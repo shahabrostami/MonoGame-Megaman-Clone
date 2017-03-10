@@ -12,18 +12,18 @@ namespace Game1
     {
         public Texture2D Texture { get; set; }
         private Action previousActionEnum = ActionEnum.MOVE_RIGHT;
-        private PlayerAnimation currentAnimation;
-        private PlayerAnimation walkRight;
-        private PlayerAnimation walkLeft;
-        private PlayerAnimation standRight;
-        private PlayerAnimation standLeft;
+        private BasePlayerAnimation currentAnimation;
+        private BasePlayerAnimation walkRight;
+        private BasePlayerAnimation walkLeft;
+        private BasePlayerAnimation standRight;
+        private BasePlayerAnimation standLeft;
 
         public PlayerSprite(Texture2D texture, int rows, int columns)
         {
             walkRight = new PlayerAnimation(texture, rows, columns, 0, 3, 6, 100);
             walkLeft = new PlayerAnimation(texture, rows, columns, 1, 3, 6, 100);
-            standRight = new PlayerAnimation(texture, rows, columns, 0, 0, 2, 2000);
-            standLeft = new PlayerAnimation(texture, rows, columns, 1, 0, 2, 2000);
+            standRight = new PlayerAnimationBlink(texture, rows, columns, 0, 0, 2, 2000, 200);
+            standLeft = new PlayerAnimationBlink(texture, rows, columns, 1, 0, 2, 2000, 200);
             currentAnimation = standRight;
         }
 

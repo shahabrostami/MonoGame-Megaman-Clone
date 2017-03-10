@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="BasePlayerAnimation.cs" />
+    <Compile Include="PlayerAnimationBlink.cs" />
     <Compile Include="PlayerAnimation.cs" />
     <Compile Include="PlayerSprite.cs" />
     <Compile Include="ActionEnum.cs" />
