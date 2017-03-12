@@ -8,35 +8,30 @@ namespace Game1
     class Player
     {
         private PlayerSprite playerSprite;
+        private PlayerStateHandler playerStateHandler;
         private Vector2 location;
 
         public Player() {
             location.X = 0;
-            location.Y = 0;
+            location.Y = 400;
+        }
+        
+        public void updateLocation(Vector2 updateLocation)
+        {
+            location.X += updateLocation.X;
+            location.Y += updateLocation.Y;
         }
 
         public void Load(Texture2D texture)
         {
-            playerSprite = new PlayerSprite(texture, 2, 6);
+            playerStateHandler = new PlayerStateHandler();
+            playerSprite = new PlayerSprite(this, texture, 2, 6);
         }
 
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                location.X += 3;
-                playerSprite.Update(gameTime, ActionEnum.MOVE_RIGHT);
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                location.X -= 3;
-                playerSprite.Update(gameTime, ActionEnum.MOVE_LEFT);
-            }
-            else
-            {
-                playerSprite.Update(gameTime, ActionEnum.NONE);
-            }
-
+            playerStateHandler.Update(gameTime);
+            playerSprite.Update(gameTime, playerStateHandler.getState());
         }
 
         public void Draw(SpriteBatch spriteBatch)

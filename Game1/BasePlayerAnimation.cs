@@ -39,17 +39,20 @@ namespace Game1
 
         public abstract void Update(GameTime gameTime);
 
+        public abstract Vector2 updateLocation();
+
+        public abstract void reset();
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             int column = currentFrame;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
-
-            Console.WriteLine("width" + width + " height" + height + " row" + row + " locationx" + location.X + " locationy" + location.Y);
             spriteBatch.Begin();
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
             spriteBatch.End();
+
         }
     }
 

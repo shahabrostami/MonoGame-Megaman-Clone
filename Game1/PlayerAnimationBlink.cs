@@ -40,7 +40,16 @@ namespace Game1
 
                 eyesOpen = !eyesOpen;
             }
-            
+        }
+
+        public override Vector2 updateLocation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void reset()
+        {
+
         }
     }
 }

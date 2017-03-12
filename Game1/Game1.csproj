@@ -38,12 +38,16 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Action.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="BasePlayerAnimation.cs" />
+    <Compile Include="PlayerAnimationJump.cs" />
     <Compile Include="PlayerAnimationBlink.cs" />
     <Compile Include="PlayerAnimation.cs" />
+    <Compile Include="PlayerLocationHandler.cs" />
+    <Compile Include="PlayerStateHandler.cs" />
     <Compile Include="PlayerSprite.cs" />
-    <Compile Include="ActionEnum.cs" />
+    <Compile Include="PlayerState.cs" />
+    <Compile Include="PlayerStates.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />

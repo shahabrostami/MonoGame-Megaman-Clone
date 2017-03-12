@@ -28,6 +28,15 @@ namespace Game1
                     currentFrame = startingFrame;
             }
         }
+        
+        public override Vector2 updateLocation()
+        {
+            throw new NotImplementedException();
+        }
+        
+        public override void reset()
+        {
 
-}
+        }
+    }
 }
