@@ -42,8 +42,10 @@
     <Compile Include="BasePlayerAnimation.cs" />
     <Compile Include="PlayerAnimationJump.cs" />
     <Compile Include="PlayerAnimationBlink.cs" />
-    <Compile Include="PlayerAnimation.cs" />
+    <Compile Include="PlayerAnimationRun.cs" />
     <Compile Include="PlayerLocationHandler.cs" />
+    <Compile Include="SpriteSpec.cs" />
+    <Compile Include="SpriteLocation.cs" />
     <Compile Include="PlayerStateHandler.cs" />
     <Compile Include="PlayerSprite.cs" />
     <Compile Include="PlayerState.cs" />

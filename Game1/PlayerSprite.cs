@@ -16,59 +16,60 @@ namespace Game1
         private PlayerLocationHandler playerLocationHandler;
         private BasePlayerAnimation currentAnimation;
         private BasePlayerAnimation previousAnimation;
-        private BasePlayerAnimation walkRight;
-        private BasePlayerAnimation walkLeft;
-        private BasePlayerAnimation standRight;
-        private BasePlayerAnimation standLeft;
-        private BasePlayerAnimation jumpRight;
-        private BasePlayerAnimation jumpLeft;
+        private BasePlayerAnimation run;
+        private BasePlayerAnimation stand;
+        private BasePlayerAnimation jump;
        
         public PlayerSprite(Player player, Texture2D texture, int rows, int columns)
         {
             this.player = player;
             playerLocationHandler = new PlayerLocationHandler(player);
-            walkRight = new PlayerAnimation(texture, rows, columns, 0, 3, 6, 100);
-            walkLeft = new PlayerAnimation(texture, rows, columns, 1, 3, 6, 100);
-            standRight = new PlayerAnimationBlink(texture, rows, columns, 0, 0, 2, 2000, 200);
-            standLeft = new PlayerAnimationBlink(texture, rows, columns, 1, 0, 2, 2000, 200);
-            jumpRight = new PlayerAnimationJump(texture, rows, columns, 0, 2, 3, 100);
-            jumpLeft = new PlayerAnimationJump(texture, rows, columns, 1, 2, 3, 100);
-            currentAnimation = standRight;
-            previousAnimation = standLeft;
+            SpriteSpec playerSpriteSpec = new SpriteSpec(texture, rows, columns);
+
+            run = new PlayerAnimationRun(playerSpriteSpec, true, 100, new SpriteLocation(Direction.RIGHT, 0, 3, 6), new SpriteLocation(Direction.LEFT, 1, 3, 6));
+            stand = new PlayerAnimationBlink(playerSpriteSpec, true, 2000, 200, new SpriteLocation(Direction.RIGHT, 0, 0, 2), new SpriteLocation(Direction.LEFT, 1, 0, 2));
+            jump = new PlayerAnimationJump(playerSpriteSpec, false, 100, new SpriteLocation(Direction.RIGHT, 0, 2, 3), new SpriteLocation(Direction.LEFT, 1, 2, 3));
+            currentAnimation = stand;
+            previousAnimation = run;
         }
 
         public void Update(GameTime gameTime, PlayerState playerState)
         {
-            if (playerState == PlayerStates.RUN_RIGHT)
+            if (currentAnimation.isLoopFinished())
             {
-                currentAnimation = walkRight;
-            }
-            else if (playerState == PlayerStates.RUN_LEFT)
-            {
-                currentAnimation = walkLeft;
-            }
-            else if (playerState == PlayerStates.JUMP_RIGHT)
-            {
-                currentAnimation = jumpRight;
-            }
-            else if (playerState == PlayerStates.JUMP_LEFT)
-            {
-                currentAnimation = jumpLeft;
-            }
-            else if (playerState == PlayerStates.STAND_RIGHT)
-            {
-                currentAnimation = standRight;
-            }
-            else if (playerState == PlayerStates.STAND_LEFT)
-            {
-                currentAnimation = standLeft;
-            }
+                if (previousAnimation != currentAnimation)
+                {
+                    Console.WriteLine("currentAnimation: " + currentAnimation.ToString() + " previousAnimation: " + previousAnimation.ToString());
+                    previousAnimation = currentAnimation;
+                    previousAnimation.reset();
+                }
 
-            if (previousAnimation != currentAnimation)
-            { 
-                Console.WriteLine("currentAnimation: " + currentAnimation.ToString() + " previousAnimation: " + previousAnimation.ToString());
-                previousAnimation = currentAnimation;
-                previousAnimation.reset();
+                currentAnimation.updateDirection(playerState.getDirection());
+
+                if (playerState == PlayerStates.RUN_RIGHT)
+                {
+                    currentAnimation = run;
+                }
+                else if (playerState == PlayerStates.RUN_LEFT)
+                {
+                    currentAnimation = run;
+                }
+                else if (playerState == PlayerStates.JUMP_RIGHT)
+                {
+                    currentAnimation = jump;
+                }
+                else if (playerState == PlayerStates.JUMP_LEFT)
+                {
+                    currentAnimation = jump;
+                }
+                else if (playerState == PlayerStates.STAND_RIGHT)
+                {
+                    currentAnimation = stand;
+                }
+                else if (playerState == PlayerStates.STAND_LEFT)
+                {
+                    currentAnimation = stand;
+                }
             }
 
             currentAnimation.Update(gameTime);

@@ -10,19 +10,18 @@ namespace Game1
 {
     class PlayerAnimationJump : BasePlayerAnimation
     {
-        private int animationCycleLength = 4;
+        private int animationCycleLength = 2;
         private int animationCycleIndex = 0;
         private Vector2[] animationCycle;
         private Vector2 noChange = new Vector2(0, 0);
 
-        public PlayerAnimationJump(Texture2D texture, int rows, int columns, int row, int startingFrame, int endFrame, int msPerFrame) : 
-            base(texture, rows, columns, row, startingFrame, endFrame, msPerFrame)
-        {
+        public PlayerAnimationJump(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite) :
+            base(spriteSpec, loopAnimation, msPerFrame, rightSprite, leftSprite)
+        {   
             animationCycle = new Vector2[animationCycleLength];
-            animationCycle[0] = new Vector2(3, -5);
-            animationCycle[1] = new Vector2(3, -5);
-            animationCycle[2] = new Vector2(3, 5);
-            animationCycle[3] = new Vector2(3, 5);
+            animationCycle[0] = new Vector2(3, -8);
+            animationCycle[1] = new Vector2(3,  8);
+            loopFinished = false;
         }
 
         override public void Update(GameTime gameTime)
@@ -32,11 +31,16 @@ namespace Game1
                 timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
                 if (timeSinceLastFrame > msPerFrame)
                 {
-                
-                        timeSinceLastFrame -= msPerFrame;
-                        animationCycleIndex++;
-                    }
+                    timeSinceLastFrame -= msPerFrame;
+                    animationCycleIndex++;
                 }
+            }
+            else
+            {
+                Console.WriteLine("cycleIndex " + animationCycleIndex + " / " + animationCycleLength);
+
+                loopFinished = true;
+            }
         }
 
         public override Vector2 updateLocation()
@@ -46,11 +50,17 @@ namespace Game1
             return animationCycle[animationCycleIndex];   
         }
 
+        public override bool hasMovement()
+        {
+            return true;
+        }
+
         public override void reset()
         {
             Console.WriteLine("RESET");
             timeSinceLastFrame = 0;
             animationCycleIndex = 0;
+            loopFinished = false;
         }
     }
 }

@@ -14,8 +14,8 @@ namespace Game1
         private int msPerFramesOpen;
         private Boolean eyesOpen = true;
 
-        public PlayerAnimationBlink(Texture2D texture, int rows, int columns, int row, int startingFrame, int endFrame, int msPerFramesOpen, int msPerFramesClosed) : 
-            base(texture, rows, columns, row, startingFrame, endFrame, msPerFramesOpen)
+        public PlayerAnimationBlink(SpriteSpec spriteSpec, bool loopAnimation, int msPerFramesOpen, int msPerFramesClosed, SpriteLocation rightSprite, SpriteLocation leftSprite) :
+            base(spriteSpec, loopAnimation, msPerFramesOpen, rightSprite, rightSprite)
         {
             this.msPerFramesOpen = msPerFramesOpen;
             this.msPerFramesClosed = msPerFramesClosed;
@@ -24,14 +24,14 @@ namespace Game1
         override public void Update(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            
+
             if (timeSinceLastFrame > msPerFrame)
             {
                 timeSinceLastFrame -= msPerFrame;
 
                 currentFrame++;
-                if (currentFrame == endFrame)
-                    currentFrame = startingFrame;
+                if (currentFrame == currentSprite.eF)
+                    currentFrame = currentSprite.sF;
                 
                 if (eyesOpen)
                     msPerFrame = msPerFramesClosed;
@@ -45,6 +45,11 @@ namespace Game1
         public override Vector2 updateLocation()
         {
             throw new NotImplementedException();
+        }
+
+        public override bool hasMovement()
+        {
+            return false;
         }
 
         public override void reset()

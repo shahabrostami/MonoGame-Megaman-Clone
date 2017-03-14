@@ -22,19 +22,8 @@ namespace Game1
 
         public void Update(GameTime gameTime, PlayerState playerState, BasePlayerAnimation playerAnimation)
         {
-
-            if (playerState == PlayerStates.RUN_RIGHT)
-            {
-                player.updateLocation(moveRight);
-            }
-            else if (playerState == PlayerStates.RUN_LEFT)
-            {
-                player.updateLocation(moveLeft);
-            }
-            else if (playerState == PlayerStates.JUMP_RIGHT)
+            if(playerAnimation.hasMovement())
                 player.updateLocation(playerAnimation.updateLocation());
-
         }
-
     }
 }

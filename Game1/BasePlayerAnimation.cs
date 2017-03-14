@@ -10,31 +10,28 @@ namespace Game1
 {
     abstract class BasePlayerAnimation
     {
-        private Texture2D Texture { get; set; }
-        private int Rows { get; set; }
-        private int Columns { get; set; }
-        private int width;
-        private int height;
+        private SpriteSpec spriteSpec;
+        protected SpriteLocation rightSprite;
+        protected SpriteLocation leftSprite;
+        protected SpriteLocation currentSprite;
+        protected Direction direction;
+        protected bool loopFinished;
+        protected bool loopAnimation;
         protected int currentFrame;
-        protected int startingFrame;
-        private int row;
-        protected int endFrame;
-        protected int timeSinceLastFrame = 0;
         protected int msPerFrame;
+        protected int timeSinceLastFrame = 0;
 
-        public BasePlayerAnimation(Texture2D texture, int rows, int columns, int row, int startingFrame, int endFrame, int msPerFrame)
+        public BasePlayerAnimation(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite)
         {
-            Texture = texture;
-            Rows = rows;
-            Columns = columns;
-            width = Texture.Width / Columns;
-            height = (Texture.Height / Rows);
-            this.row = row;
-            this.startingFrame = startingFrame;
-            this.endFrame = endFrame;
+            this.spriteSpec = spriteSpec;
+            this.loopFinished = true;
             this.msPerFrame = msPerFrame;
-
-            currentFrame = startingFrame;
+            this.leftSprite = leftSprite;
+            this.rightSprite = rightSprite;
+            this.loopAnimation = loopAnimation;
+            this.currentSprite = rightSprite;
+            this.direction = Direction.RIGHT;
+            currentFrame = rightSprite.sF;
         }
 
         public abstract void Update(GameTime gameTime);
@@ -43,16 +40,26 @@ namespace Game1
 
         public abstract void reset();
 
+        public abstract bool hasMovement();
+
+        public void updateDirection(Direction direction)
+        {
+            this.direction = direction;
+            if (direction == Direction.RIGHT)
+                currentSprite = rightSprite;
+            else
+                currentSprite = leftSprite;
+        }
+
+        public bool isLoopFinished()
+        {
+            return loopFinished;
+        }
+        
+
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            int column = currentFrame;
-
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
-            spriteBatch.Begin();
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
-            spriteBatch.End();
-
+            spriteSpec.Draw(spriteBatch, location, currentSprite.row, currentFrame);
         }
     }
 

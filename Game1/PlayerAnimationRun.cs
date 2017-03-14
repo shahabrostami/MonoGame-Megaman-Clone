@@ -8,10 +8,13 @@ using Microsoft.Xna.Framework;
 
 namespace Game1
 {
-    class PlayerAnimation : BasePlayerAnimation
+    class PlayerAnimationRun : BasePlayerAnimation
     {
-        public PlayerAnimation(Texture2D texture, int rows, int columns, int row, int startingFrame, int endFrame, int msPerFrame) : 
-            base(texture, rows, columns, row, startingFrame, endFrame, msPerFrame)
+        Vector2 rightMoveUpdate = new Vector2(3, 0);
+        Vector2 leftMoveUpdate = new Vector2(-3, 0);
+
+        public PlayerAnimationRun(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite) :
+            base(spriteSpec, loopAnimation, msPerFrame, rightSprite, leftSprite)
         {
             // Standard animation, likely to change...
         }
@@ -24,16 +27,23 @@ namespace Game1
                 timeSinceLastFrame -= msPerFrame;
 
                 currentFrame++;
-                if (currentFrame == endFrame)
-                    currentFrame = startingFrame;
+                if (currentFrame == currentSprite.eF)
+                    currentFrame = currentSprite.sF;
             }
         }
         
         public override Vector2 updateLocation()
         {
-            throw new NotImplementedException();
+            if (direction == Direction.RIGHT)
+                return rightMoveUpdate;
+            else return leftMoveUpdate;
         }
-        
+
+        public override bool hasMovement()
+        {
+            return true;
+        }
+
         public override void reset()
         {
 
