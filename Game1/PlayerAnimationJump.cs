@@ -10,17 +10,19 @@ namespace Game1
 {
     class PlayerAnimationJump : BasePlayerAnimation
     {
-        private int animationCycleLength = 2;
+        private int animationCycleLength = 4;
         private int animationCycleIndex = 0;
-        private Vector2[] animationCycle;
+        private AnimationCycle[] animationCycle;
         private Vector2 noChange = new Vector2(0, 0);
 
         public PlayerAnimationJump(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite) :
             base(spriteSpec, loopAnimation, msPerFrame, rightSprite, leftSprite)
         {   
-            animationCycle = new Vector2[animationCycleLength];
-            animationCycle[0] = new Vector2(3, -8);
-            animationCycle[1] = new Vector2(3,  8);
+            animationCycle = new AnimationCycle[animationCycleLength];
+            animationCycle[0] = new AnimationCycle(3, -8, msPerFrame/4);
+            animationCycle[1] = new AnimationCycle(3, -3, msPerFrame/3);
+            animationCycle[2] = new AnimationCycle(3,  3, msPerFrame/3);
+            animationCycle[3] = new AnimationCycle(3,  8, msPerFrame/4);
             loopFinished = false;
         }
 
@@ -47,7 +49,11 @@ namespace Game1
         {
             if (animationCycleIndex == animationCycleLength)
                 return noChange;
-            return animationCycle[animationCycleIndex];   
+            if (direction == Direction.RIGHT)
+                return animationCycle[animationCycleIndex].getRightDisplacement();   
+            else if (direction == Direction.LEFT)
+                return animationCycle[animationCycleIndex].getLeftDisplacement();
+            return noChange;
         }
 
         public override bool hasMovement()

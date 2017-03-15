@@ -12,8 +12,6 @@ namespace Game1
     class PlayerLocationHandler
     {
         private Player player;
-        private Vector2 moveRight = new Vector2(3, 0);
-        private Vector2 moveLeft = new Vector2(-3, 0);
 
         public PlayerLocationHandler(Player player)
         {

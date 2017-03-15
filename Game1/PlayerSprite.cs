@@ -26,26 +26,27 @@ namespace Game1
             playerLocationHandler = new PlayerLocationHandler(player);
             SpriteSpec playerSpriteSpec = new SpriteSpec(texture, rows, columns);
 
-            run = new PlayerAnimationRun(playerSpriteSpec, true, 100, new SpriteLocation(Direction.RIGHT, 0, 3, 6), new SpriteLocation(Direction.LEFT, 1, 3, 6));
-            stand = new PlayerAnimationBlink(playerSpriteSpec, true, 2000, 200, new SpriteLocation(Direction.RIGHT, 0, 0, 2), new SpriteLocation(Direction.LEFT, 1, 0, 2));
-            jump = new PlayerAnimationJump(playerSpriteSpec, false, 100, new SpriteLocation(Direction.RIGHT, 0, 2, 3), new SpriteLocation(Direction.LEFT, 1, 2, 3));
+            run = new PlayerAnimationRun(playerSpriteSpec, true, 100, 
+                                            new SpriteLocation(Direction.RIGHT, 0, 3, 6), 
+                                            new SpriteLocation(Direction.LEFT, 1, 3, 6));
+
+            stand = new PlayerAnimationBlink(playerSpriteSpec, true, 2000, 200, 
+                                                new SpriteLocation(Direction.RIGHT, 0, 0, 2), 
+                                                new SpriteLocation(Direction.LEFT, 1, 0, 2));
+
+            jump = new PlayerAnimationJump(playerSpriteSpec, false, 100, 
+                                                new SpriteLocation(Direction.RIGHT, 0, 2, 3), 
+                                                new SpriteLocation(Direction.LEFT, 1, 2, 3));
             currentAnimation = stand;
             previousAnimation = run;
         }
 
         public void Update(GameTime gameTime, PlayerState playerState)
         {
+            currentAnimation.updateDirection(playerState.getDirection());
+
             if (currentAnimation.isLoopFinished())
             {
-                if (previousAnimation != currentAnimation)
-                {
-                    Console.WriteLine("currentAnimation: " + currentAnimation.ToString() + " previousAnimation: " + previousAnimation.ToString());
-                    previousAnimation = currentAnimation;
-                    previousAnimation.reset();
-                }
-
-                currentAnimation.updateDirection(playerState.getDirection());
-
                 if (playerState == PlayerStates.RUN_RIGHT)
                 {
                     currentAnimation = run;
@@ -69,6 +70,13 @@ namespace Game1
                 else if (playerState == PlayerStates.STAND_LEFT)
                 {
                     currentAnimation = stand;
+                }
+
+                if (previousAnimation != currentAnimation)
+                {
+                    Console.WriteLine("currentAnimation: " + currentAnimation.ToString() + " previousAnimation: " + previousAnimation.ToString());
+                    previousAnimation = currentAnimation;
+                    previousAnimation.reset();
                 }
             }
 
