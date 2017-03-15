@@ -7,13 +7,19 @@ namespace Game1
 {
     class Player
     {
-        private PlayerSprite playerSprite;
-        private PlayerStateHandler playerStateHandler;
+        private PlayerStateMachine playerStateMachine;
+        private PlayerActionHandler playerActionHandler;
+        private PlayerState currentState;
+        private PlayerAction previousAction;
         private Vector2 location;
 
         public Player() {
             location.X = 0;
             location.Y = 400;
+            playerActionHandler = new PlayerActionHandler();
+            playerStateMachine = new PlayerStateMachine();
+            currentState = PlayerStates.STAND_RIGHT;
+            previousAction = PlayerAction.MOVE_RIGHT;
         }
         
         public void updateLocation(Vector2 updateLocation)
@@ -24,19 +30,33 @@ namespace Game1
 
         public void Load(Texture2D texture)
         {
-            playerStateHandler = new PlayerStateHandler();
-            playerSprite = new PlayerSprite(this, texture, 2, 6);
+            PlayerStates.Load(this, texture, 2, 6);
         }
 
         public void Update(GameTime gameTime)
         {
-            playerStateHandler.Update(gameTime);
-            playerSprite.Update(gameTime, playerStateHandler.getState());
+
+            PlayerAction playerAction = playerActionHandler.Update(gameTime);
+
+            currentState = playerStateMachine.Update(playerAction);
+
+            currentState.animation.updateDirection(currentState.getDirection());
+
+            currentState.animation.Update(gameTime);
+
+            if (currentState.animation.hasMovement())
+                updateLocation(currentState.animation.updateLocation());
+
+            if (currentState.animation.isLoopFinished())
+            {
+                playerStateMachine.currentState = playerStateMachine.previousState;
+                currentState.animation.reset();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            playerSprite.Draw(spriteBatch, location);
+            playerStateMachine.currentState.animation.Draw(spriteBatch, location);
         }
     }
 }

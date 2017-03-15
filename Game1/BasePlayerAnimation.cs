@@ -24,7 +24,7 @@ namespace Game1
         public BasePlayerAnimation(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite)
         {
             this.spriteSpec = spriteSpec;
-            this.loopFinished = true;
+            this.loopFinished = false;
             this.msPerFrame = msPerFrame;
             this.leftSprite = leftSprite;
             this.rightSprite = rightSprite;

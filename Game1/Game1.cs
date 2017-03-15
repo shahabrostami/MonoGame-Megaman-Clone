@@ -26,7 +26,7 @@ namespace Game1
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2D texture = Content.Load<Texture2D>("megamanboth");
-            player.Load( texture);
+            player.Load(texture);
         }
 
         protected override void UnloadContent()

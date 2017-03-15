@@ -15,7 +15,7 @@ namespace Game1
         private Boolean eyesOpen = true;
 
         public PlayerAnimationBlink(SpriteSpec spriteSpec, bool loopAnimation, int msPerFramesOpen, int msPerFramesClosed, SpriteLocation rightSprite, SpriteLocation leftSprite) :
-            base(spriteSpec, loopAnimation, msPerFramesOpen, rightSprite, rightSprite)
+            base(spriteSpec, loopAnimation, msPerFramesOpen, rightSprite, leftSprite)
         {
             this.msPerFramesOpen = msPerFramesOpen;
             this.msPerFramesClosed = msPerFramesClosed;

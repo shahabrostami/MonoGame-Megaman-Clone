@@ -10,6 +10,8 @@ namespace Game1
     {
         private Direction direction;
         private String desc;
+        public BasePlayerAnimation animation { get;  set; }
+
         public PlayerState(String desc, Direction direction)
         {
             this.desc = desc;
