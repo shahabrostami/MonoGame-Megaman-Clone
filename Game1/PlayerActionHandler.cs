@@ -45,7 +45,7 @@ namespace Game1
 
             if (currentAction != previousAction)
             {
-                Console.WriteLine("CurrentAction: " + currentAction.ToString() + " PreviousAction: " + previousAction.ToString());
+                // Console.WriteLine("CurrentAction: " + currentAction.ToString() + " PreviousAction: " + previousAction.ToString());
                 previousAction = currentAction;
             }
             return currentAction;

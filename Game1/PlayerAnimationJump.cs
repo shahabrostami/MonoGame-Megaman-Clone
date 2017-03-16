@@ -19,16 +19,16 @@ namespace Game1
             base(spriteSpec, loopAnimation, msPerFrame, rightSprite, leftSprite)
         {   
             animationCycle = new AnimationCycle[animationCycleLength];
-            animationCycle[0] = new AnimationCycle(3, -8, msPerFrame/4);
-            animationCycle[1] = new AnimationCycle(3, -3, msPerFrame/3);
-            animationCycle[2] = new AnimationCycle(3,  3, msPerFrame/3);
-            animationCycle[3] = new AnimationCycle(3,  8, msPerFrame/4);
+            animationCycle[0] = new AnimationCycle(3, -8, msPerFrame);
+            animationCycle[1] = new AnimationCycle(3, -3, msPerFrame);
+            animationCycle[2] = new AnimationCycle(3,  3, msPerFrame);
+            animationCycle[3] = new AnimationCycle(3,  8, msPerFrame);
             loopFinished = false;
         }
 
         override public void Update(GameTime gameTime)
         {
-            if (animationCycleIndex != animationCycleLength)
+            if (animationCycleIndex < animationCycleLength)
             {
                 timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
                 if (timeSinceLastFrame > msPerFrame)
@@ -37,10 +37,10 @@ namespace Game1
                     animationCycleIndex++;
                 }
             }
-            else
+            else if (animationCycleIndex == animationCycleLength)
             {
-                Console.WriteLine("cycleIndex " + animationCycleIndex + " / " + animationCycleLength);
-
+                timeSinceLastFrame = 0;
+                animationCycleIndex = 0;
                 loopFinished = true;
             }
         }
@@ -64,8 +64,6 @@ namespace Game1
         public override void reset()
         {
             Console.WriteLine("RESET");
-            timeSinceLastFrame = 0;
-            animationCycleIndex = 0;
             loopFinished = false;
         }
     }

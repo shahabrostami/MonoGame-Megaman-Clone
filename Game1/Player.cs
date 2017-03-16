@@ -10,7 +10,7 @@ namespace Game1
         private PlayerStateMachine playerStateMachine;
         private PlayerActionHandler playerActionHandler;
         private PlayerState currentState;
-        private PlayerAction previousAction;
+        private PlayerAction playerAction;
         private Vector2 location;
 
         public Player() {
@@ -19,11 +19,11 @@ namespace Game1
             playerActionHandler = new PlayerActionHandler();
             playerStateMachine = new PlayerStateMachine();
             currentState = PlayerStates.STAND_RIGHT;
-            previousAction = PlayerAction.MOVE_RIGHT;
         }
         
         public void updateLocation(Vector2 updateLocation)
         {
+            Console.WriteLine("Update: (" + updateLocation.X + "),(" + updateLocation.Y + ")");
             location.X += updateLocation.X;
             location.Y += updateLocation.Y;
         }
@@ -36,7 +36,7 @@ namespace Game1
         public void Update(GameTime gameTime)
         {
 
-            PlayerAction playerAction = playerActionHandler.Update(gameTime);
+            playerAction = playerActionHandler.Update(gameTime);
 
             currentState = playerStateMachine.Update(playerAction);
 
@@ -48,10 +48,7 @@ namespace Game1
                 updateLocation(currentState.animation.updateLocation());
 
             if (currentState.animation.isLoopFinished())
-            {
-                playerStateMachine.currentState = playerStateMachine.previousState;
-                currentState.animation.reset();
-            }
+                playerStateMachine.revert();
         }
 
         public void Draw(SpriteBatch spriteBatch)
