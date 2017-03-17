@@ -36,7 +36,9 @@ namespace Game1
 
         public abstract void Update(GameTime gameTime);
 
-        public abstract Vector2 updateLocation();
+        public abstract Vector2 updateLocation(PlayerState state);
+
+        public abstract void updateAnimationCycle(PlayerState state);
 
         public abstract void reset();
 

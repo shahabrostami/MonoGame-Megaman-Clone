@@ -42,9 +42,14 @@ namespace Game1
             }
         }
 
-        public override Vector2 updateLocation()
+        public override Vector2 updateLocation(PlayerState pState)
         {
             throw new NotImplementedException();
+        }
+
+        public override void updateAnimationCycle(PlayerState pState)
+        {
+
         }
 
         public override bool hasMovement()

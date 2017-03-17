@@ -45,7 +45,7 @@ namespace Game1
             currentState.animation.Update(gameTime);
 
             if (currentState.animation.hasMovement())
-                updateLocation(currentState.animation.updateLocation());
+                updateLocation(currentState.animation.updateLocation(currentState));
 
             if (currentState.animation.isLoopFinished())
                 playerStateMachine.revert();

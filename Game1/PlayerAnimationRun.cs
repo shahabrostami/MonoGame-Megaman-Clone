@@ -31,8 +31,13 @@ namespace Game1
                     currentFrame = currentSprite.sF;
             }
         }
-        
-        public override Vector2 updateLocation()
+
+        public override void updateAnimationCycle(PlayerState pState)
+        {
+            
+        }
+
+        public override Vector2 updateLocation(PlayerState pState)
         {
             if (direction == Direction.RIGHT)
                 return rightMoveUpdate;
