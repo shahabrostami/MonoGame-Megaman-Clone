@@ -32,7 +32,7 @@ namespace Game1
             }
         }
 
-        public override void updateAnimationCycle(PlayerState pState)
+        public override void updateAnimationCycle(PlayerState pState, PlayerAction pAction)
         {
             
         }

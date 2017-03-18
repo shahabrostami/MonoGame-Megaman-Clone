@@ -38,7 +38,7 @@ namespace Game1
 
         public abstract Vector2 updateLocation(PlayerState state);
 
-        public abstract void updateAnimationCycle(PlayerState state);
+        public abstract void updateAnimationCycle(PlayerState state, PlayerAction action);
 
         public abstract void reset();
 

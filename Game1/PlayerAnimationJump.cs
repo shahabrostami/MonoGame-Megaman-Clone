@@ -54,9 +54,9 @@ namespace Game1
             }
         }
 
-        public override void updateAnimationCycle(PlayerState state)
+        public override void updateAnimationCycle(PlayerState state, PlayerAction pAction)
         {
-            if (state.action == PlayerAction.STOP)
+            if (state.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
                 currentCycle = animationCycleNone;
             else
                 currentCycle = animationCycle;
