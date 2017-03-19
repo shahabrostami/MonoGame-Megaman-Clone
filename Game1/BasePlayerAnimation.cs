@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MyObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,47 +12,38 @@ namespace Game1
     abstract class BasePlayerAnimation
     {
         private SpriteSpec spriteSpec;
-        protected SpriteLocation rightSprite;
-        protected SpriteLocation leftSprite;
-        protected SpriteLocation currentSprite;
         protected Direction direction;
-        protected bool loopFinished;
+        protected AnimationCycleSpec[] cycles;
+
         protected bool loopAnimation;
-        protected int currentFrame;
-        protected int msPerFrame;
+        protected bool loopFinished;
+
+        protected AnimationCycleSpec currentCycle;
+        protected AnimationFrameSpec currentFrame;
+        protected int currentFrameIndex;
         protected int timeSinceLastFrame = 0;
 
-        public BasePlayerAnimation(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite)
+        public BasePlayerAnimation(SpriteSpec spriteSpec, AnimationSpec animation)
         {
             this.spriteSpec = spriteSpec;
             this.loopFinished = false;
-            this.msPerFrame = msPerFrame;
-            this.leftSprite = leftSprite;
-            this.rightSprite = rightSprite;
-            this.loopAnimation = loopAnimation;
-            this.currentSprite = rightSprite;
+            this.loopAnimation = animation.loop;
+            this.cycles = animation.cycles;
             this.direction = Direction.RIGHT;
-            currentFrame = rightSprite.sF;
+            this.currentCycle = cycles[0];
+            this.currentFrame = currentCycle.frames[0];
+            this.currentFrameIndex = currentCycle.sf;
         }
 
         public abstract void Update(GameTime gameTime);
 
         public abstract Vector2 updateLocation(PlayerState state);
 
-        public abstract void updateAnimationCycle(PlayerState state, PlayerAction action);
-
         public abstract void reset();
 
         public abstract bool hasMovement();
 
-        public void updateDirection(Direction direction)
-        {
-            this.direction = direction;
-            if (direction == Direction.RIGHT)
-                currentSprite = rightSprite;
-            else
-                currentSprite = leftSprite;
-        }
+        public abstract void updateDirection(Direction direction);
 
         public bool isLoopFinished()
         {
@@ -61,7 +53,7 @@ namespace Game1
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            spriteSpec.Draw(spriteBatch, location, currentSprite.row, currentFrame);
+            spriteSpec.Draw(spriteBatch, location, currentCycle.row, currentFrameIndex);
         }
     }
 

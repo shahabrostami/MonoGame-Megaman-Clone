@@ -5,43 +5,49 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using MyObjects;
 
 namespace Game1
 {
     class PlayerAnimationRun : BasePlayerAnimation
     {
-        Vector2 rightMoveUpdate = new Vector2(3, 0);
-        Vector2 leftMoveUpdate = new Vector2(-3, 0);
 
-        public PlayerAnimationRun(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite) :
-            base(spriteSpec, loopAnimation, msPerFrame, rightSprite, leftSprite)
+        public PlayerAnimationRun(SpriteSpec spriteSpec, AnimationSpec animation) :
+            base(spriteSpec, animation)
         {
-            // Standard animation, likely to change...
+            cycles[1].frames = cycles[0].frames;
         }
 
-        public override void Update(GameTime gameTime)
+        override public void Update(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (timeSinceLastFrame > msPerFrame)
-            {
-                timeSinceLastFrame -= msPerFrame;
 
-                currentFrame++;
-                if (currentFrame == currentSprite.eF)
-                    currentFrame = currentSprite.sF;
+            if (timeSinceLastFrame > currentFrame.ms)
+            {
+                timeSinceLastFrame -= currentFrame.ms;
+
+                currentFrameIndex++;
+
+                if (currentFrameIndex == currentCycle.ef + 1)
+                    currentFrameIndex = currentCycle.sf;
+
+                currentFrame = currentCycle.frames[currentCycle.ef % currentFrameIndex];
             }
         }
 
-        public override void updateAnimationCycle(PlayerState pState, PlayerAction pAction)
+        public override void updateDirection(Direction direction)
         {
-            
+
+            this.direction = direction;
+            if (direction == Direction.RIGHT)
+                currentCycle = cycles[0];
+            else
+                currentCycle = cycles[1];
         }
 
         public override Vector2 updateLocation(PlayerState pState)
         {
-            if (direction == Direction.RIGHT)
-                return rightMoveUpdate;
-            else return leftMoveUpdate;
+            return currentCycle.dis;
         }
 
         public override bool hasMovement()

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+
+  <Asset Type="MyObjects.Sprite[]">
+    <Item>
+      <textureName>megamanboth</textureName>
+      <rows>2</rows>
+      <columns>6</columns>
+      <animations>
+        <Item>
+          <name>stand</name>
+          <loop>true</loop>
+          <cycles>
+            <Item>
+              <row>0</row>
+              <sf>0</sf>
+              <ef>1</ef>
+              <dis>0 0</dis>
+              <frames>
+                <Item>
+                  <ms>1500</ms>
+                </Item>
+                <Item>
+                  <ms>500</ms>
+                </Item>
+              </frames>
+            </Item>
+            <Item>
+              <row>1</row>
+            </Item>
+          </cycles>
+
+        </Item>
+        <Item>
+          <name>run</name>
+          <loop>true</loop>
+          <cycles>
+            <Item>
+              <row>0</row>
+              <sf>3</sf>
+              <ef>5</ef>
+              <dis>3 0</dis>
+              <frames>
+                <Item>
+                  <ms>100</ms>
+                </Item>
+                <Item>
+                  <ms>100</ms>
+                </Item>
+                <Item>
+                  <ms>100</ms>
+                </Item>
+              </frames>
+            </Item>
+            <Item>
+              <row>1</row>
+              <sf>3</sf>
+              <ef>5</ef>
+              <dis>-3 0</dis>
+            </Item>
+          </cycles>
+        </Item>
+      </animations>
+    </Item>
+  </Asset>
+</XnaContent>

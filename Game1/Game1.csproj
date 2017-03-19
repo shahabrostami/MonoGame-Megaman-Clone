@@ -47,8 +47,8 @@
     <Compile Include="PlayerAnimationBlink.cs" />
     <Compile Include="PlayerAnimationRun.cs" />
     <Compile Include="PlayerAction.cs" />
+    <Compile Include="Animation.cs" />
     <Compile Include="SpriteSpec.cs" />
-    <Compile Include="SpriteLocation.cs" />
     <Compile Include="PlayerActionHandler.cs" />
     <Compile Include="PlayerState.cs" />
     <Compile Include="PlayerStates.cs" />
@@ -69,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary2\MyObjects.csproj">
+      <Project>{45636539-323b-430f-8189-ab99931128fe}</Project>
+      <Name>MyObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

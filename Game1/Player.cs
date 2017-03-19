@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using MyObjects;
 
 namespace Game1
 {
@@ -28,9 +29,9 @@ namespace Game1
             location.Y += updateLocation.Y;
         }
 
-        public void Load(Texture2D texture)
+        public void Load(Texture2D texture, Sprite sprite)
         {
-            PlayerStates.Load(this, texture, 2, 6);
+            PlayerStates.Load(this, texture, sprite);
         }
 
         public void Update(GameTime gameTime)

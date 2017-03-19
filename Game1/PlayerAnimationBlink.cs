@@ -5,40 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using MyObjects;
 
 namespace Game1
 {
     class PlayerAnimationBlink : BasePlayerAnimation
     {
-        private int msPerFramesClosed;
-        private int msPerFramesOpen;
-        private Boolean eyesOpen = true;
 
-        public PlayerAnimationBlink(SpriteSpec spriteSpec, bool loopAnimation, int msPerFramesOpen, int msPerFramesClosed, SpriteLocation rightSprite, SpriteLocation leftSprite) :
-            base(spriteSpec, loopAnimation, msPerFramesOpen, rightSprite, leftSprite)
+        public PlayerAnimationBlink(SpriteSpec spriteSpec, AnimationSpec animation) :
+            base(spriteSpec, animation)
         {
-            this.msPerFramesOpen = msPerFramesOpen;
-            this.msPerFramesClosed = msPerFramesClosed;
+            cycles[1].frames = cycles[0].frames;
+            cycles[1].dis = cycles[0].dis;
         }
 
         override public void Update(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (timeSinceLastFrame > msPerFrame)
+            if (timeSinceLastFrame > currentFrame.ms)
             {
-                timeSinceLastFrame -= msPerFrame;
+                timeSinceLastFrame -= currentFrame.ms;
 
-                currentFrame++;
-                if (currentFrame == currentSprite.eF)
-                    currentFrame = currentSprite.sF;
-                
-                if (eyesOpen)
-                    msPerFrame = msPerFramesClosed;
-                else
-                    msPerFrame = msPerFramesOpen;
+                currentFrameIndex++;
 
-                eyesOpen = !eyesOpen;
+                if (currentFrameIndex == currentCycle.ef + 1)
+                    currentFrameIndex = currentCycle.sf;
+
+                currentFrame = currentCycle.frames[currentFrameIndex];
             }
         }
 
@@ -47,9 +41,21 @@ namespace Game1
             throw new NotImplementedException();
         }
 
+        /*
         public override void updateAnimationCycle(PlayerState pState, PlayerAction pAction)
         {
 
+        }
+        */
+
+        public override void updateDirection(Direction direction)
+        {
+
+            this.direction = direction;
+            if (direction == Direction.RIGHT)
+                currentCycle = cycles[0];
+            else
+                currentCycle = cycles[1];
         }
 
         public override bool hasMovement()

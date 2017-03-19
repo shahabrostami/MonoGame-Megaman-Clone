@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MyObjects;
 
 namespace Game1
 {
@@ -25,8 +26,9 @@ namespace Game1
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Texture2D texture = Content.Load<Texture2D>("megamanboth");
-            player.Load(texture);
+            Sprite playerSprite = Content.Load<Sprite[]>("spritetest")[0];
+            Texture2D playerTexture = Content.Load<Texture2D>(playerSprite.textureName);
+            player.Load(playerTexture, playerSprite);
         }
 
         protected override void UnloadContent()

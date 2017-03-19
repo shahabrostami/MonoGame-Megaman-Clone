@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\ClassLibrary2\bin\Debug\MyObjects.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -24,4 +25,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:megamanboth.png
+
+#begin spritetest.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:spritetest.xml
 

@@ -5,55 +5,36 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using MyObjects;
 
 namespace Game1
 {
     class PlayerAnimationJump : BasePlayerAnimation
     {
-        private int animationCycleLength = 4;
-        private int animationCycleIndex = 0;
-        private AnimationCycle[] currentCycle;
-        private AnimationCycle[] animationCycle;
-        private AnimationCycle[] animationCycleNone;
         private Vector2 noChange = new Vector2(0, 0);
-
-        public PlayerAnimationJump(SpriteSpec spriteSpec, bool loopAnimation, int msPerFrame, SpriteLocation rightSprite, SpriteLocation leftSprite) :
-            base(spriteSpec, loopAnimation, msPerFrame, rightSprite, leftSprite)
-        {   
-            animationCycle = new AnimationCycle[animationCycleLength];
-            animationCycle[0] = new AnimationCycle(3, -8, msPerFrame);
-            animationCycle[1] = new AnimationCycle(3, -3, msPerFrame);
-            animationCycle[2] = new AnimationCycle(3,  3, msPerFrame);
-            animationCycle[3] = new AnimationCycle(3,  8, msPerFrame);
-            animationCycleNone = new AnimationCycle[animationCycleLength];
-            animationCycleNone[0] = new AnimationCycle(0, -8, msPerFrame);
-            animationCycleNone[1] = new AnimationCycle(0, -3, msPerFrame);
-            animationCycleNone[2] = new AnimationCycle(0, 3, msPerFrame);
-            animationCycleNone[3] = new AnimationCycle(0, 8, msPerFrame);
-
-
-            loopFinished = false;
+        public PlayerAnimationJump(SpriteSpec spriteSpec, AnimationSpec animation) :
+            base(spriteSpec, animation)
+        {
+            cycles[1].frames = cycles[0].frames;
+            cycles[1].dis = cycles[0].dis;
         }
 
         override public void Update(GameTime gameTime)
         {
-            if (animationCycleIndex < animationCycleLength)
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (timeSinceLastFrame > currentFrame.ms)
             {
-                timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-                if (timeSinceLastFrame > msPerFrame)
-                {
-                    timeSinceLastFrame -= msPerFrame;
-                    animationCycleIndex++;
-                }
-            }
-            else if (animationCycleIndex == animationCycleLength)
-            {
-                timeSinceLastFrame = 0;
-                animationCycleIndex = 0;
-                loopFinished = true;
+                timeSinceLastFrame -= currentFrame.ms;
+
+                currentFrameIndex++;
+                if (currentFrameIndex == currentCycle.ef)
+                    currentFrameIndex = currentCycle.sf;
+
+                currentFrame = currentCycle.frames[currentFrameIndex];
             }
         }
-
+        /*
         public override void updateAnimationCycle(PlayerState state, PlayerAction pAction)
         {
             if (state.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
@@ -61,14 +42,23 @@ namespace Game1
             else
                 currentCycle = animationCycle;
         }
+                */
+
         public override Vector2 updateLocation(PlayerState pState)
         {
+            /*
             if (animationCycleIndex == animationCycleLength)
                 return noChange;
             if (direction == Direction.RIGHT)
                 return currentCycle[animationCycleIndex].getRightDisplacement();
             else
                 return currentCycle[animationCycleIndex].getLeftDisplacement();
+                */
+            return noChange;
+        }
+
+        public override void updateDirection(Direction direction)
+        {
         }
 
         public override bool hasMovement()

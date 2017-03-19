@@ -1,0 +1,5 @@
+C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\bin\Debug\ClassLibrary2.dll
+C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\bin\Debug\ClassLibrary2.pdb
+C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\obj\Debug\ClassLibrary2.csprojResolveAssemblyReference.cache
+C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\obj\Debug\ClassLibrary2.dll
+C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\obj\Debug\ClassLibrary2.pdb
