@@ -60,6 +60,58 @@
             </Item>
           </cycles>
         </Item>
+        <Item>
+          <name>jump</name>
+          <loop>false</loop>
+          <cycles>
+            <Item>
+              <row>0</row>
+              <sf>2</sf>
+              <ef>2</ef>
+              <frames>
+                <Item>
+                  <dis>3 2</dis>
+                  <ms>400</ms>
+                </Item>
+                <Item>
+                  <dis>3 8</dis>
+                  <ms>600</ms>
+                </Item>
+                <Item>
+                  <dis>3 -8</dis>
+                  <ms>600</ms>
+                </Item>
+                <Item>
+                  <dis>3 2</dis>
+                  <ms>400</ms>
+                </Item>
+              </frames>
+            </Item>
+            <Item>
+              <row>1</row>
+              <sf>2</sf>
+              <ef>2</ef>
+              <frames>
+                <Item>
+                  <dis>-3 2</dis>
+                  <ms>400</ms>
+                </Item>
+                <Item>
+                  <dis>-3 8</dis>
+                  <ms>600</ms>
+                </Item>
+                <Item>
+                  <dis>-3 -8</dis>
+                  <ms>600</ms>
+                </Item>
+                <Item>
+                  <dis>-3 -2</dis>
+                  <ms>400</ms>
+                </Item>
+              </frames>
+            </Item>
+          </cycles>
+        </Item>
       </animations>
     </Item>
   </Asset>

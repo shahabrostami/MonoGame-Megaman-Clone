@@ -31,7 +31,7 @@ namespace Game1
 
             run = new PlayerAnimationRun(playerSpriteSpec, sprite.animations[1]);
             
-            // jump = new PlayerAnimationJump(playerSpriteSpec, sprite.animations[1]);
+            jump = new PlayerAnimationJump(playerSpriteSpec, sprite.animations[2]);
 
             RUN_RIGHT.animation = run;
             RUN_LEFT.animation = run;

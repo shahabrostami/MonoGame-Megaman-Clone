@@ -15,8 +15,6 @@ namespace Game1
         public PlayerAnimationJump(SpriteSpec spriteSpec, AnimationSpec animation) :
             base(spriteSpec, animation)
         {
-            cycles[1].frames = cycles[0].frames;
-            cycles[1].dis = cycles[0].dis;
         }
 
         override public void Update(GameTime gameTime)
@@ -34,6 +32,7 @@ namespace Game1
                 currentFrame = currentCycle.frames[currentFrameIndex];
             }
         }
+
         /*
         public override void updateAnimationCycle(PlayerState state, PlayerAction pAction)
         {
@@ -42,7 +41,8 @@ namespace Game1
             else
                 currentCycle = animationCycle;
         }
-                */
+        */
+        
 
         public override Vector2 updateLocation(PlayerState pState)
         {

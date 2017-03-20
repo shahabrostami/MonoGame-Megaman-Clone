@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/spritetest.xml</SourceFile>
-  <SourceTime>2017-03-19T13:40:49.4023379+00:00</SourceTime>
+  <SourceTime>2017-03-20T20:08:49.9550251+00:00</SourceTime>
   <DestFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/bin/Windows/spritetest.xnb</DestFile>
-  <DestTime>2017-03-19T13:41:08.6922962+00:00</DestTime>
+  <DestTime>2017-03-20T20:15:46.2838783+00:00</DestTime>
   <Importer>XmlImporter</Importer>
   <ImporterTime>2016-03-30T07:36:08+01:00</ImporterTime>
   <Processor>PassThroughProcessor</Processor>
