@@ -49,7 +49,7 @@ namespace Game1
                 newState = currentState;
             }
             else
-               // newState.animation.updateAnimationCycle(currentState, playerAction);
+               newState.animation.updateOnAction(currentState, playerAction);
 
             if (currentState != newState)
             {

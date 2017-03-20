@@ -34,6 +34,8 @@ namespace MyObjects
         [ContentSerializerAttribute(Optional = true)]
         public Vector2 dis;
         [ContentSerializerAttribute(Optional = true)]
+        public int ms;
+        [ContentSerializerAttribute(Optional = true)]
         public AnimationFrameSpec[] frames;
     }
 

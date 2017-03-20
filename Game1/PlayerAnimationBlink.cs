@@ -16,6 +16,8 @@ namespace Game1
             base(spriteSpec, animation)
         {
             cycles[1].frames = cycles[0].frames;
+            cycles[1].ef = cycles[0].ef;
+            cycles[1].sf = cycles[0].sf;
             cycles[1].dis = cycles[0].dis;
         }
 
@@ -41,12 +43,11 @@ namespace Game1
             throw new NotImplementedException();
         }
 
-        /*
-        public override void updateAnimationCycle(PlayerState pState, PlayerAction pAction)
+        
+        public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
 
         }
-        */
 
         public override void updateDirection(Direction direction)
         {

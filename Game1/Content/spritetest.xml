@@ -40,23 +40,17 @@
               <sf>3</sf>
               <ef>5</ef>
               <dis>3 0</dis>
+              <ms>100</ms>
               <frames>
-                <Item>
-                  <ms>100</ms>
-                </Item>
-                <Item>
-                  <ms>100</ms>
-                </Item>
-                <Item>
-                  <ms>100</ms>
-                </Item>
+                <Item></Item>
+                <Item></Item>
+                <Item></Item>
               </frames>
             </Item>
             <Item>
               <row>1</row>
               <sf>3</sf>
               <ef>5</ef>
-              <dis>-3 0</dis>
             </Item>
           </cycles>
         </Item>
@@ -70,45 +64,28 @@
               <ef>2</ef>
               <frames>
                 <Item>
-                  <dis>3 2</dis>
-                  <ms>400</ms>
+                  <dis>1 -4</dis>
+                  <ms>50</ms>
                 </Item>
                 <Item>
-                  <dis>3 8</dis>
-                  <ms>600</ms>
+                  <dis>1 -8</dis>
+                  <ms>50</ms>
                 </Item>
                 <Item>
-                  <dis>3 -8</dis>
-                  <ms>600</ms>
+                  <dis>1 8</dis>
+                  <ms>50</ms>
                 </Item>
                 <Item>
-                  <dis>3 2</dis>
-                  <ms>400</ms>
+                  <dis>1 4</dis>
+                  <ms>50</ms>
                 </Item>
               </frames>
             </Item>
             <Item>
               <row>1</row>
-              <sf>2</sf>
-              <ef>2</ef>
-              <frames>
-                <Item>
-                  <dis>-3 2</dis>
-                  <ms>400</ms>
-                </Item>
-                <Item>
-                  <dis>-3 8</dis>
-                  <ms>600</ms>
-                </Item>
-                <Item>
-                  <dis>-3 -8</dis>
-                  <ms>600</ms>
-                </Item>
-                <Item>
-                  <dis>-3 -2</dis>
-                  <ms>400</ms>
-                </Item>
-              </frames>
+            </Item>
+            <Item>
+              <row>2</row>
             </Item>
           </cycles>
         </Item>
