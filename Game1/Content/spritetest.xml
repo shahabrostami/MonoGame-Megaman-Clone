@@ -39,8 +39,8 @@
               <row>0</row>
               <sf>3</sf>
               <ef>5</ef>
-              <dis>3 0</dis>
-              <ms>100</ms>
+              <dis>2 0</dis>
+              <ms>80</ms>
               <frames>
                 <Item></Item>
                 <Item></Item>
@@ -64,20 +64,20 @@
               <ef>2</ef>
               <frames>
                 <Item>
-                  <dis>1 -4</dis>
-                  <ms>50</ms>
+                  <dis>10 -50</dis>
+                  <ms>20</ms>
                 </Item>
                 <Item>
-                  <dis>1 -8</dis>
-                  <ms>50</ms>
+                  <dis>20 -50</dis>
+                  <ms>100</ms>
                 </Item>
                 <Item>
-                  <dis>1 8</dis>
-                  <ms>50</ms>
+                  <dis>20 50</dis>
+                  <ms>100</ms>
                 </Item>
                 <Item>
-                  <dis>1 4</dis>
-                  <ms>50</ms>
+                  <dis>10 50</dis>
+                  <ms>20</ms>
                 </Item>
               </frames>
             </Item>

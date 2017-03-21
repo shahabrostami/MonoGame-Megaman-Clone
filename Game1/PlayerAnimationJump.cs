@@ -13,6 +13,7 @@ namespace Game1
     {
         private Vector2 noChange = new Vector2(0, 0);
         private int animationCycleIndex = 0;
+        private int animationCycleMs = 0;
         public PlayerAnimationJump(SpriteSpec spriteSpec, AnimationSpec animation) :
             base(spriteSpec, animation)
         {
@@ -31,24 +32,28 @@ namespace Game1
                 cycles[2].frames[i].dis = new Vector2(X * 0, Y);
                 cycles[2].frames[i].ms = ms;
             }
+            animationCycleMs = currentFrame.ms;
         }
 
-        override public void Update(GameTime gameTime)
+        override public bool Update(GameTime gameTime)
         {
-            if (animationCycleIndex < currentCycle.frames.Length - 1)
+            if (loopFinished)
+                return false;
+
+            timeSinceLastFrame = gameTime.ElapsedGameTime.Milliseconds;
+            if (animationCycleMs <= 0)
             {
-                timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-                if (timeSinceLastFrame > currentFrame.ms)
+                animationCycleIndex++;
+                if(animationCycleIndex == currentCycle.frames.Length)
                 {
-                    timeSinceLastFrame -= currentFrame.ms;
-                    animationCycleIndex++;
-                    currentFrame = currentCycle.frames[animationCycleIndex];
+                    loopFinished = true;
+                    return false;
                 }
+                currentFrame = currentCycle.frames[animationCycleIndex];
+                animationCycleMs = currentFrame.ms;
             }
-            else
-            {
-                loopFinished = true;
-            }
+            animationCycleMs -= timeSinceLastFrame;
+            return true;
         }
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
@@ -56,14 +61,10 @@ namespace Game1
             if (pState.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
                 currentCycle = cycles[2];
         }
-        
+
         public override Vector2 updateLocation(PlayerState pState)
         {
-            
-            if (animationCycleIndex == currentCycle.frames.Length)
-                return noChange;
-                
-            return currentFrame.dis;
+            return timeSinceLastFrame * (currentFrame.dis / currentFrame.ms); ;
         }
 
         public override void updateDirection(Direction direction)
@@ -72,6 +73,7 @@ namespace Game1
                 currentCycle = cycles[0];
             else
                 currentCycle = cycles[1];
+            currentFrame = currentCycle.frames[animationCycleIndex];
         }
 
         public override bool hasMovement()
@@ -81,10 +83,9 @@ namespace Game1
 
         public override void reset()
         {
-            currentFrameIndex = 0;
             animationCycleIndex = 0;
-            timeSinceLastFrame = 0;
             currentFrame = currentCycle.frames[animationCycleIndex];
+            animationCycleMs = currentFrame.ms;
             loopFinished = false;
         }
     }

@@ -22,7 +22,7 @@ namespace Game1
             ms = animation.cycles[0].ms;
         }
 
-        override public void Update(GameTime gameTime)
+        override public bool Update(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
@@ -37,6 +37,7 @@ namespace Game1
 
                 currentFrame = currentCycle.frames[currentCycle.ef % currentFrameIndex];
             }
+            return true;
         }
 
         public override void updateDirection(Direction direction)

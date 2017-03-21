@@ -43,13 +43,13 @@ namespace Game1
 
             currentState.animation.updateDirection(currentState.getDirection());
 
-            currentState.animation.Update(gameTime);
-
-            if (currentState.animation.hasMovement())
-                updateLocation(currentState.animation.updateLocation(currentState));
+            if(currentState.animation.Update(gameTime))
+                if (currentState.animation.hasMovement())
+                    updateLocation(currentState.animation.updateLocation(currentState));
 
             if (currentState.animation.isLoopFinished())
                 playerStateMachine.revert();
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

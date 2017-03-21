@@ -21,7 +21,7 @@ namespace Game1
             cycles[1].dis = cycles[0].dis;
         }
 
-        override public void Update(GameTime gameTime)
+        override public bool Update(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
@@ -35,7 +35,9 @@ namespace Game1
                     currentFrameIndex = currentCycle.sf;
 
                 currentFrame = currentCycle.frames[currentFrameIndex];
+                return true;
             }
+            return false;
         }
 
         public override Vector2 updateLocation(PlayerState pState)

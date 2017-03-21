@@ -35,7 +35,7 @@ namespace Game1
             this.currentFrameIndex = currentCycle.sf;
         }
 
-        public abstract void Update(GameTime gameTime);
+        public abstract bool Update(GameTime gameTime);
 
         public abstract Vector2 updateLocation(PlayerState state);
 
