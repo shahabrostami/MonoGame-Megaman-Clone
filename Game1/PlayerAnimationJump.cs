@@ -16,6 +16,7 @@ namespace Game1
         public PlayerAnimationJump(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
+
         }
 
         override public bool Update(GameTime gameTime)
@@ -38,15 +39,22 @@ namespace Game1
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-            if (pState.action == PlayerAction.STOP || pAction == PlayerAction.STOP) ;
+            if (pState.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
+                velocity.X = 0;
         }
         
         public override void updateDirection(Direction direction)
         {
-            if (direction == Direction.RIGHT)
+            if (direction == Direction.RIGHT && currentCycle != cycles[0])
+            {
                 currentCycle = cycles[0];
-            else
+                velocity.X *= -1;
+            }
+            else if(direction == Direction.LEFT && currentCycle != cycles[1])
+            {
                 currentCycle = cycles[1];
+                velocity.X *= -1;
+            }
         }
 
         public override bool hasMovement()

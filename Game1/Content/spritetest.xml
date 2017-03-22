@@ -62,7 +62,7 @@
               <row>0</row>
               <sf>2</sf>
               <ef>2</ef>
-              <velocity>4 -20</velocity>
+              <velocity>4 -40</velocity>
               <ms>100</ms>
               <frames>
                 <Item></Item>
@@ -70,6 +70,10 @@
             </Item>
             <Item>
               <row>1</row>
+              <sf>2</sf>
+              <ef>2</ef>
+              <velocity>-4 -40</velocity>
+              <ms>100</ms>
             </Item>
             <Item>
               <row>2</row>
