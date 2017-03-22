@@ -12,7 +12,7 @@ namespace Game1
         private PlayerActionHandler playerActionHandler;
         private PlayerState currentState;
         private PlayerAction playerAction;
-        private Vector2 location;
+        public Vector2 location;
 
         public Player() {
             location.X = 0;
@@ -25,8 +25,7 @@ namespace Game1
         public void updateLocation(Vector2 updateLocation)
         {
             Console.WriteLine("Update: (" + updateLocation.X + "),(" + updateLocation.Y + ")");
-            location.X += updateLocation.X;
-            location.Y += updateLocation.Y;
+            location += updateLocation;
         }
 
         public void Load(Texture2D texture, Sprite sprite)
@@ -43,9 +42,7 @@ namespace Game1
 
             currentState.animation.updateDirection(currentState.getDirection());
 
-            if(currentState.animation.Update(gameTime))
-                if (currentState.animation.hasMovement())
-                    updateLocation(currentState.animation.updateLocation(currentState));
+            currentState.animation.Update(gameTime);
 
             if (currentState.animation.isLoopFinished())
                 playerStateMachine.revert();

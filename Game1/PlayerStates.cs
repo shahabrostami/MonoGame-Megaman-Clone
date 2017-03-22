@@ -27,11 +27,11 @@ namespace Game1
         {
             SpriteSpec playerSpriteSpec = new SpriteSpec(texture, sprite.rows, sprite.columns);
 
-            stand = new PlayerAnimationBlink(playerSpriteSpec, sprite.animations[0]);
+            stand = new PlayerAnimationBlink(player, playerSpriteSpec, sprite.animations[0]);
 
-            run = new PlayerAnimationRun(playerSpriteSpec, sprite.animations[1]);
+            run = new PlayerAnimationRun(player, playerSpriteSpec, sprite.animations[1]);
             
-            jump = new PlayerAnimationJump(playerSpriteSpec, sprite.animations[2]);
+            jump = new PlayerAnimationJump(player, playerSpriteSpec, sprite.animations[2]);
 
             RUN_RIGHT.animation = run;
             RUN_LEFT.animation = run;

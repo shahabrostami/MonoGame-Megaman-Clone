@@ -21,10 +21,13 @@ namespace Game1
         protected AnimationCycleSpec currentCycle;
         protected AnimationFrameSpec currentFrame;
         protected int currentFrameIndex;
-        protected int timeSinceLastFrame = 0;
+        protected float timeSinceLastFrame = 0;
 
-        public BasePlayerAnimation(SpriteSpec spriteSpec, AnimationSpec animation)
+        protected Player player;
+
+        public BasePlayerAnimation(Player player, SpriteSpec spriteSpec, AnimationSpec animation)
         {
+            this.player = player;
             this.spriteSpec = spriteSpec;
             this.loopFinished = false;
             this.loopAnimation = animation.loop;
@@ -36,8 +39,6 @@ namespace Game1
         }
 
         public abstract bool Update(GameTime gameTime);
-
-        public abstract Vector2 updateLocation(PlayerState state);
 
         public abstract void reset();
 

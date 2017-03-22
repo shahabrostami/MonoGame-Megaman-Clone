@@ -13,11 +13,11 @@ namespace Game1
     {
         private int ms;
 
-        public PlayerAnimationRun(SpriteSpec spriteSpec, AnimationSpec animation) :
-            base(spriteSpec, animation)
+        public PlayerAnimationRun(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
+            base(player, spriteSpec, animation)
         {
             cycles[1].frames = cycles[0].frames;
-            cycles[1].dis = new Vector2(cycles[0].dis.X * -1, cycles[0].dis.Y);
+            cycles[1].velocity = new Vector2(cycles[0].velocity.X * -1, cycles[0].velocity.Y);
 
             ms = animation.cycles[0].ms;
         }
@@ -37,6 +37,8 @@ namespace Game1
 
                 currentFrame = currentCycle.frames[currentCycle.ef % currentFrameIndex];
             }
+
+            player.updateLocation(currentCycle.velocity * (timeSinceLastFrame/1000));
             return true;
         }
 
@@ -48,11 +50,6 @@ namespace Game1
                 currentCycle = cycles[0];
             else
                 currentCycle = cycles[1];
-        }
-
-        public override Vector2 updateLocation(PlayerState pState)
-        {
-            return currentCycle.dis;
         }
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)

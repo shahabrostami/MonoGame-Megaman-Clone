@@ -32,19 +32,20 @@ namespace MyObjects
         [ContentSerializerAttribute(Optional = true)]
         public int ef;
         [ContentSerializerAttribute(Optional = true)]
-        public Vector2 dis;
+        public Vector2 velocity;
         [ContentSerializerAttribute(Optional = true)]
         public int ms;
         [ContentSerializerAttribute(Optional = true)]
         public AnimationFrameSpec[] frames;
     }
-
+    
     public class AnimationFrameSpec
     {
         [ContentSerializerAttribute(Optional = true)]
-        public Vector2 dis;
+        public Vector2 velocity;
         [ContentSerializerAttribute(Optional = true)]
         public int ms = 0;
     }
+    
 
 }

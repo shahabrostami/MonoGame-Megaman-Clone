@@ -15,7 +15,7 @@
               <row>0</row>
               <sf>0</sf>
               <ef>1</ef>
-              <dis>0 0</dis>
+              <velocity>0 0</velocity>
               <frames>
                 <Item>
                   <ms>1500</ms>
@@ -39,7 +39,7 @@
               <row>0</row>
               <sf>3</sf>
               <ef>5</ef>
-              <dis>2 0</dis>
+              <velocity>20 0</velocity>
               <ms>80</ms>
               <frames>
                 <Item></Item>
@@ -62,23 +62,10 @@
               <row>0</row>
               <sf>2</sf>
               <ef>2</ef>
+              <velocity>4 -20</velocity>
+              <ms>100</ms>
               <frames>
-                <Item>
-                  <dis>10 -50</dis>
-                  <ms>20</ms>
-                </Item>
-                <Item>
-                  <dis>20 -50</dis>
-                  <ms>100</ms>
-                </Item>
-                <Item>
-                  <dis>20 50</dis>
-                  <ms>100</ms>
-                </Item>
-                <Item>
-                  <dis>10 50</dis>
-                  <ms>20</ms>
-                </Item>
+                <Item></Item>
               </frames>
             </Item>
             <Item>

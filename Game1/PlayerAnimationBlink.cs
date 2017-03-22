@@ -12,13 +12,13 @@ namespace Game1
     class PlayerAnimationBlink : BasePlayerAnimation
     {
 
-        public PlayerAnimationBlink(SpriteSpec spriteSpec, AnimationSpec animation) :
-            base(spriteSpec, animation)
+        public PlayerAnimationBlink(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
+            base(player, spriteSpec, animation)
         {
             cycles[1].frames = cycles[0].frames;
             cycles[1].ef = cycles[0].ef;
             cycles[1].sf = cycles[0].sf;
-            cycles[1].dis = cycles[0].dis;
+            cycles[1].velocity = cycles[0].velocity;
         }
 
         override public bool Update(GameTime gameTime)
@@ -39,13 +39,7 @@ namespace Game1
             }
             return false;
         }
-
-        public override Vector2 updateLocation(PlayerState pState)
-        {
-            throw new NotImplementedException();
-        }
-
-        
+                
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
 
