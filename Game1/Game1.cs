@@ -10,6 +10,7 @@ namespace Game1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
+        Map map;
 
         public Game1()
         {
@@ -29,6 +30,8 @@ namespace Game1
             Sprite playerSprite = Content.Load<Sprite[]>("spritetest")[0];
             Texture2D playerTexture = Content.Load<Texture2D>(playerSprite.textureName);
             player.Load(playerTexture, playerSprite);
+
+            map = new Map(GraphicsDevice, this.GraphicsDevice.Viewport.Bounds.Width, this.GraphicsDevice.Viewport.Bounds.Height);
         }
 
         protected override void UnloadContent()
@@ -51,9 +54,9 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
+            map.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            
             base.Draw(gameTime);
         }
     }

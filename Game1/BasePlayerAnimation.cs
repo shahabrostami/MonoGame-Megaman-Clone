@@ -11,6 +11,7 @@ namespace Game1
 {
     abstract class BasePlayerAnimation
     {
+        readonly Vector2 gravity = new Vector2(0, 9.8f);
         private SpriteSpec spriteSpec;
         protected Direction direction;
         protected AnimationCycleSpec[] cycles;
@@ -22,6 +23,7 @@ namespace Game1
         protected AnimationFrameSpec currentFrame;
         protected int currentFrameIndex;
         protected float timeSinceLastFrame = 0;
+        protected Vector2 velocity;
 
         protected Player player;
 

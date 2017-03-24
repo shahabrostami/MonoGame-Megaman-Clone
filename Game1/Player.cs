@@ -16,7 +16,7 @@ namespace Game1
 
         public Player() {
             location.X = 0;
-            location.Y = 400;
+            location.Y = 426;
             playerActionHandler = new PlayerActionHandler();
             playerStateMachine = new PlayerStateMachine();
             currentState = PlayerStates.STAND_RIGHT;

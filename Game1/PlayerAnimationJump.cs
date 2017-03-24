@@ -11,8 +11,6 @@ namespace Game1
 {
     class PlayerAnimationJump : BasePlayerAnimation
     {
-        readonly Vector2 gravity = new Vector2(0, 9.8f);
-        Vector2 velocity;
         public PlayerAnimationJump(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
@@ -29,8 +27,9 @@ namespace Game1
             velocity += (gravity * (timeSinceLastFrame*10));
             player.updateLocation(velocity * (timeSinceLastFrame*10));
 
-            if (player.location.Y >= 400)
+            if (player.location.Y >= 426)
             {
+                player.location.Y = 426;
                 velocity = currentCycle.velocity;
                 loopFinished = true;
             }
@@ -41,6 +40,8 @@ namespace Game1
         {
             if (pState.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
                 velocity.X = 0;
+            else
+                velocity.X = currentCycle.velocity.X;
         }
         
         public override void updateDirection(Direction direction)

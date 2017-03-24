@@ -41,6 +41,7 @@
     <Compile Include="Direction.cs" />
     <Compile Include="BasePlayerAnimation.cs" />
     <Compile Include="AnimationCycle.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="PlayerStateMachine.cs" />
     <Compile Include="PlayerStateTransition.cs" />
     <Compile Include="PlayerAnimationJump.cs" />
