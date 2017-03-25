@@ -11,7 +11,8 @@ namespace Game1
 {
     abstract class BasePlayerAnimation
     {
-        readonly Vector2 gravity = new Vector2(0, 9.8f);
+        protected readonly Vector2 gravity = new Vector2(0, 9.8f);
+
         private SpriteSpec spriteSpec;
         protected Direction direction;
         protected AnimationCycleSpec[] cycles;
