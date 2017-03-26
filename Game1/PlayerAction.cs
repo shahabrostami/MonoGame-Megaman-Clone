@@ -11,6 +11,7 @@ namespace Game1
         MOVE_RIGHT,
         MOVE_LEFT,
         JUMP,
+        SHOOT,
         STOP
     }
 }

@@ -13,11 +13,16 @@ namespace Game1
         public static PlayerState RUN_RIGHT = new PlayerState("RUN_RIGHT", Direction.RIGHT, PlayerAction.MOVE_RIGHT);
         public static PlayerState RUN_LEFT = new PlayerState("RUN_LEFT", Direction.LEFT, PlayerAction.MOVE_LEFT);
         public static PlayerState JUMP_RIGHT = new PlayerState("JUMP_RIGHT", Direction.RIGHT, PlayerAction.JUMP);
-      //  public static PlayerState JUMP_UP_RIGHT = new PlayerState("JUMP_UP_RIGHT", Direction.RIGHT, PlayerAction.JUMP);
         public static PlayerState JUMP_LEFT = new PlayerState("JUMP_LEFT", Direction.LEFT, PlayerAction.JUMP);
-        //public static PlayerState JUMP_UP_LEFT = new PlayerState("JUMP_UP_LEFT", Direction.LEFT, PlayerAction.JUMP);
         public static PlayerState STAND_RIGHT = new PlayerState("STAND_RIGHT", Direction.RIGHT, PlayerAction.STOP);
         public static PlayerState STAND_LEFT = new PlayerState("STAND_LEFT", Direction.LEFT, PlayerAction.STOP);
+        /* public static PlayerState STAND_SHOOT_RIGHT = new PlayerState("STAND_RIGHT", Direction.RIGHT, PlayerAction.SHOOT);
+        public static PlayerState STAND_SHOOT_LEFT = new PlayerState("STAND_LEFT", Direction.LEFT, PlayerAction.SHOOT);
+        public static PlayerState RUN_SHOOT_RIGHT = new PlayerState("STAND_RIGHT", Direction.RIGHT, PlayerAction.SHOOT);
+        public static PlayerState RUN_SHOOT_LEFT = new PlayerState("STAND_LEFT", Direction.LEFT, PlayerAction.SHOOT);
+        public static PlayerState JUMP_SHOOT_RIGHT = new PlayerState("STAND_RIGHT", Direction.RIGHT, PlayerAction.SHOOT);
+        public static PlayerState JUMP_SHOOT_LEFT = new PlayerState("STAND_LEFT", Direction.LEFT, PlayerAction.SHOOT);
+        */
 
         private static BasePlayerAnimation run;
         private static BasePlayerAnimation stand;

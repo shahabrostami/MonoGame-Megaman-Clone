@@ -13,6 +13,7 @@ namespace Game1
         private PlayerState currentState;
         private PlayerAction playerAction;
         public Vector2 location;
+        public Boolean shooting;
 
         public Player() {
             location.X = 0;
@@ -26,6 +27,11 @@ namespace Game1
         {
             Console.WriteLine("Update: (" + updateLocation.X + "),(" + updateLocation.Y + ")");
             location += updateLocation;
+        }
+
+        public bool isShooting()
+        {
+            return shooting;
         }
 
         public void Load(Texture2D texture, Sprite sprite)

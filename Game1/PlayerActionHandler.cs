@@ -26,6 +26,8 @@ namespace Game1
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
+                else if (Keyboard.GetState().IsKeyDown(Keys.O))
+                    currentAction = PlayerAction.SHOOT;
                 else
                     currentAction = PlayerAction.MOVE_RIGHT;
             }
@@ -33,10 +35,14 @@ namespace Game1
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
+                else if (Keyboard.GetState().IsKeyDown(Keys.O))
+                    currentAction = PlayerAction.SHOOT;
                 else
                     currentAction = PlayerAction.MOVE_LEFT;
             }
-            else if(Keyboard.GetState().IsKeyDown(Keys.Space))
+            else if (Keyboard.GetState().IsKeyDown(Keys.O))
+                    currentAction = PlayerAction.SHOOT;
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 currentAction = PlayerAction.JUMP;
             else
             {
