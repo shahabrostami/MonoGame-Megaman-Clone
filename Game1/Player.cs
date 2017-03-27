@@ -12,13 +12,13 @@ namespace Game1
         private PlayerActionHandler playerActionHandler;
         private PlayerState currentState;
         private PlayerAction playerAction;
+        private bool shooting;
         public Vector2 location;
-        public Boolean shooting;
 
         public Player() {
             location.X = 0;
             location.Y = 426;
-            playerActionHandler = new PlayerActionHandler();
+            playerActionHandler = new PlayerActionHandler(this);
             playerStateMachine = new PlayerStateMachine();
             currentState = PlayerStates.STAND_RIGHT;
         }
@@ -34,6 +34,11 @@ namespace Game1
             return shooting;
         }
 
+        public void setShooting(bool shoot)
+        {
+            this.shooting = shoot;
+        }
+
         public void Load(Texture2D texture, Sprite sprite)
         {
             PlayerStates.Load(this, texture, sprite);
@@ -45,8 +50,7 @@ namespace Game1
             playerAction = playerActionHandler.Update(gameTime);
 
             currentState = playerStateMachine.Update(playerAction);
-
-            currentState.animation.updateDirection(currentState.getDirection());
+            currentState.animation.updateOnAction(currentState, playerAction);
 
             currentState.animation.Update(gameTime);
 

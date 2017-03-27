@@ -3,8 +3,8 @@
 
   <Asset Type="MyObjects.Sprite[]">
     <Item>
-      <textureName>megamanboth</textureName>
-      <rows>2</rows>
+      <textureName>megamanfull</textureName>
+      <rows>4</rows>
       <columns>6</columns>
       <animations>
         <Item>
@@ -28,6 +28,26 @@
             <Item>
               <row>1</row>
             </Item>
+            <Item>
+              <row>2</row>
+              <sf>0</sf>
+              <ef>0</ef>
+              <velocity>0 0</velocity>
+              <ms>0</ms>
+              <frames>
+                <Item></Item>
+              </frames>
+            </Item>
+            <Item>
+              <row>3</row>
+              <sf>0</sf>
+              <ef>0</ef>
+              <velocity>0 0</velocity>
+              <ms>0</ms>
+              <frames>
+                <Item></Item>
+              </frames>
+            </Item>
           </cycles>
 
         </Item>
@@ -40,7 +60,7 @@
               <sf>3</sf>
               <ef>5</ef>
               <velocity>40 0</velocity>
-              <ms>80</ms>
+              <ms>100</ms>
               <frames>
                 <Item></Item>
                 <Item></Item>
@@ -51,6 +71,20 @@
               <row>1</row>
               <sf>3</sf>
               <ef>5</ef>
+            </Item>
+            <Item>
+              <row>2</row>
+              <sf>1</sf>
+              <ef>3</ef>
+              <velocity>40 0</velocity>
+              <ms>100</ms>
+            </Item>
+            <Item>
+              <row>3</row>
+              <sf>1</sf>
+              <ef>3</ef>
+              <velocity>-40 0</velocity>
+              <ms>100</ms>
             </Item>
           </cycles>
         </Item>
@@ -63,7 +97,6 @@
               <sf>2</sf>
               <ef>2</ef>
               <velocity>10 -40</velocity>
-              <ms>100</ms>
               <frames>
                 <Item></Item>
               </frames>
@@ -73,7 +106,6 @@
               <sf>2</sf>
               <ef>2</ef>
               <velocity>-10 -40</velocity>
-              <ms>100</ms>
             </Item>
             <Item>
               <row>2</row>

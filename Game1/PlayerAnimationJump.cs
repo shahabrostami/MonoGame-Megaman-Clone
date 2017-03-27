@@ -40,22 +40,18 @@ namespace Game1
         {
             if (pState.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
                 velocity.X = 0;
-            else
-                velocity.X = currentCycle.velocity.X;
-        }
-        
-        public override void updateDirection(Direction direction)
-        {
-            if (direction == Direction.RIGHT && currentCycle != cycles[0])
+            else if (direction == Direction.RIGHT && currentCycle != cycles[0])
             {
                 currentCycle = cycles[0];
                 velocity.X *= -1;
             }
-            else if(direction == Direction.LEFT && currentCycle != cycles[1])
+            else if (direction == Direction.LEFT && currentCycle != cycles[1])
             {
                 currentCycle = cycles[1];
                 velocity.X *= -1;
             }
+            else
+                velocity.X = currentCycle.velocity.X;
         }
 
         public override bool hasMovement()

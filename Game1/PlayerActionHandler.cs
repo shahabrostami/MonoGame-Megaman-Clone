@@ -13,11 +13,13 @@ namespace Game1
     {
         private PlayerAction currentAction;
         private PlayerAction previousAction;
+        private Player player;
 
-        public PlayerActionHandler()
+        public PlayerActionHandler(Player player)
         {
             previousAction = PlayerAction.JUMP;
             currentAction = PlayerAction.STOP;
+            this.player = player;
         }
 
         public PlayerAction Update(GameTime gameTime)
@@ -26,8 +28,6 @@ namespace Game1
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
-                else if (Keyboard.GetState().IsKeyDown(Keys.O))
-                    currentAction = PlayerAction.SHOOT;
                 else
                     currentAction = PlayerAction.MOVE_RIGHT;
             }
@@ -35,19 +35,19 @@ namespace Game1
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
-                else if (Keyboard.GetState().IsKeyDown(Keys.O))
-                    currentAction = PlayerAction.SHOOT;
                 else
                     currentAction = PlayerAction.MOVE_LEFT;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.O))
-                    currentAction = PlayerAction.SHOOT;
             else if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 currentAction = PlayerAction.JUMP;
             else
             {
                 currentAction = PlayerAction.STOP;
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.O))
+                player.setShooting(true);
+            else player.setShooting(false);
 
             if (currentAction != previousAction)
             {

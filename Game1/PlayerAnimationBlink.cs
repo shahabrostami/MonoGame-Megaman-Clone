@@ -24,8 +24,8 @@ namespace Game1
         override public bool Update(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-
-            if (timeSinceLastFrame > currentFrame.ms)
+            
+            if (currentFrame.ms > 0 && timeSinceLastFrame > currentFrame.ms)
             {
                 timeSinceLastFrame -= currentFrame.ms;
 
@@ -42,17 +42,28 @@ namespace Game1
                 
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-
-        }
-
-        public override void updateDirection(Direction direction)
-        {
-
-            this.direction = direction;
-            if (direction == Direction.RIGHT)
-                currentCycle = cycles[0];
-            else
-                currentCycle = cycles[1];
+            if (pState.getDirection() == Direction.RIGHT)
+            {
+                direction = Direction.RIGHT;
+                if (player.isShooting())
+                {
+                    currentCycle = cycles[2];
+                    currentFrame = currentCycle.frames[0];
+                }
+                else
+                    currentCycle = cycles[0];
+            }
+            else if (pState.getDirection() == Direction.LEFT)
+            {
+                direction = Direction.RIGHT;
+                if (player.isShooting())
+                {
+                    currentCycle = cycles[3];
+                    currentFrame = currentCycle.frames[0];
+                }
+                else
+                    currentCycle = cycles[1];
+            }
         }
 
         public override bool hasMovement()

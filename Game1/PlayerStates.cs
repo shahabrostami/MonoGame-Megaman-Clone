@@ -42,8 +42,6 @@ namespace Game1
             RUN_LEFT.animation = run;
             JUMP_RIGHT.animation = jump;
             JUMP_LEFT.animation = jump;
-            //JUMP_UP_LEFT.animation = jump;
-            //JUMP_UP_RIGHT.animation = jump;
             STAND_RIGHT.animation = stand;
             STAND_LEFT.animation = stand;
 

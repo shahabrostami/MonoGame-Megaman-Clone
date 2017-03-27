@@ -47,8 +47,6 @@ namespace Game1
 
         public abstract bool hasMovement();
 
-        public abstract void updateDirection(Direction direction);
-
         public abstract void updateOnAction(PlayerState pState, PlayerAction pAction);
 
         public bool isLoopFinished()

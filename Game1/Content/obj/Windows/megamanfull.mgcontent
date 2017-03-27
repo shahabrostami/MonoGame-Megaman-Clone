@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/megamanboth.png</SourceFile>
-  <SourceTime>2017-03-10T13:03:41.8083829+00:00</SourceTime>
-  <DestFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/bin/Windows/megamanboth.xnb</DestFile>
-  <DestTime>2017-03-27T21:17:29.6255986+01:00</DestTime>
+  <SourceFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/megamanfull.png</SourceFile>
+  <SourceTime>2017-03-27T21:16:57.699392+01:00</SourceTime>
+  <DestFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/bin/Windows/megamanfull.xnb</DestFile>
+  <DestTime>2017-03-27T21:17:29.8601291+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T07:36:08+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
