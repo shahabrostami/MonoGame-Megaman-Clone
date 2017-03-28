@@ -38,8 +38,8 @@ namespace Game1
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-            direction = pState.getDirection();
-            if (pState.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
+            direction = player.getDirection();
+            if (pAction == PlayerAction.STOP)
                 velocity.X = 0;
             /*else if (direction == Direction.RIGHT && currentCycle != cycles[0])
             {

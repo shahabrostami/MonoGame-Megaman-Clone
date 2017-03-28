@@ -15,26 +15,15 @@ namespace Game1
 
         public PlayerStateMachine()
         {
-            currentState = PlayerStates.STAND_RIGHT;
+            currentState = PlayerStates.STAND;
 
             transitions = new Dictionary<PlayerStateTransition, PlayerState>
             {
-                { new PlayerStateTransition(PlayerStates.STAND_RIGHT, PlayerAction.MOVE_RIGHT), PlayerStates.RUN_RIGHT },
-                { new PlayerStateTransition(PlayerStates.STAND_RIGHT, PlayerAction.MOVE_LEFT), PlayerStates.RUN_LEFT},
-                { new PlayerStateTransition(PlayerStates.STAND_RIGHT, PlayerAction.JUMP), PlayerStates.JUMP_RIGHT},
-                { new PlayerStateTransition(PlayerStates.STAND_LEFT, PlayerAction.MOVE_RIGHT), PlayerStates.RUN_RIGHT },
-                { new PlayerStateTransition(PlayerStates.STAND_LEFT, PlayerAction.MOVE_LEFT), PlayerStates.RUN_LEFT},
-                { new PlayerStateTransition(PlayerStates.STAND_LEFT, PlayerAction.JUMP), PlayerStates.JUMP_LEFT},
-                { new PlayerStateTransition(PlayerStates.RUN_RIGHT, PlayerAction.MOVE_LEFT), PlayerStates.RUN_LEFT},
-                { new PlayerStateTransition(PlayerStates.RUN_RIGHT, PlayerAction.JUMP), PlayerStates.JUMP_RIGHT},
-                { new PlayerStateTransition(PlayerStates.RUN_RIGHT, PlayerAction.STOP), PlayerStates.STAND_RIGHT},
-                { new PlayerStateTransition(PlayerStates.RUN_LEFT, PlayerAction.MOVE_RIGHT), PlayerStates.RUN_RIGHT },
-                { new PlayerStateTransition(PlayerStates.RUN_LEFT, PlayerAction.JUMP), PlayerStates.JUMP_LEFT},
-                { new PlayerStateTransition(PlayerStates.RUN_LEFT, PlayerAction.STOP), PlayerStates.STAND_LEFT},
-                { new PlayerStateTransition(PlayerStates.JUMP_LEFT, PlayerAction.MOVE_RIGHT), PlayerStates.JUMP_RIGHT},
-                { new PlayerStateTransition(PlayerStates.JUMP_LEFT, PlayerAction.MOVE_LEFT), PlayerStates.JUMP_LEFT},
-                { new PlayerStateTransition(PlayerStates.JUMP_RIGHT, PlayerAction.MOVE_RIGHT), PlayerStates.JUMP_RIGHT},
-                { new PlayerStateTransition(PlayerStates.JUMP_RIGHT, PlayerAction.MOVE_LEFT), PlayerStates.JUMP_LEFT}
+                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE_RIGHT), PlayerStates.RUN },
+                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE_LEFT), PlayerStates.RUN},
+                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.JUMP), PlayerStates.JUMP},
+                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.JUMP), PlayerStates.JUMP},
+                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.STOP), PlayerStates.STAND}
             };
         }
 
@@ -60,10 +49,7 @@ namespace Game1
         public void revert()
         {
             currentState.animation.reset();
-            if (currentState.getDirection() == Direction.RIGHT)
-                currentState = PlayerStates.RUN_RIGHT;
-            else if (currentState.getDirection() == Direction.LEFT)
-                currentState = PlayerStates.RUN_LEFT;
+            currentState = PlayerStates.STAND;
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Game1
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
             {
+                player.setDirection(Direction.RIGHT);
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
                 else
@@ -33,6 +34,7 @@ namespace Game1
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
             {
+                player.setDirection(Direction.LEFT);
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
                 else

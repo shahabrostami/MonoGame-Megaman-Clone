@@ -12,6 +12,7 @@ namespace Game1
         private PlayerActionHandler playerActionHandler;
         private PlayerState currentState;
         private PlayerAction playerAction;
+        private Direction direction;
         private bool shooting;
         private bool jumping;
         public Vector2 location;
@@ -21,7 +22,7 @@ namespace Game1
             location.Y = 426;
             playerActionHandler = new PlayerActionHandler(this);
             playerStateMachine = new PlayerStateMachine();
-            currentState = PlayerStates.STAND_RIGHT;
+            currentState = PlayerStates.STAND;
             jumping = false;
             shooting = false;
         }
@@ -30,6 +31,16 @@ namespace Game1
         {
             // Console.WriteLine("Update: (" + updateLocation.X + "),(" + updateLocation.Y + ")");
             location += updateLocation;
+        }
+
+        public Direction getDirection()
+        {
+            return direction;
+        }
+
+        public void setDirection(Direction dir)
+        {
+            this.direction = dir;
         }
 
         public bool isShooting()
