@@ -76,14 +76,14 @@
               <row>2</row>
               <sf>1</sf>
               <ef>3</ef>
-              <velocity>40 0</velocity>
+              <velocity>20 0</velocity>
               <ms>100</ms>
             </Item>
             <Item>
               <row>3</row>
               <sf>1</sf>
               <ef>3</ef>
-              <velocity>-40 0</velocity>
+              <velocity>-20 0</velocity>
               <ms>100</ms>
             </Item>
           </cycles>
@@ -109,6 +109,15 @@
             </Item>
             <Item>
               <row>2</row>
+              <sf>4</sf>
+              <ef>4</ef>
+              <velocity>10 -40</velocity>
+            </Item>
+            <Item>
+              <row>3</row>
+              <sf>4</sf>
+              <ef>4</ef>
+              <velocity>-10 -40</velocity>
             </Item>
           </cycles>
         </Item>

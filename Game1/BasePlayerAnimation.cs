@@ -49,6 +49,18 @@ namespace Game1
 
         public abstract void updateOnAction(PlayerState pState, PlayerAction pAction);
 
+        public void updateCycle(AnimationCycleSpec cycle)
+        {
+            if (cycle != currentCycle)
+            {
+                currentCycle = cycle;
+                if (currentFrameIndex > currentCycle.ef)
+                    currentFrameIndex = currentCycle.ef;
+                else if (currentFrameIndex < currentCycle.sf)
+                    currentFrameIndex = currentCycle.sf;
+            }
+        }
+
         public bool isLoopFinished()
         {
             return loopFinished;

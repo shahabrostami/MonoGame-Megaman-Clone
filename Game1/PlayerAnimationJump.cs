@@ -14,7 +14,6 @@ namespace Game1
         public PlayerAnimationJump(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
-
         }
 
         override public bool Update(GameTime gameTime)
@@ -31,6 +30,7 @@ namespace Game1
             {
                 player.location.Y = 426;
                 velocity = currentCycle.velocity;
+                player.setJumping(false);
                 loopFinished = true;
             }
             return true;
@@ -38,16 +38,32 @@ namespace Game1
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
+            direction = pState.getDirection();
             if (pState.action == PlayerAction.STOP || pAction == PlayerAction.STOP)
                 velocity.X = 0;
-            else if (direction == Direction.RIGHT && currentCycle != cycles[0])
+            /*else if (direction == Direction.RIGHT && currentCycle != cycles[0])
             {
-                currentCycle = cycles[0];
+                if (player.isShooting())
+                    updateCycle(cycles[2]);
+                else updateCycle(cycles[0]);
                 velocity.X *= -1;
             }
             else if (direction == Direction.LEFT && currentCycle != cycles[1])
             {
-                currentCycle = cycles[1];
+                if (player.isShooting())
+                    updateCycle(cycles[3]);
+                else updateCycle(cycles[1]);
+                velocity.X *= -1;
+            }
+            */
+            else if (direction == Direction.RIGHT && currentCycle != cycles[0])
+            {
+                currentCycle = (cycles[0]);
+                velocity.X *= -1;
+            }
+            else if (direction == Direction.LEFT && currentCycle != cycles[1])
+            {
+                currentCycle = (cycles[1]);
                 velocity.X *= -1;
             }
             else

@@ -44,25 +44,25 @@ namespace Game1
             player.updateLocation(currentCycle.velocity * (timeSinceLastFrame/1000));
             return true;
         }
-        
+
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
             if (pState.getDirection() == Direction.RIGHT)
             {
                 direction = Direction.RIGHT;
                 if (player.isShooting())
-                    currentCycle = cycles[2];
-                else currentCycle = cycles[0];
+                    updateCycle(cycles[2]);
+                else updateCycle(cycles[0]);
             }
             else if (pState.getDirection() == Direction.LEFT)
             {
                 direction = Direction.LEFT;
                 if (player.isShooting())
-                    currentCycle = cycles[3];
-                else currentCycle = cycles[1];
+                    updateCycle(cycles[3]);
+                else updateCycle(cycles[1]);
             }
         }
-
+           
         public override bool hasMovement()
         {
             return true;

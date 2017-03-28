@@ -32,27 +32,9 @@ namespace Game1
                 { new PlayerStateTransition(PlayerStates.RUN_LEFT, PlayerAction.JUMP), PlayerStates.JUMP_LEFT},
                 { new PlayerStateTransition(PlayerStates.RUN_LEFT, PlayerAction.STOP), PlayerStates.STAND_LEFT},
                 { new PlayerStateTransition(PlayerStates.JUMP_LEFT, PlayerAction.MOVE_RIGHT), PlayerStates.JUMP_RIGHT},
-                { new PlayerStateTransition(PlayerStates.JUMP_LEFT, PlayerAction.STOP), PlayerStates.JUMP_LEFT},
                 { new PlayerStateTransition(PlayerStates.JUMP_LEFT, PlayerAction.MOVE_LEFT), PlayerStates.JUMP_LEFT},
                 { new PlayerStateTransition(PlayerStates.JUMP_RIGHT, PlayerAction.MOVE_RIGHT), PlayerStates.JUMP_RIGHT},
-                { new PlayerStateTransition(PlayerStates.JUMP_RIGHT, PlayerAction.STOP), PlayerStates.JUMP_RIGHT},
                 { new PlayerStateTransition(PlayerStates.JUMP_RIGHT, PlayerAction.MOVE_LEFT), PlayerStates.JUMP_LEFT}
-                /*{ new PlayerStateTransition(PlayerStates.STAND_SHOOT_RIGHT, PlayerAction.MOVE_RIGHT), PlayerStates.RUN_RIGHT},
-                { new PlayerStateTransition(PlayerStates.STAND_SHOOT_RIGHT, PlayerAction.MOVE_LEFT), PlayerStates.RUN_LEFT},
-                { new PlayerStateTransition(PlayerStates.STAND_SHOOT_RIGHT, PlayerAction.JUMP), PlayerStates.JUMP_SHOOT_RIGHT},
-                { new PlayerStateTransition(PlayerStates.STAND_SHOOT_RIGHT, PlayerAction.STOP), PlayerStates.STAND_RIGHT},
-                { new PlayerStateTransition(PlayerStates.STAND_SHOOT_LEFT, PlayerAction.MOVE_RIGHT), PlayerStates.RUN_RIGHT},
-                { new PlayerStateTransition(PlayerStates.STAND_SHOOT_LEFT, PlayerAction.MOVE_LEFT), PlayerStates.RUN_LEFT},
-                { new PlayerStateTransition(PlayerStates.STAND_SHOOT_LEFT, PlayerAction.JUMP), PlayerStates.JUMP_SHOOT_LEFT},
-                { new PlayerStateTransition(PlayerStates.STAND_SHOOT_LEFT, PlayerAction.STOP), PlayerStates.STAND_LEFT },
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_RIGHT, PlayerAction.MOVE_RIGHT), PlayerStates.RUN_RIGHT},
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_RIGHT, PlayerAction.MOVE_LEFT), PlayerStates.RUN_LEFT},
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_RIGHT, PlayerAction.JUMP), PlayerStates.JUMP_SHOOT_RIGHT},
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_RIGHT, PlayerAction.STOP), PlayerStates.STAND_RIGHT},
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_LEFT, PlayerAction.MOVE_RIGHT), PlayerStates.RUN_RIGHT},
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_LEFT, PlayerAction.MOVE_LEFT), PlayerStates.RUN_LEFT},
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_LEFT, PlayerAction.JUMP), PlayerStates.JUMP_SHOOT_RIGHT},
-                { new PlayerStateTransition(PlayerStates.RUN_SHOOT_LEFT, PlayerAction.STOP), PlayerStates.STAND_RIGHT},*/
             };
         }
 
@@ -64,8 +46,6 @@ namespace Game1
             {
                 newState = currentState;
             }
-            else
-               newState.animation.updateOnAction(currentState, playerAction);
 
             if (currentState != newState)
             {
