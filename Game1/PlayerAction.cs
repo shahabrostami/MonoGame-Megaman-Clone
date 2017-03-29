@@ -8,8 +8,7 @@ namespace Game1
 {
     enum PlayerAction
     {
-        MOVE_RIGHT,
-        MOVE_LEFT,
+        MOVE,
         JUMP,
         SHOOT,
         STOP

@@ -38,36 +38,25 @@ namespace Game1
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-            direction = player.getDirection();
             if (pAction == PlayerAction.STOP)
                 velocity.X = 0;
-            /*else if (direction == Direction.RIGHT && currentCycle != cycles[0])
+            else 
             {
-                if (player.isShooting())
-                    updateCycle(cycles[2]);
-                else updateCycle(cycles[0]);
-                velocity.X *= -1;
-            }
-            else if (direction == Direction.LEFT && currentCycle != cycles[1])
-            {
-                if (player.isShooting())
-                    updateCycle(cycles[3]);
-                else updateCycle(cycles[1]);
-                velocity.X *= -1;
-            }
-            */
-            else if (direction == Direction.RIGHT && currentCycle != cycles[0])
-            {
-                currentCycle = (cycles[0]);
-                velocity.X *= -1;
-            }
-            else if (direction == Direction.LEFT && currentCycle != cycles[1])
-            {
-                currentCycle = (cycles[1]);
-                velocity.X *= -1;
-            }
-            else
+                direction = player.getDirection();
+                if (direction == Direction.RIGHT)
+                {
+                    if (player.isShooting())
+                        updateCycle(cycles[2]);
+                    else updateCycle(cycles[0]);
+                }
+                else if (direction == Direction.LEFT)
+                {
+                    if (player.isShooting())
+                        updateCycle(cycles[3]);
+                    else updateCycle(cycles[1]);
+                }
                 velocity.X = currentCycle.velocity.X;
+            }
         }
 
         public override bool hasMovement()

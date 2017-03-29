@@ -30,7 +30,7 @@ namespace Game1
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
                 else
-                    currentAction = PlayerAction.MOVE_RIGHT;
+                    currentAction = PlayerAction.MOVE;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
             {
@@ -38,7 +38,7 @@ namespace Game1
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
                 else
-                    currentAction = PlayerAction.MOVE_LEFT;
+                    currentAction = PlayerAction.MOVE;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Space) && !player.isJumping())
             {

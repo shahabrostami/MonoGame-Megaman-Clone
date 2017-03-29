@@ -7,7 +7,6 @@ C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLib
 C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\SharpDX.Direct2D1.dll
 C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\SharpDX.XInput.dll
 C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\SharpDX.MediaFoundation.dll
-C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\MonoGame.Framework.xml
 C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\SharpDX.XAudio2.xml
 C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\SharpDX.xml
 C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\SharpDX.DXGI.xml

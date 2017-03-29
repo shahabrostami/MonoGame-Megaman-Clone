@@ -19,8 +19,7 @@ namespace Game1
 
             transitions = new Dictionary<PlayerStateTransition, PlayerState>
             {
-                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE_RIGHT), PlayerStates.RUN },
-                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE_LEFT), PlayerStates.RUN},
+                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE), PlayerStates.RUN },
                 { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.JUMP), PlayerStates.JUMP},
                 { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.JUMP), PlayerStates.JUMP},
                 { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.STOP), PlayerStates.STAND}

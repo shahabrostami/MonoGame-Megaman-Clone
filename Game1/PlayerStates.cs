@@ -10,9 +10,9 @@ namespace Game1
 {
     class PlayerStates
     {
-        public static PlayerState RUN = new PlayerState("RUN_RIGHT");
-        public static PlayerState JUMP = new PlayerState("RUN_LEFT");
-        public static PlayerState STAND = new PlayerState("STAND_RIGHT");
+        public static PlayerState RUN = new PlayerState("RUN");
+        public static PlayerState JUMP = new PlayerState("JUMP");
+        public static PlayerState STAND = new PlayerState("STAND");
         /* public static PlayerState STAND_SHOOT_RIGHT = new PlayerState("STAND_RIGHT", Direction.RIGHT, PlayerAction.SHOOT);
         public static PlayerState STAND_SHOOT_LEFT = new PlayerState("STAND_LEFT", Direction.LEFT, PlayerAction.SHOOT);
         public static PlayerState RUN_SHOOT_RIGHT = new PlayerState("STAND_RIGHT", Direction.RIGHT, PlayerAction.SHOOT);
