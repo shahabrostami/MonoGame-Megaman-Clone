@@ -38,22 +38,24 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="player\bullet\Bullet.cs" />
+    <Compile Include="player\bullet\BulletFactory.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="BasePlayerAnimation.cs" />
-    <Compile Include="AnimationCycle.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="PlayerStateMachine.cs" />
-    <Compile Include="PlayerStateTransition.cs" />
-    <Compile Include="PlayerAnimationJump.cs" />
-    <Compile Include="PlayerAnimationBlink.cs" />
-    <Compile Include="PlayerAnimationRun.cs" />
-    <Compile Include="PlayerAction.cs" />
-    <Compile Include="Animation.cs" />
-    <Compile Include="SpriteSpec.cs" />
-    <Compile Include="PlayerActionHandler.cs" />
-    <Compile Include="PlayerState.cs" />
-    <Compile Include="PlayerStates.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="player\animation\BasePlayerAnimation.cs" />
+    <Compile Include="animation\AnimationCycle.cs" />
+    <Compile Include="map\Map.cs" />
+    <Compile Include="player\state\PlayerStateMachine.cs" />
+    <Compile Include="player\state\PlayerStateTransition.cs" />
+    <Compile Include="player\animation\PlayerAnimationJump.cs" />
+    <Compile Include="player\animation\PlayerAnimationBlink.cs" />
+    <Compile Include="player\animation\PlayerAnimationRun.cs" />
+    <Compile Include="player\action\PlayerAction.cs" />
+    <Compile Include="animation\Animation.cs" />
+    <Compile Include="animation\SpriteSpec.cs" />
+    <Compile Include="player\action\PlayerActionHandler.cs" />
+    <Compile Include="player\state\PlayerState.cs" />
+    <Compile Include="player\state\PlayerStates.cs" />
+    <Compile Include="player\Player.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

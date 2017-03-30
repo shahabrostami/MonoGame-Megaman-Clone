@@ -21,8 +21,6 @@ namespace Game1
         {
             return 17 + 31 * state.GetHashCode() + 31 * action.GetHashCode();
         }
-
-
         public override bool Equals(object obj)
         {
             PlayerStateTransition other = obj as PlayerStateTransition;

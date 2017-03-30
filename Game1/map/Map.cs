@@ -12,19 +12,25 @@ namespace Game1
     {
         int[,] mapTiles;
         int width, height;
-        int tiles = 20;
+        int tiles;
         Texture2D whiteTile;
         Texture2D blackTile;
 
-        public Map(GraphicsDevice GraphicsDevice, int screenWidth, int screenHeight)
+        public Map(int tiles)
         {
-            width = screenWidth/tiles;
-            height = screenHeight/tiles;
+            this.tiles = tiles;
+        }
+
+        public void LoadContent(GraphicsDevice GraphicsDevice)
+        {
+            width = GraphicsDevice.Viewport.Bounds.Width / tiles;
+            height = GraphicsDevice.Viewport.Bounds.Height / tiles;
+
             mapTiles = new int[20, 20];
 
             for (int i = 0; i < tiles; i++)
                 for (int j = 0; j < tiles; j++)
-                    if(i==19)
+                    if (i == 19)
                         mapTiles[i, j] = 1;
                     else
                         mapTiles[i, j] = 0;
@@ -33,10 +39,6 @@ namespace Game1
             blackTile = new Texture2D(GraphicsDevice, 1, 1);
             whiteTile.SetData(new[] { Color.White });
             blackTile.SetData(new[] { Color.Black });
-        }
-
-        public void LoadContent()
-        {
         }
         
 

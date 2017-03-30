@@ -17,6 +17,7 @@ namespace Game1
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             player = new Player();
+            map = new Map(20);
         }
 
         protected override void Initialize()
@@ -27,11 +28,8 @@ namespace Game1
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Sprite playerSprite = Content.Load<Sprite[]>("spritetest")[0];
-            Texture2D playerTexture = Content.Load<Texture2D>(playerSprite.textureName);
-            player.Load(playerTexture, playerSprite);
-
-            map = new Map(GraphicsDevice, this.GraphicsDevice.Viewport.Bounds.Width, this.GraphicsDevice.Viewport.Bounds.Height);
+            player.LoadContent(GraphicsDevice, Content);
+            map.LoadContent(GraphicsDevice);
         }
 
         protected override void UnloadContent()
