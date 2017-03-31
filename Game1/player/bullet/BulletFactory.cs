@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1.player.bullet;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,27 +12,47 @@ namespace Game1
 {
     class BulletFactory
     {
-        Texture2D bullet;
+        Texture2D bulletTexture;
+        protected Player player;
+        protected float timeSinceLastFrame = 500;
+        protected float delay = 100;
+        protected List<Bullet> bullets = new List<Bullet>();
 
-        public BulletFactory()
+        public BulletFactory(Player player)
         {
-
+            this.player = player;
         }
 
         public void LoadContent(GraphicsDevice GraphicsDevice)
         {
-            bullet = new Texture2D(GraphicsDevice, 1, 1);
-            bullet.SetData(new[] { Color.White });
+            bulletTexture = new Texture2D(GraphicsDevice, 1, 1);
+            bulletTexture.SetData(new[] { Color.White });
         }
 
-        public void Update(bool isShooting)
+        public void Update(bool isShooting, bool isJumping, GameTime gameTime)
         {
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
+            if (timeSinceLastFrame > delay) { 
+
+                if (isShooting) {
+                    bullets.Add(new Bullet(isJumping, (player.location), player.getDirection()));
+                    timeSinceLastFrame = 0;
+                }
+            }
+
+            foreach (var bullet in bullets)
+            {
+                bullet.Update(gameTime);
+            }
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
-
+            foreach (var bullet in bullets)
+            {
+                bullet.Draw(spriteBatch, bulletTexture);
+            }
         }
     }
 }

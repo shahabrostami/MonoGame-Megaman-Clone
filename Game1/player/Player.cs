@@ -27,10 +27,10 @@ namespace Game1
         public Player() {
             location.X = 0;
             location.Y = 426;
+            bulletFactory = new BulletFactory(this);
             playerActionHandler = new PlayerActionHandler(this);
             playerStateMachine = new PlayerStateMachine();
             playerState = PlayerStates.STAND;
-            bulletFactory = new BulletFactory();
             jumping = false;
             shooting = false;
         }
@@ -58,13 +58,14 @@ namespace Game1
                 playerStateMachine.revert();
 
             // Update Bullets
-            bulletFactory.Update(isShooting());
+            bulletFactory.Update(isShooting(), isJumping(), gameTime);
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             playerStateMachine.currentState.animation.Draw(spriteBatch, location);
+            bulletFactory.Draw(spriteBatch);
         }
 
         public void updateLocation(Vector2 updateLocation)
