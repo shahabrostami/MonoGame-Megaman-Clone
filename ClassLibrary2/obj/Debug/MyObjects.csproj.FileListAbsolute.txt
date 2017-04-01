@@ -37,3 +37,4 @@ C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\Clas
 C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\bin\Debug\SharpDX.MediaFoundation.xml
 C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\obj\Debug\MyObjects.dll
 C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\obj\Debug\MyObjects.pdb
+C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\TiledSharp.dll

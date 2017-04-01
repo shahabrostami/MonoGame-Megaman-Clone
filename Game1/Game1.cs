@@ -29,7 +29,7 @@ namespace Game1
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.LoadContent(GraphicsDevice, Content);
-            map.LoadContent(GraphicsDevice);
+            map.LoadContent(GraphicsDevice, Content);
         }
 
         protected override void UnloadContent()

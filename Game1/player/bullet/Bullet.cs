@@ -46,7 +46,7 @@ namespace Game1.player.bullet
         public void Draw(SpriteBatch spriteBatch, Texture2D bulletTexture)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(bulletTexture, new Rectangle((int)position.X,(int)position.Y,2,2), Color.Chocolate);
+            spriteBatch.Draw(bulletTexture, new Rectangle((int)position.X,(int)position.Y,2,2), Color.White);
             spriteBatch.End();
         }
     }
