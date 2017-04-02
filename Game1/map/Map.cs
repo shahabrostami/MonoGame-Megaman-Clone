@@ -31,7 +31,7 @@ namespace Game1
         {
             width = GraphicsDevice.Viewport.Bounds.Width;
             height = GraphicsDevice.Viewport.Bounds.Height;
-            TmxMap map = new TmxMap("Content/testmap2.tmx");
+            TmxMap map = new TmxMap("Content/testmap3.tmx");
             var version = map.Version;
             tmxTileset = map.Tilesets["KITileset"];
             background = map.Layers[0];
