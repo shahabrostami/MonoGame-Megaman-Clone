@@ -49,8 +49,6 @@ namespace Game1
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
-            spriteBatch.Begin();
             foreach (TmxLayerTile tile in background.Tiles)
             {
                 int tileNumber = tile.Gid;
@@ -72,8 +70,6 @@ namespace Game1
                 if (tileNumber != 0)
                     spriteBatch.Draw(textureTileset, new Rectangle(x, y, tileWidth, tileHeight), new Rectangle(column * tileWidth, row * tileHeight, tileWidth, tileHeight), Color.White);
             }
-            spriteBatch.End();
-
         }
 
     }

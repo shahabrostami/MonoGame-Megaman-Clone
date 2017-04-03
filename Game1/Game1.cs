@@ -11,6 +11,7 @@ namespace Game1
         SpriteBatch spriteBatch;
         Player player;
         Map map;
+        Camera camera;
 
         public Game1()
         {
@@ -18,10 +19,12 @@ namespace Game1
             Content.RootDirectory = "Content";
             player = new Player();
             map = new Map(20);
+
         }
 
         protected override void Initialize()
         {
+            camera = new Camera(GraphicsDevice.Viewport);
             base.Initialize();
         }
 
@@ -52,10 +55,12 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            var updateMatrix = camera.getViewMatrix();
+            spriteBatch.Begin(transformMatrix: updateMatrix);
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
             base.Draw(gameTime);
+            spriteBatch.End();
         }
     }
 }

@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Camera.cs" />
     <Compile Include="player\bullet\Bullet.cs" />
     <Compile Include="player\bullet\BulletFactory.cs" />
     <Compile Include="Direction.cs" />
