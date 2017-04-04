@@ -27,7 +27,7 @@ namespace Game1
 
         }
 
-        public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
+        public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content, Player player)
         {
             width = GraphicsDevice.Viewport.Bounds.Width;
             height = GraphicsDevice.Viewport.Bounds.Height;
@@ -38,8 +38,11 @@ namespace Game1
             wall = map.Layers[1];
             tileWidth = tmxTileset.TileWidth;
             tileHeight = tmxTileset.TileHeight;
+
             textureTileset = Content.Load<Texture2D>(map.Tilesets[0].Name);
             heightDiff = (map.Height*tileHeight) - height;
+
+            player.location = new Vector2((int)map.ObjectGroups[0].Objects[0].X, (int)map.ObjectGroups[0].Objects[0].Y - heightDiff);
         }
 
 

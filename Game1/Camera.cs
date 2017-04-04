@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace Game1
     {
         private readonly Viewport viewport;
 
-        public Vector2 Position { get; set; }
-        public float Rotation { get; set; }
-        public float Zoom { get; set; }
-        public Vector2 Origin { get; set; }
+        private Vector2 Position;
+        private float Rotation;
+        private float Zoom;
+        private Vector2 Origin;
 
         public Camera(Viewport viewport)
         {
@@ -24,6 +25,29 @@ namespace Game1
             Zoom = 1;
             Origin = new Vector2(viewport.Width / 2f, viewport.Height / 2f);
             Position = Vector2.Zero;
+        }
+
+        public void Update(Player player, GameTime gameTime)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Home))
+            {
+                Position.Y -= 1.0F;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.End))
+            {
+                Position.Y += 1.0F;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Delete))
+            {
+                Position.X -= 1.0F;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.PageDown))
+            {
+                Position.X += 1.0F;
+            }
+
+            Position.X = player.location.X - Origin.X;
+            Position.Y = player.location.Y - Origin.Y;
         }
 
         public Matrix getViewMatrix()

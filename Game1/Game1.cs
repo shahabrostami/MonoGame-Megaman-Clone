@@ -32,7 +32,7 @@ namespace Game1
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.LoadContent(GraphicsDevice, Content);
-            map.LoadContent(GraphicsDevice, Content);
+            map.LoadContent(GraphicsDevice, Content, player);
         }
 
         protected override void UnloadContent()
@@ -48,7 +48,7 @@ namespace Game1
                 Exit();
 
             player.Update(gameTime);
-
+            camera.Update(player, gameTime);
             base.Update(gameTime);
         }
 
@@ -56,7 +56,7 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.Black);
             var updateMatrix = camera.getViewMatrix();
-            spriteBatch.Begin(transformMatrix: updateMatrix);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: updateMatrix);
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
             base.Draw(gameTime);
