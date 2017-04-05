@@ -10,7 +10,7 @@ namespace Game1.player.bullet
 {
     class Bullet
     {
-        private Vector2 position;
+        public Vector2 position;
         private static Vector2 velocityRight = new Vector2(500, 0);
         private static Vector2 velocityLeft = new Vector2(-500, 0);
         private static Vector2 rightDisplace = new Vector2(25, 14);

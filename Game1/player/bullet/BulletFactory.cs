@@ -16,6 +16,7 @@ namespace Game1
         protected Player player;
         protected float timeSinceLastFrame = 500;
         protected float delay = 100;
+        protected static float screenWidth, screenHeight;
         protected List<Bullet> bullets = new List<Bullet>();
 
         public BulletFactory(Player player)
@@ -27,6 +28,7 @@ namespace Game1
         {
             bulletTexture = new Texture2D(GraphicsDevice, 1, 1);
             bulletTexture.SetData(new[] { Color.White });
+            screenWidth = GraphicsDevice.Viewport.Width / 2 + 20;
         }
 
         public void Update(bool isShooting, bool isJumping, GameTime gameTime)
@@ -40,11 +42,22 @@ namespace Game1
                     timeSinceLastFrame = 0;
                 }
             }
-
+            
             foreach (var bullet in bullets)
-            {
                 bullet.Update(gameTime);
-            }
+
+            var bulletsOffScreen = bullets.Where(i => IsOffScreen(i)).ToList();
+
+            foreach (var bullet in bulletsOffScreen)
+                bullets.Remove(bullet);
+
+        }
+
+        private Boolean IsOffScreen(Bullet bullet)
+        {
+            if (bullet.position.X <= player.location.X - screenWidth || bullet.position.X >= player.location.X + screenWidth)
+                return true;
+            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
