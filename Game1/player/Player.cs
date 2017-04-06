@@ -25,8 +25,6 @@ namespace Game1
         public Vector2 location;
 
         public Player() {
-            location.X = 0;
-            location.Y = 426;
             bulletFactory = new BulletFactory(this);
             playerActionHandler = new PlayerActionHandler(this);
             playerStateMachine = new PlayerStateMachine();
@@ -102,6 +100,11 @@ namespace Game1
         public void setJumping(bool jump)
         {
             this.jumping = jump;
+        }
+
+        public string getDebugInfo()
+        {
+            return "Player: (" + location.X + "," + location.Y + ")";
         }
 
     }

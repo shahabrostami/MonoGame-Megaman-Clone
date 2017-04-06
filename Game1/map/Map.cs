@@ -13,35 +13,38 @@ namespace Game1
     class Map
     {
         int width, height, heightDiff;
+        int screenWidthCap, screenHeightCap;
         int tileWidth, tileHeight;
         int tiles;
         Texture2D textureTileset;
         TmxTileset tmxTileset;
-        TmxLayer background;
-        TmxLayer wall;
+        TmxLayer background, wall, collision;
+        Player player;
 
-        public Map(int tiles)
+        public Map(int tiles, Player player)
         {
             this.tiles = tiles;
-
-
+            this.player = player;
         }
 
-        public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content, Player player)
+        public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
         {
             width = GraphicsDevice.Viewport.Bounds.Width;
             height = GraphicsDevice.Viewport.Bounds.Height;
+            screenWidthCap = (width / 2) + 20;
+            screenHeightCap = (height / 2) + 20;
             TmxMap map = new TmxMap("Content/testmap3.tmx");
             var version = map.Version;
             tmxTileset = map.Tilesets["KITileset"];
             background = map.Layers[0];
             wall = map.Layers[1];
+            collision = map.Layers[2];
             tileWidth = tmxTileset.TileWidth;
             tileHeight = tmxTileset.TileHeight;
 
             textureTileset = Content.Load<Texture2D>(map.Tilesets[0].Name);
             heightDiff = (map.Height*tileHeight) - height;
-
+            
             player.location = new Vector2((int)map.ObjectGroups[0].Objects[0].X, (int)map.ObjectGroups[0].Objects[0].Y - heightDiff);
         }
 
@@ -50,8 +53,26 @@ namespace Game1
         {
         }
 
+        public void checkCollision()
+        {
+            int xTile = (int)player.location.X / tileWidth -1;
+            int yTile = (height -(int)player.location.Y) / tileHeight -1;
+
+            int tile = yTile * ((int)tmxTileset.Columns-1) + xTile;
+
+            TmxLayerTile collisionTile = collision.Tiles[tile];
+            if (collisionTile.Gid == 211)
+                Console.WriteLine("true");
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
+            float capPosY = player.location.Y - screenHeightCap;
+            float capNegY = player.location.Y + screenHeightCap;
+            float capPosX = player.location.X + screenWidthCap;
+            float capNegX = player.location.X - screenWidthCap;
+            checkCollision();
+
             foreach (TmxLayerTile tile in background.Tiles)
             {
                 int tileNumber = tile.Gid;
@@ -59,7 +80,8 @@ namespace Game1
                 int row = ((int)tileNumber / (int)tmxTileset.Columns);
                 int x = tile.X * tileWidth;
                 int y = (tile.Y * tileHeight) - heightDiff;
-                spriteBatch.Draw(textureTileset, new Rectangle(x, y, tileWidth, tileHeight), new Rectangle(column * tileWidth, row * tileHeight, tileWidth, tileHeight), Color.White);
+                if (tileNumber != 0 && (x > capNegX) && (x < capPosX) && (y > capPosY) && (y < capNegY))
+                    spriteBatch.Draw(textureTileset, new Rectangle(x, y, tileWidth, tileHeight), new Rectangle(column * tileWidth, row * tileHeight, tileWidth, tileHeight), Color.White);
             }
 
 
@@ -70,7 +92,7 @@ namespace Game1
                 int row = ((int)tileNumber / (int)tmxTileset.Columns);
                 int x = tile.X * tileWidth;
                 int y = (tile.Y * tileHeight) - heightDiff;
-                if (tileNumber != 0)
+                if (tileNumber != 0 && (x > capNegX) && (x < capPosX) && (y > capPosY) && (y < capNegY))
                     spriteBatch.Draw(textureTileset, new Rectangle(x, y, tileWidth, tileHeight), new Rectangle(column * tileWidth, row * tileHeight, tileWidth, tileHeight), Color.White);
             }
         }

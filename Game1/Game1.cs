@@ -12,14 +12,16 @@ namespace Game1
         Player player;
         Map map;
         Camera camera;
-
+        SpriteFont Arial;
+        Vector2 DebugPos;
+        string debugText;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             player = new Player();
-            map = new Map(20);
-
+            map = new Map(20, player);
+            IsMouseVisible = true;
         }
 
         protected override void Initialize()
@@ -31,8 +33,11 @@ namespace Game1
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Arial = Content.Load<SpriteFont>("Arial");
+            map.LoadContent(GraphicsDevice, Content);
             player.LoadContent(GraphicsDevice, Content);
-            map.LoadContent(GraphicsDevice, Content, player);
+            DebugPos = new Vector2(100,20);
+
         }
 
         protected override void UnloadContent()
@@ -49,6 +54,8 @@ namespace Game1
 
             player.Update(gameTime);
             camera.Update(player, gameTime);
+            debugText = player.getDebugInfo();
+            debugText = debugText + "\nMouse: (" + Mouse.GetState().X + "," + Mouse.GetState().Y + ")";
             base.Update(gameTime);
         }
 
@@ -59,8 +66,16 @@ namespace Game1
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: updateMatrix);
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            base.Draw(gameTime);
             spriteBatch.End();
+
+
+            spriteBatch.Begin();
+            
+            Vector2 FontOrigin = Arial.MeasureString(debugText) / 2;
+            spriteBatch.DrawString(Arial, debugText, DebugPos, Color.White, 0, FontOrigin, 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.End();
+
+            base.Draw(gameTime);
         }
     }
 }
