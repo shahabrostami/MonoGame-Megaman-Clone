@@ -60,6 +60,11 @@ namespace Game1
             return false;
         }
 
+        public string GetDebugInfo()
+        {
+            return "Bullets: " + bullets.Count;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (var bullet in bullets)

@@ -104,8 +104,7 @@ namespace Game1
 
         public string getDebugInfo()
         {
-            return "Player: (" + location.X + "," + location.Y + ")";
+            return "Player: (" + (int)location.X + "," + (int)location.Y + ")" + "\n" + bulletFactory.GetDebugInfo();
         }
-
     }
 }

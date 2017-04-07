@@ -36,7 +36,7 @@ namespace Game1
             Arial = Content.Load<SpriteFont>("Arial");
             map.LoadContent(GraphicsDevice, Content);
             player.LoadContent(GraphicsDevice, Content);
-            DebugPos = new Vector2(100,20);
+            DebugPos = new Vector2(80,50);
 
         }
 
@@ -56,6 +56,7 @@ namespace Game1
             camera.Update(player, gameTime);
             debugText = player.getDebugInfo();
             debugText = debugText + "\nMouse: (" + Mouse.GetState().X + "," + Mouse.GetState().Y + ")";
+            debugText = debugText + "\n" + map.GetDebugInfo();
             base.Update(gameTime);
         }
 

@@ -14,7 +14,7 @@ namespace Game1
     {
         int width, height, heightDiff;
         int screenWidthCap, screenHeightCap;
-        int tileWidth, tileHeight;
+        int tileWidth, tileHeight, mapWidth, mapHeight;
         int tiles;
         Texture2D textureTileset;
         TmxTileset tmxTileset;
@@ -41,6 +41,8 @@ namespace Game1
             collision = map.Layers[2];
             tileWidth = tmxTileset.TileWidth;
             tileHeight = tmxTileset.TileHeight;
+            mapWidth = map.Width;
+            mapHeight = map.Height;
 
             textureTileset = Content.Load<Texture2D>(map.Tilesets[0].Name);
             heightDiff = (map.Height*tileHeight) - height;
@@ -52,6 +54,7 @@ namespace Game1
         public void Update()
         {
         }
+
 
         public void checkCollision()
         {
@@ -95,6 +98,17 @@ namespace Game1
                 if (tileNumber != 0 && (x > capNegX) && (x < capPosX) && (y > capPosY) && (y < capNegY))
                     spriteBatch.Draw(textureTileset, new Rectangle(x, y, tileWidth, tileHeight), new Rectangle(column * tileWidth, row * tileHeight, tileWidth, tileHeight), Color.White);
             }
+        }
+
+        public string GetDebugInfo()
+        {
+            int xTile = ( (int)player.location.X + 15) / tileWidth;
+            int yTile = ( (int)player.location.Y + 15 + heightDiff) / tileHeight;
+            int tile = yTile * ((int)mapWidth) + xTile;
+            
+
+            TmxLayerTile collisionTile = collision.Tiles[tile];
+            return "Map: (" + xTile + "," + yTile + ") - " + tile + ":" + collisionTile.Gid;
         }
 
     }
