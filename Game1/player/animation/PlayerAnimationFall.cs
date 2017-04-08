@@ -9,13 +9,14 @@ using MyObjects;
 
 namespace Game1
 {
-    class PlayerAnimationJump : BasePlayerAnimation
+    class PlayerAnimationFall : BasePlayerAnimation
     {
         float previousY;
 
-        public PlayerAnimationJump(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
+        public PlayerAnimationFall(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
+            velocity.Y *= 1;
             reset();
         }
 
@@ -65,11 +66,6 @@ namespace Game1
         public override bool hasMovement()
         {
             return true;
-        }
-
-        public void setFalling()
-        {
-            velocity.Y *= 1;
         }
 
         public override void reset()

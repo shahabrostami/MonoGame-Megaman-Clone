@@ -16,6 +16,7 @@ namespace Game1
         private PlayerAction playerAction;
         private Direction playerDirection;
         private BulletFactory bulletFactory;
+        private Map map;
 
         // Player Related Flags
         private bool shooting;
@@ -48,10 +49,17 @@ namespace Game1
 
             // Update Player State
             playerState = playerStateMachine.Update(playerAction);
-            
+
+            if (map.checkCollision(location.X + 6, location.Y + 35) &&
+               map.checkCollision(location.X + +28, location.Y + 35) )
+            {
+                // Handle falling
+            }
+
             // Update Player Animation
             playerState.animation.updateOnAction(playerState, playerAction);
             playerState.animation.Update(gameTime);
+
             if (playerState.animation.isLoopFinished())
                 playerStateMachine.revert();
 
@@ -66,10 +74,18 @@ namespace Game1
             bulletFactory.Draw(spriteBatch);
         }
 
-        public void updateLocation(Vector2 updateLocation)
+        public bool updateLocation(Vector2 updateLocation)
         {
             // Console.WriteLine("Update: (" + updateLocation.X + "),(" + updateLocation.Y + ")");
-            location += updateLocation;
+            if (map.checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 4) &&
+                map.checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 27) &&
+                map.checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 4) &&
+                map.checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 27))
+            {
+                location += updateLocation;
+                return true;
+            }
+            return false;
         }
 
         public Direction getDirection()
@@ -100,6 +116,11 @@ namespace Game1
         public void setJumping(bool jump)
         {
             this.jumping = jump;
+        }
+
+        public void setMap(Map map)
+        {
+            this.map = map;
         }
 
         public string getDebugInfo()

@@ -16,7 +16,7 @@ namespace Game1
         protected Player player;
         protected float timeSinceLastFrame = 500;
         protected float delay = 100;
-        protected static float screenWidth, screenHeight;
+        protected static float screenWidth;
         protected List<Bullet> bullets = new List<Bullet>();
 
         public BulletFactory(Player player)

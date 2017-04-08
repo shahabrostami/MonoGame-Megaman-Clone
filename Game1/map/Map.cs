@@ -20,11 +20,13 @@ namespace Game1
         TmxTileset tmxTileset;
         TmxLayer background, wall, collision;
         Player player;
+        static Map inst;
 
         public Map(int tiles, Player player)
         {
             this.tiles = tiles;
             this.player = player;
+            inst = this;
         }
 
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
@@ -48,6 +50,7 @@ namespace Game1
             heightDiff = (map.Height*tileHeight) - height;
             
             player.location = new Vector2((int)map.ObjectGroups[0].Objects[0].X, (int)map.ObjectGroups[0].Objects[0].Y - heightDiff);
+            player.setMap(this);
         }
 
 
@@ -56,16 +59,18 @@ namespace Game1
         }
 
 
-        public void checkCollision()
+        public bool checkCollision(float x, float y)
         {
-            int xTile = (int)player.location.X / tileWidth -1;
-            int yTile = (height -(int)player.location.Y) / tileHeight -1;
+            int xTile = ((int)x) / tileWidth;
+            int yTile = ((int)y + heightDiff) / tileHeight;
+            int tile = yTile * ((int)mapWidth) + xTile;
 
-            int tile = yTile * ((int)tmxTileset.Columns-1) + xTile;
 
             TmxLayerTile collisionTile = collision.Tiles[tile];
             if (collisionTile.Gid == 211)
-                Console.WriteLine("true");
+               return false;
+            return true;
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -74,7 +79,6 @@ namespace Game1
             float capNegY = player.location.Y + screenHeightCap;
             float capPosX = player.location.X + screenWidthCap;
             float capNegX = player.location.X - screenWidthCap;
-            checkCollision();
 
             foreach (TmxLayerTile tile in background.Tiles)
             {
@@ -111,5 +115,9 @@ namespace Game1
             return "Map: (" + xTile + "," + yTile + ") - " + tile + ":" + collisionTile.Gid;
         }
 
+        public static Map getInstance()
+        {
+            return inst;
+        }
     }
 }
