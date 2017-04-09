@@ -42,7 +42,6 @@ namespace Game1
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Space) && !player.isJumping())
             {
-                player.setJumping(true);
                 currentAction = PlayerAction.JUMP;
             }
             else
@@ -59,6 +58,9 @@ namespace Game1
                 Console.WriteLine("CurrentAction: " + currentAction.ToString() + " PreviousAction: " + previousAction.ToString());
                 previousAction = currentAction;
             }
+
+            if (currentAction == PlayerAction.JUMP)
+                player.setJumping(true);
             return currentAction;
         }
 

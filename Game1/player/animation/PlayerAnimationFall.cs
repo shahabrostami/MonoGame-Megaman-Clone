@@ -16,28 +16,22 @@ namespace Game1
         public PlayerAnimationFall(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
-            velocity.Y *= 1;
+            velocity.Y *= -1;
             reset();
         }
 
         override public bool Update(GameTime gameTime)
         {
-            if (loopFinished)
+            if (!player.isFalling())
+            {
                 return false;
+            }
             
             timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             velocity += (gravity * (timeSinceLastFrame*10));
             if (!player.updateLocation(velocity * (timeSinceLastFrame * 10)) && velocity.Y > 0)
                 previousY = player.location.Y;
-
-            if (player.location.Y >= previousY)
-            {
-                player.location.Y = previousY;
-                velocity = currentCycle.velocity;
-                player.setJumping(false);
-                loopFinished = true;
-            }
             return true;
         }
         
@@ -72,6 +66,7 @@ namespace Game1
         {
             previousY = player.location.Y;
             velocity = currentCycle.velocity;
+            velocity.Y *= -1;
             loopFinished = false;
         }
     }

@@ -18,6 +18,7 @@ namespace Game1
         int tiles;
         Texture2D textureTileset;
         TmxTileset tmxTileset;
+        TmxLayerTile collisionTile;
         TmxLayer background, wall, collision;
         Player player;
         static Map inst;
@@ -58,6 +59,40 @@ namespace Game1
         {
         }
 
+        public bool checkCollisionDir(Direction direction, float x, float y)
+        {
+            if (direction == Direction.DOWN)
+            {
+                int xTile = ((int)x) / tileWidth;
+                int yTile = ((int)y + heightDiff) / tileHeight;
+                int tile = yTile * ((int)mapWidth) + xTile;
+
+
+                collisionTile = collision.Tiles[tile];
+                if (collisionTile.Gid == 211)
+                    return false;
+                return true;
+            }
+            return true;
+        }
+
+        public Vector2 checkCollisions(Vector2 location, Vector2 updateLocation)
+        {
+            if (checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 4))
+            {
+
+            }
+            else if (checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 27)) {
+
+            }
+            else if (checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 4) ) {
+
+            }
+            else if (checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 27)) {
+
+            }
+            return new Vector2(0, 0);
+        }
 
         public bool checkCollision(float x, float y)
         {
@@ -66,11 +101,15 @@ namespace Game1
             int tile = yTile * ((int)mapWidth) + xTile;
 
 
-            TmxLayerTile collisionTile = collision.Tiles[tile];
+            collisionTile = collision.Tiles[tile];
             if (collisionTile.Gid == 211)
                return false;
             return true;
+        }
 
+        public Vector2 getCollisionTile()
+        {
+            return new Vector2(collisionTile.Y, collisionTile.X);
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -13,6 +13,7 @@ namespace Game1
         public static PlayerState RUN = new PlayerState("RUN");
         public static PlayerState JUMP = new PlayerState("JUMP");
         public static PlayerState STAND = new PlayerState("STAND");
+        public static PlayerState FALL = new PlayerState("FALL");
 
         public static void LoadContent(Player player, Texture2D texture, Sprite sprite)
         {
@@ -24,9 +25,12 @@ namespace Game1
 
             BasePlayerAnimation jump = new PlayerAnimationJump(player, playerSpriteSpec, sprite.animations[2]);
 
+            BasePlayerAnimation fall = new PlayerAnimationFall(player, playerSpriteSpec, sprite.animations[2]);
+
             RUN.animation = run;
             JUMP.animation = jump;
             STAND.animation = stand;
+            FALL.animation = fall;
         }
     }
 }

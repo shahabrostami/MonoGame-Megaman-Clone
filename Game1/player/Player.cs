@@ -21,6 +21,7 @@ namespace Game1
         // Player Related Flags
         private bool shooting;
         private bool jumping;
+        private bool falling;
 
         // Player Location
         public Vector2 location;
@@ -31,6 +32,7 @@ namespace Game1
             playerStateMachine = new PlayerStateMachine();
             playerState = PlayerStates.STAND;
             jumping = false;
+            falling = false;
             shooting = false;
         }
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
@@ -50,11 +52,18 @@ namespace Game1
             // Update Player State
             playerState = playerStateMachine.Update(playerAction);
 
-            if (map.checkCollision(location.X + 6, location.Y + 35) &&
-               map.checkCollision(location.X + +28, location.Y + 35) )
+            /*
+            if (map.checkCollision(location.X + 7, location.Y + 34) &&
+               map.checkCollision(location.X + 28, location.Y + 34) && !isJumping())
             {
-                // Handle falling
+                playerState = PlayerStates.FALL;
+                setFalling(true);
             }
+            else
+            {
+                setFalling(false);
+            }
+            */
 
             // Update Player Animation
             playerState.animation.updateOnAction(playerState, playerAction);
@@ -82,7 +91,11 @@ namespace Game1
                 map.checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 4) &&
                 map.checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 27))
             {
+                // Need to introduce snap to grid
                 location += updateLocation;
+                location.X -= location.X % 1;
+                location.Y -= location.Y % 1;
+                Console.WriteLine("Location:" + location.X + "," + location.Y);
                 return true;
             }
             return false;
@@ -117,6 +130,17 @@ namespace Game1
         {
             this.jumping = jump;
         }
+
+        public bool isFalling()
+        {
+            return falling;
+        }
+
+        public void setFalling(bool fall)
+        {
+            this.falling = fall;
+        }
+
 
         public void setMap(Map map)
         {
