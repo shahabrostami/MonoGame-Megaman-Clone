@@ -85,20 +85,54 @@ namespace Game1
 
         public bool updateLocation(Vector2 updateLocation)
         {
-            // Console.WriteLine("Update: (" + updateLocation.X + "),(" + updateLocation.Y + ")");
-            if (map.checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 4) &&
-                map.checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 27) &&
-                map.checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 4) &&
-                map.checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 27))
+            // Need to introduce snap to grid
+            if((map.checkCollision(location.X + updateLocation.X + 7, location.Y + 4) &&
+                    map.checkCollision(location.X + updateLocation.X + 7, location.Y + 27) &&
+                    map.checkCollision(location.X + updateLocation.X + 28, location.Y + 27) &&
+                    map.checkCollision(location.X + updateLocation.X + 28, location.Y + 4)))
             {
-                // Need to introduce snap to grid
-                location += updateLocation;
-                location.X -= location.X % 1;
-                location.Y -= location.Y % 1;
-                Console.WriteLine("Location:" + location.X + "," + location.Y);
-                return true;
+                location.X += updateLocation.X;
+                location.X -= (location.X % 1);
             }
-            return false;
+
+            if ((map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 4) &&
+                    map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 27) &&
+                    map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 27) &&
+                    map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 4)))
+            {
+                location.Y += updateLocation.Y;
+                location.Y -= (location.Y % 1);
+            }
+            else
+            {
+                if (updateLocation.Y < 0)
+                {
+                    if (!(map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 4) &&
+                        map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 4)))
+                    {
+                        location.Y += updateLocation.Y;
+                        location.Y -= location.Y % 16 - 4;
+                    }
+                }
+                else if (updateLocation.Y > 0)
+                {
+                    if (!(map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 27) &&
+                        map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 27)))
+                    {
+                        location.Y += updateLocation.Y;
+                        location.Y -= (location.Y % 16) - 4;
+                        setJumping(false);
+                    }
+                }
+            }
+
+            
+
+           
+
+           
+            Console.WriteLine("Location:" + location.X + "," + location.Y);
+            return true;
         }
 
         public Direction getDirection()
@@ -120,7 +154,8 @@ namespace Game1
         {
             this.shooting = shoot;
         }
-
+        
+        
         public bool isJumping()
         {
             return jumping;
