@@ -76,22 +76,71 @@ namespace Game1
             return true;
         }
 
-        public Vector2 checkCollisions(Vector2 location, Vector2 updateLocation)
+        public Vector2 checkCollisions(Rectangle playerBound)
         {
-            if (checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 4))
+
+            Rectangle collisionRect = Rectangle.Intersect(playerBound, getTileRectangle(playerBound.Top, playerBound.Left));
+            // Continue
+            
+            /*
+            if (update.Y == 0)
             {
-
+                if (checkCollision(playerLocation.X + 7, playerLocation.Y + 29) &&
+                        checkCollision(playerLocation.X + 28, playerLocation.Y + 29))
+                    player.setFalling(true);
             }
-            else if (checkCollision(location.X + updateLocation.X + 6, location.Y + updateLocation.Y + 27)) {
-
+            else if (checkCollision(playerLocation.X + 7, newLocation.Y + 4) &&
+                    checkCollision(playerLocation.X + 7, newLocation.Y + 27) &&
+                    checkCollision(playerLocation.X + 28, newLocation.Y + 27) &&
+                    checkCollision(playerLocation.X + 28, newLocation.Y + 4))
+            {
+                Console.WriteLine("Updating Y");
+                playerLocation.Y = newLocation.Y;
             }
-            else if (checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 4) ) {
-
+            else
+            {
+                if (update.Y < 0)
+                {
+                    if (!(checkCollision(playerLocation.X + 7, newLocation.Y + 4) &&
+                    checkCollision(playerLocation.X + 28, newLocation.Y + 4)))
+                    {
+                        Console.WriteLine("Colliding Y Up");
+                    }
+                }
+                else if (update.Y > 0)
+                {
+                    if (!(checkCollision(playerLocation.X + 7, newLocation.Y + 27) &&
+                        checkCollision(playerLocation.X + 28, newLocation.Y + 27)))
+                    {
+                        playerLocation.Y = newLocation.Y;
+                        Console.WriteLine("Colliding Y Down" + playerLocation.Y);
+                        player.setJumping(false);
+                        player.setFalling(false);
+                        playerLocation.Y -= (playerLocation.Y % 16) - 4;
+                        Console.WriteLine("Blocation.Y: " + newLocation.Y + " updateLocation.Y: " + update.Y + "Alocation.Y" + playerLocation.Y);
+                    }
+                }
             }
-            else if (checkCollision(location.X + updateLocation.X + 27, location.Y + updateLocation.Y + 27)) {
-
+            if ((checkCollision(newLocation.X + 7, playerLocation.Y + 4) &&
+                checkCollision(newLocation.X + 7, playerLocation.Y + 27) &&
+                checkCollision(newLocation.X + 28, playerLocation.Y + 27) &&
+                checkCollision(newLocation.X + 28, playerLocation.Y + 4)))
+            {
+                Console.WriteLine("Updating X");
+                playerLocation.X = newLocation.X;
             }
-            return new Vector2(0, 0);
+            */
+
+            return playerLocation;
+        }
+
+        public Rectangle getTileRectangle(int x, int y)
+        {
+            int xTile = ((int)x) / tileWidth;
+            int yTile = ((int)y + heightDiff) / tileHeight;
+            int tile = yTile * ((int)mapWidth) + xTile;
+            TmxLayerTile tmxTile = collision.Tiles[tile];
+            return new Rectangle(tmxTile.X, tmxTile.Y, tileWidth, tileHeight);
         }
 
         public bool checkCollision(float x, float y)
