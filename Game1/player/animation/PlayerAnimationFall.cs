@@ -24,14 +24,15 @@ namespace Game1
         {
             if (!player.isFalling())
             {
+                loopFinished = true;
                 return false;
             }
             
             timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            velocity += (gravity * (timeSinceLastFrame*10));
-            if (!player.updateLocation(velocity * (timeSinceLastFrame * 10)) && velocity.Y > 0)
-                previousY = player.location.Y;
+
+            player.updateLocation(velocity * (timeSinceLastFrame * 10));
+            velocity += (gravity * (timeSinceLastFrame * 10));
             return true;
         }
         

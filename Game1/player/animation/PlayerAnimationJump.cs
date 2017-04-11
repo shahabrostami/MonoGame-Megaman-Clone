@@ -26,8 +26,8 @@ namespace Game1
             
             timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            velocity += (gravity * (timeSinceLastFrame*10));
             player.updateLocation(velocity * (timeSinceLastFrame * 10));
+            velocity += (gravity * (timeSinceLastFrame * 10));
 
             if (!player.isJumping())
             {
@@ -62,11 +62,6 @@ namespace Game1
         public override bool hasMovement()
         {
             return true;
-        }
-
-        public void setFalling()
-        {
-            velocity.Y *= 1;
         }
 
         public override void reset()

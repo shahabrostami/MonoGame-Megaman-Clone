@@ -22,6 +22,7 @@ namespace Game1
         private bool shooting;
         private bool jumping;
         private bool falling;
+        private bool colliding;
 
         // Player Location
         public Vector2 location;
@@ -52,18 +53,8 @@ namespace Game1
             // Update Player State
             playerState = playerStateMachine.Update(playerAction);
 
-            /*
-            if (map.checkCollision(location.X + 7, location.Y + 34) &&
-               map.checkCollision(location.X + 28, location.Y + 34) && !isJumping())
-            {
+            if (isFalling())
                 playerState = PlayerStates.FALL;
-                setFalling(true);
-            }
-            else
-            {
-                setFalling(false);
-            }
-            */
 
             // Update Player Animation
             playerState.animation.updateOnAction(playerState, playerAction);
@@ -85,54 +76,69 @@ namespace Game1
 
         public bool updateLocation(Vector2 updateLocation)
         {
-            // Need to introduce snap to grid
-            if((map.checkCollision(location.X + updateLocation.X + 7, location.Y + 4) &&
-                    map.checkCollision(location.X + updateLocation.X + 7, location.Y + 27) &&
-                    map.checkCollision(location.X + updateLocation.X + 28, location.Y + 27) &&
-                    map.checkCollision(location.X + updateLocation.X + 28, location.Y + 4)))
-            {
-                location.X += updateLocation.X;
-                location.X -= (location.X % 1);
-            }
+            colliding = false;
 
-            if ((map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 4) &&
-                    map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 27) &&
-                    map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 27) &&
-                    map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 4)))
+            float newX = (location.X + updateLocation.X);
+            float newY = (location.Y + updateLocation.Y);
+            newX -= newX % 1;
+            newY -= newY % 1;
+            
+            // Need to introduce snap to grid
+
+            if (updateLocation.Y == 0)
             {
-                location.Y += updateLocation.Y;
-                location.Y -= (location.Y % 1);
+                if (map.checkCollision(location.X + 7, location.Y + 29) &&
+                        map.checkCollision(location.X + 28, location.Y + 29))
+                    setFalling(true);
+            }
+            else if(map.checkCollision(location.X + 7, newY + 4) &&
+                    map.checkCollision(location.X + 7, newY + 27) &&
+                    map.checkCollision(location.X + 28, newY + 27) &&
+                    map.checkCollision(location.X + 28, newY + 4))
+            {
+                Console.WriteLine("Updating Y");
+                location.Y = newY;
             }
             else
             {
                 if (updateLocation.Y < 0)
                 {
-                    if (!(map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 4) &&
-                        map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 4)))
+                    if (!(map.checkCollision(location.X + 7, newY + 4) &&
+                    map.checkCollision(location.X + 28, newY + 4)))
                     {
-                        location.Y += updateLocation.Y;
-                        location.Y -= location.Y % 16 - 4;
+                        Console.WriteLine("Colliding Y Up");
+                        colliding = true;
                     }
                 }
                 else if (updateLocation.Y > 0)
                 {
-                    if (!(map.checkCollision(location.X + 7, location.Y + updateLocation.Y + 27) &&
-                        map.checkCollision(location.X + 28, location.Y + updateLocation.Y + 27)))
+                    if (!(map.checkCollision(location.X + 7, newY + 27) &&
+                        map.checkCollision(location.X + 28, newY + 27)))
                     {
-                        location.Y += updateLocation.Y;
-                        location.Y -= (location.Y % 16) - 4;
+                        location.Y = newY;
+                        Console.WriteLine("Colliding Y Down" + location.Y);
                         setJumping(false);
+                        setFalling(false);
+                        colliding = true;
+                        if(location.Y % 16 != 0)
+                            location.Y -= (location.Y % 16) - 4;
+                        Console.WriteLine("Blocation.Y: " + newY + " updateLocation.Y: " + updateLocation.Y + "Alocation.Y" + location.Y);
                     }
                 }
             }
+            if ((map.checkCollision(newX + 7, location.Y + 4) &&
+                map.checkCollision(newX + 7, location.Y + 27) &&
+                map.checkCollision(newX + 28, location.Y + 27) &&
+                map.checkCollision(newX + 28, location.Y + 4)))
+            {
+                Console.WriteLine("Updating X");
+                location.X = newX;
+            }
+            else
+                colliding = true;
 
-            
-
-           
-
-           
             Console.WriteLine("Location:" + location.X + "," + location.Y);
-            return true;
+            return colliding;
         }
 
         public Direction getDirection()
