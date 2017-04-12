@@ -78,8 +78,19 @@ namespace Game1
 
         public Vector2 checkCollisions(Rectangle playerBound)
         {
-
-            Rectangle collisionRect = Rectangle.Intersect(playerBound, getTileRectangle(playerBound.Top, playerBound.Left));
+            int check = playerBound.Left;
+            while(check <= playerBound.Right)
+            {
+                Rectangle TR_Rect = getTileRectangle(check, playerBound.Top);
+                if (TR_Rect != Rectangle.Empty) {
+                    Rectangle collisionRect = Rectangle.Intersect(playerBound, TR_Rect);
+                    if (!collisionRect.IsEmpty)
+                    {
+                        playerBound.Offset(collisionRect.Width, 0);
+                    }
+                }
+                check += 16;
+            }
             // Continue
             
             /*
@@ -131,7 +142,7 @@ namespace Game1
             }
             */
 
-            return playerLocation;
+            return new Vector2(playerBound.X, playerBound.Y);
         }
 
         public Rectangle getTileRectangle(int x, int y)
@@ -140,7 +151,10 @@ namespace Game1
             int yTile = ((int)y + heightDiff) / tileHeight;
             int tile = yTile * ((int)mapWidth) + xTile;
             TmxLayerTile tmxTile = collision.Tiles[tile];
-            return new Rectangle(tmxTile.X, tmxTile.Y, tileWidth, tileHeight);
+            if (tmxTile.Gid == 211)
+                return new Rectangle(tmxTile.X* tileWidth, tmxTile.Y * tileHeight - heightDiff, tileWidth, tileHeight);
+            else
+                return Rectangle.Empty;
         }
 
         public bool checkCollision(float x, float y)
@@ -154,11 +168,6 @@ namespace Game1
             if (collisionTile.Gid == 211)
                return false;
             return true;
-        }
-
-        public Vector2 getCollisionTile()
-        {
-            return new Vector2(collisionTile.Y, collisionTile.X);
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -82,6 +82,8 @@ namespace Game1
             newY -= newY % 1;
             Rectangle newBound = new Rectangle((int) (newX + playerTextureOffset.X), (int) (newY + playerTextureOffset.Y), 21, 24);
             location = map.checkCollisions(newBound);
+            location.X -= playerTextureOffset.X;
+            location.Y -= playerTextureOffset.Y;
             return true;
         }
 
