@@ -80,10 +80,10 @@ namespace Game1
             float newY = (location.Y + updateLocation.Y);
             newX -= newX % 1;
             newY -= newY % 1;
-            Rectangle newBound = new Rectangle((int) (newX + playerTextureOffset.X), (int) (newY + playerTextureOffset.Y), 21, 24);
-            location = map.checkCollisions(newBound);
+            Rectangle newBound = new Rectangle((int) (newX + playerTextureOffset.X), (int) (newY + playerTextureOffset.Y-1), 20, 23);
+            location = map.checkCollisions(newBound, updateLocation);
             location.X -= playerTextureOffset.X;
-            location.Y -= playerTextureOffset.Y;
+            location.Y -= playerTextureOffset.Y - 1;
             return true;
         }
 

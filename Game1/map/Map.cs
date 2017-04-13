@@ -59,40 +59,71 @@ namespace Game1
         {
         }
 
-        public bool checkCollisionDir(Direction direction, float x, float y)
+        public Rectangle getCollisionRectangle(Rectangle player, int x, int y)
         {
-            if (direction == Direction.DOWN)
-            {
-                int xTile = ((int)x) / tileWidth;
-                int yTile = ((int)y + heightDiff) / tileHeight;
-                int tile = yTile * ((int)mapWidth) + xTile;
-
-
-                collisionTile = collision.Tiles[tile];
-                if (collisionTile.Gid == 211)
-                    return false;
-                return true;
-            }
-            return true;
+            Rectangle rect = getTileRectangle(x, y);
+            if (rect != Rectangle.Empty)
+                return Rectangle.Intersect(player, rect);
+            return rect;
         }
 
-        public Vector2 checkCollisions(Rectangle playerBound)
+        public Vector2 checkCollisions(Rectangle playerBound, Vector2 updateLocation)
         {
             int check = playerBound.Left;
-            while(check <= playerBound.Right)
+            while (check != playerBound.Right && updateLocation.Y < 0)
             {
-                Rectangle TR_Rect = getTileRectangle(check, playerBound.Top);
-                if (TR_Rect != Rectangle.Empty) {
-                    Rectangle collisionRect = Rectangle.Intersect(playerBound, TR_Rect);
-                    if (!collisionRect.IsEmpty)
-                    {
-                        playerBound.Offset(collisionRect.Width, 0);
-                    }
-                }
+                Rectangle collisionRect = getCollisionRectangle(playerBound, check, playerBound.Top);
+                if (!collisionRect.IsEmpty)
+                    playerBound.Offset(0, collisionRect.Height);
+
                 check += 16;
+                if (check >= playerBound.Right)
+                    check = playerBound.Right;
             }
+
+            check = playerBound.Top;
+            while (check != playerBound.Bottom && updateLocation.X > 0)
+            {
+                Rectangle collisionRect = getCollisionRectangle(playerBound, playerBound.Right, check);
+                if (!collisionRect.IsEmpty)
+                    playerBound.Offset(-collisionRect.Width, 0);
+
+                check += 16;
+                if (check >= playerBound.Bottom)
+                    check = playerBound.Bottom;
+            }
+
+            check = playerBound.Right;
+            while (check != playerBound.Left && updateLocation.Y > 0)
+            {
+                Rectangle collisionRect = getCollisionRectangle(playerBound, check, playerBound.Bottom);
+                if (!collisionRect.IsEmpty && updateLocation.Y > 0)
+                {
+                    playerBound.Offset(0, -collisionRect.Height);
+                    player.setJumping(false);
+                    player.setFalling(false);
+                } else if (updateLocation.Y == 0)
+                    player.setFalling(true);
+                check -= 16;
+                if (check <= playerBound.Left)
+                    check = playerBound.Left;
+            }
+
+            check = playerBound.Bottom;
+            while (check != playerBound.Top && updateLocation.X < 0)
+            {
+                Rectangle collisionRect = getCollisionRectangle(playerBound, playerBound.Left, check);
+                if (!collisionRect.IsEmpty) 
+                    playerBound.Offset(collisionRect.Width, 0);
+                check -= 16;
+                if (check <= playerBound.Top)
+                    check = playerBound.Top;
+            }
+
+
+
             // Continue
-            
+
             /*
             if (update.Y == 0)
             {
@@ -152,7 +183,7 @@ namespace Game1
             int tile = yTile * ((int)mapWidth) + xTile;
             TmxLayerTile tmxTile = collision.Tiles[tile];
             if (tmxTile.Gid == 211)
-                return new Rectangle(tmxTile.X* tileWidth, tmxTile.Y * tileHeight - heightDiff, tileWidth, tileHeight);
+                return new Rectangle(tmxTile.X * tileWidth, tmxTile.Y * tileHeight - heightDiff, tileWidth, tileHeight);
             else
                 return Rectangle.Empty;
         }
