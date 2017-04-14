@@ -40,3 +40,4 @@ C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\Clas
 C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\TiledSharp.dll
 C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\bin\Debug\TiledSharp.dll
 C:\Users\Bro-W\Documents\Visual Studio 2015\Projects\Game1\monogame-testing\ClassLibrary2\obj\Debug\MyObjects.csprojResolveAssemblyReference.cache
+C:\Users\rostami\Documents\Visual Studio 2017\Projects\monogame-testing\ClassLibrary2\bin\Debug\MonoGame.Framework.xml

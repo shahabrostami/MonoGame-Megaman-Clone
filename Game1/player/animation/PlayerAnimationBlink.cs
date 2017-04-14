@@ -42,10 +42,10 @@ namespace Game1
                 
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-            if (player.getDirection() == Direction.RIGHT)
+            if (player.direction == Direction.RIGHT)
             {
                 direction = Direction.RIGHT;
-                if (player.isShooting())
+                if (player.shooting)
                 {
                     currentCycle = cycles[2];
                     currentFrame = currentCycle.frames[0];
@@ -53,10 +53,10 @@ namespace Game1
                 else
                     currentCycle = cycles[0];
             }
-            else if (player.getDirection() == Direction.LEFT)
+            else if (player.direction == Direction.LEFT)
             {
                 direction = Direction.RIGHT;
-                if (player.isShooting())
+                if (player.shooting)
                 {
                     currentCycle = cycles[3];
                     currentFrame = currentCycle.frames[0];

@@ -38,7 +38,7 @@ namespace Game1
             if (timeSinceLastFrame > delay) { 
 
                 if (isShooting) {
-                    bullets.Add(new Bullet(isJumping, (player.location), player.getDirection()));
+                    bullets.Add(new Bullet(isJumping, (player.location), player.direction));
                     timeSinceLastFrame = 0;
                 }
             }

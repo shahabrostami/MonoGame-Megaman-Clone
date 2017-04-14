@@ -22,7 +22,7 @@ namespace Game1
 
         override public bool Update(GameTime gameTime)
         {
-            if (!player.isFalling())
+            if (!player.falling)
             {
                 loopFinished = true;
                 return false;
@@ -38,16 +38,16 @@ namespace Game1
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-            direction = player.getDirection();
+            direction = player.direction;
             if (direction == Direction.RIGHT)
             {
-                if (player.isShooting())
+                if (player.shooting)
                     updateCycle(cycles[2]);
                 else updateCycle(cycles[0]);
             }
             else if (direction == Direction.LEFT)
             {
-                if (player.isShooting())
+                if (player.shooting)
                     updateCycle(cycles[3]);
                 else updateCycle(cycles[1]);
             }

@@ -47,15 +47,15 @@ namespace Game1
 
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-            if (player.getDirection() == Direction.RIGHT)
+            if (player.direction == Direction.RIGHT)
             {
-                if (player.isShooting())
+                if (player.shooting)
                     updateCycle(cycles[2]);
                 else updateCycle(cycles[0]);
             }
-            else if (player.getDirection() == Direction.LEFT)
+            else if (player.direction == Direction.LEFT)
             {
-                if (player.isShooting())
+                if (player.shooting)
                     updateCycle(cycles[3]);
                 else updateCycle(cycles[1]);
             }

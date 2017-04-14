@@ -14,14 +14,14 @@ namespace Game1
         private PlayerActionHandler playerActionHandler;
         private PlayerState playerState;
         private PlayerAction playerAction;
-        private Direction playerDirection;
         private BulletFactory bulletFactory;
         private Map map;
+        public Direction direction { get; set; }
 
         // Player Related Flags
-        private bool shooting;
-        private bool jumping;
-        private bool falling;
+        public bool shooting { get; set; }
+        public bool jumping { get; set; }
+        public bool falling { get; set; }
         private Vector2 playerTextureOffset = new Vector2(4, 6);
 
         // Player Location
@@ -53,7 +53,7 @@ namespace Game1
             // Update Player State
             playerState = playerStateMachine.Update(playerAction);
 
-            if (isFalling())
+            if (falling)
                 playerState = PlayerStates.FALL;
 
             // Update Player Animation
@@ -64,7 +64,7 @@ namespace Game1
                 playerStateMachine.revert();
 
             // Update Bullets
-            bulletFactory.Update(isShooting(), isJumping(), gameTime);
+            bulletFactory.Update(shooting, jumping, gameTime);
 
         }
 
@@ -86,48 +86,6 @@ namespace Game1
             location.Y -= playerTextureOffset.Y - 1;
             return true;
         }
-
-        public Direction getDirection()
-        {
-            return playerDirection;
-        }
-
-        public void setDirection(Direction dir)
-        {
-            this.playerDirection = dir;
-        }
-
-        public bool isShooting()
-        {
-            return shooting;
-        }
-
-        public void setShooting(bool shoot)
-        {
-            this.shooting = shoot;
-        }
-        
-        
-        public bool isJumping()
-        {
-            return jumping;
-        }
-
-        public void setJumping(bool jump)
-        {
-            this.jumping = jump;
-        }
-
-        public bool isFalling()
-        {
-            return falling;
-        }
-
-        public void setFalling(bool fall)
-        {
-            this.falling = fall;
-        }
-
 
         public void setMap(Map map)
         {

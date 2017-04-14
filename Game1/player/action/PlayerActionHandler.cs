@@ -26,7 +26,7 @@ namespace Game1
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                player.setDirection(Direction.RIGHT);
+                player.direction = Direction.RIGHT;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
                 else
@@ -34,13 +34,13 @@ namespace Game1
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                player.setDirection(Direction.LEFT);
+                player.direction = Direction.LEFT;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     currentAction = PlayerAction.JUMP;
                 else
                     currentAction = PlayerAction.MOVE;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Space) && !player.isJumping())
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space) && !player.jumping)
             {
                 currentAction = PlayerAction.JUMP;
             }
@@ -50,8 +50,8 @@ namespace Game1
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.O))
-                player.setShooting(true);
-            else player.setShooting(false);
+                player.shooting = true;
+            else player.shooting = false;
 
             if (currentAction != previousAction)
             {
@@ -60,7 +60,7 @@ namespace Game1
             }
 
             if (currentAction == PlayerAction.JUMP)
-                player.setJumping(true);
+                player.jumping = true;
             return currentAction;
         }
 

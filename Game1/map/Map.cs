@@ -69,7 +69,34 @@ namespace Game1
 
         public Vector2 checkCollisions(Rectangle playerBound, Vector2 updateLocation)
         {
-            int check = playerBound.Left;
+            // Need to convert this into rectangle bound collision
+            if (updateLocation.Y == 0)
+            {
+                if (checkCollision(playerBound.X + 7, playerBound.Y + 29) &&
+                        checkCollision(playerBound.X + 28, playerBound.Y + 29))
+                    player.falling = true;
+            }
+
+            int check = playerBound.Right;
+            while (check != playerBound.Left && updateLocation.Y > 0)
+            {
+                Rectangle collisionRect = getCollisionRectangle(playerBound, check, playerBound.Bottom);
+                if (!collisionRect.IsEmpty)
+                {
+                    playerBound.Offset(0, -collisionRect.Height);
+                    player.falling = false;
+                    player.jumping = false;
+                }
+                check -= 16;
+                if (check <= playerBound.Left)
+                    check = playerBound.Left;
+            }
+
+            // if (falling)
+            //    player.falling = true;
+
+            check = playerBound.Left;
+
             while (check != playerBound.Right && updateLocation.Y < 0)
             {
                 Rectangle collisionRect = getCollisionRectangle(playerBound, check, playerBound.Top);
@@ -91,22 +118,6 @@ namespace Game1
                 check += 16;
                 if (check >= playerBound.Bottom)
                     check = playerBound.Bottom;
-            }
-
-            check = playerBound.Right;
-            while (check != playerBound.Left && updateLocation.Y > 0)
-            {
-                Rectangle collisionRect = getCollisionRectangle(playerBound, check, playerBound.Bottom);
-                if (!collisionRect.IsEmpty && updateLocation.Y > 0)
-                {
-                    playerBound.Offset(0, -collisionRect.Height);
-                    player.setJumping(false);
-                    player.setFalling(false);
-                } else if (updateLocation.Y == 0)
-                    player.setFalling(true);
-                check -= 16;
-                if (check <= playerBound.Left)
-                    check = playerBound.Left;
             }
 
             check = playerBound.Bottom;

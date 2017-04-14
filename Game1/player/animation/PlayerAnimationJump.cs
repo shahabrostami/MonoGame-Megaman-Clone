@@ -29,7 +29,7 @@ namespace Game1
             player.updateLocation(velocity * (timeSinceLastFrame * 10));
             velocity += (gravity * (timeSinceLastFrame * 10));
 
-            if (!player.isJumping())
+            if (!player.jumping)
             {
                 velocity = currentCycle.velocity;
                 loopFinished = true;
@@ -39,16 +39,16 @@ namespace Game1
         
         public override void updateOnAction(PlayerState pState, PlayerAction pAction)
         {
-            direction = player.getDirection();
+            direction = player.direction;
             if (direction == Direction.RIGHT)
             {
-                if (player.isShooting())
+                if (player.jumping)
                     updateCycle(cycles[2]);
                 else updateCycle(cycles[0]);
             }
             else if (direction == Direction.LEFT)
             {
-                if (player.isShooting())
+                if (player.shooting)
                     updateCycle(cycles[3]);
                 else updateCycle(cycles[1]);
             }
