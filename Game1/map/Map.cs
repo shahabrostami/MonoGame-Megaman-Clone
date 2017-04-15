@@ -10,6 +10,18 @@ using TiledSharp;
 
 namespace Game1
 {
+    class TileRect
+    {
+        public int tileId { get; set; }
+        public Rectangle rectangle { get; set; }
+
+    public TileRect(int tileId, Rectangle rectangle)
+        {
+            this.tileId = tileId;
+            this.rectangle = rectangle;
+        }
+    }
+
     class Map
     {
         int width, height, heightDiff;
@@ -22,6 +34,8 @@ namespace Game1
         TmxLayer background, wall, collision;
         Player player;
         static Map inst;
+        private int collisionTileId = 211;
+        private int emptyTileId = 0;
 
         public Map(int tiles, Player player)
         {
@@ -48,8 +62,8 @@ namespace Game1
             mapHeight = map.Height;
 
             textureTileset = Content.Load<Texture2D>(map.Tilesets[0].Name);
-            heightDiff = (map.Height*tileHeight) - height;
-            
+            heightDiff = (map.Height * tileHeight) - height;
+
             player.location = new Vector2((int)map.ObjectGroups[0].Objects[0].X, (int)map.ObjectGroups[0].Objects[0].Y - heightDiff);
             player.setMap(this);
         }
@@ -59,144 +73,117 @@ namespace Game1
         {
         }
 
-        public Rectangle getCollisionRectangle(Rectangle player, int x, int y)
+        public TileRect getCollisionRectangle(Rectangle player, int x, int y)
         {
-            Rectangle rect = getTileRectangle(x, y);
-            if (rect != Rectangle.Empty)
-                return Rectangle.Intersect(player, rect);
-            return rect;
+            TileRect tileRect = getTileRectangle(x, y);
+            if (tileRect.rectangle != Rectangle.Empty)
+            {
+                Rectangle intersect = Rectangle.Intersect(player, tileRect.rectangle);
+                return new TileRect(tileRect.tileId, intersect);
+            }
+            return new TileRect(tileRect.tileId, tileRect.rectangle);
+        }
+
+        public void checkFalling(Rectangle playerBound, Vector2 updateLocation)
+        {
+            int check = playerBound.Left;
+            bool falling = true;
+            if (updateLocation.Y == 0)
+            {
+                while (check < playerBound.Right)
+                {
+                    TileRect collisionRect = getCollisionRectangle(playerBound, check, playerBound.Bottom);
+
+                    if (collisionRect.rectangle.IsEmpty && collisionRect.tileId != emptyTileId)
+                        falling = false;
+
+                    check += 16;
+                    if (check < playerBound.Right)
+                        check = playerBound.Right;
+                }
+                player.falling = falling;
+                // Console.WriteLine("falling = true");
+                // Console.WriteLine("falling = false");
+            }
+        }
+
+        public Rectangle checkVertCollision(Rectangle playerBound, int checkY, int mult)
+        {
+            int check = playerBound.Left;
+            while (check < playerBound.Right)
+            {
+                TileRect tileRect = getCollisionRectangle(playerBound, check, checkY);
+                if (!tileRect.rectangle.IsEmpty && tileRect.tileId == collisionTileId)
+                {
+                    playerBound.Offset(0, tileRect.rectangle.Height*mult);
+                    if (mult == -1)
+                    {
+                        player.falling = false;
+                        player.jumping = false;
+                    }
+                }
+                check += tileHeight;
+                if (check > playerBound.Right)
+                    check = playerBound.Right;
+            }
+            return playerBound;
+        }
+
+        public Rectangle checkHorizCollision(Rectangle playerBound, int checkX, int mult)
+        {
+            // Check Below
+            int check = playerBound.Top;
+            while (check < playerBound.Bottom)
+            {
+                TileRect tileRect = getCollisionRectangle(playerBound, checkX, check);
+                if (!tileRect.rectangle.IsEmpty && tileRect.tileId == collisionTileId)
+                    playerBound.Offset(tileRect.rectangle.Width * mult, 0);
+                check += tileWidth;
+                if (check > playerBound.Bottom)
+                    check = playerBound.Bottom;
+            }
+            return playerBound;
         }
 
         public Vector2 checkCollisions(Rectangle playerBound, Vector2 updateLocation)
         {
-            // Need to convert this into rectangle bound collision
-            if (updateLocation.Y == 0)
-            {
-                if (checkCollision(playerBound.X + 7, playerBound.Y + 29) &&
-                        checkCollision(playerBound.X + 28, playerBound.Y + 29))
-                    player.falling = true;
+            checkFalling(playerBound, updateLocation);
+            Rectangle horizBound = playerBound;
+            Rectangle vertBound = playerBound;
+            int xDiff = 0;
+            int yDiff = 0;
+
+            if (updateLocation.X > 0) {
+                horizBound = checkHorizCollision(playerBound, playerBound.Right, -1);
+                xDiff = horizBound.X - playerBound.X;
+            }
+            else if (updateLocation.X < 0) {
+                horizBound = checkHorizCollision(playerBound, playerBound.Left, 1);
+                xDiff = playerBound.X - horizBound.X;
             }
 
-            int check = playerBound.Right;
-            while (check != playerBound.Left && updateLocation.Y > 0)
-            {
-                Rectangle collisionRect = getCollisionRectangle(playerBound, check, playerBound.Bottom);
-                if (!collisionRect.IsEmpty)
-                {
-                    playerBound.Offset(0, -collisionRect.Height);
-                    player.falling = false;
-                    player.jumping = false;
-                }
-                check -= 16;
-                if (check <= playerBound.Left)
-                    check = playerBound.Left;
+            if (updateLocation.Y < 0) {
+                vertBound = checkVertCollision(playerBound, playerBound.Top, 1);
+                yDiff = playerBound.Y - vertBound.Y;
+            }
+            else if (updateLocation.Y > 0) {
+                vertBound = checkVertCollision(playerBound, playerBound.Bottom, -1);
+                yDiff = vertBound.Y - playerBound.Y;
             }
 
-            // if (falling)
-            //    player.falling = true;
-
-            check = playerBound.Left;
-
-            while (check != playerBound.Right && updateLocation.Y < 0)
-            {
-                Rectangle collisionRect = getCollisionRectangle(playerBound, check, playerBound.Top);
-                if (!collisionRect.IsEmpty)
-                    playerBound.Offset(0, collisionRect.Height);
-
-                check += 16;
-                if (check >= playerBound.Right)
-                    check = playerBound.Right;
-            }
-
-            check = playerBound.Top;
-            while (check != playerBound.Bottom && updateLocation.X > 0)
-            {
-                Rectangle collisionRect = getCollisionRectangle(playerBound, playerBound.Right, check);
-                if (!collisionRect.IsEmpty)
-                    playerBound.Offset(-collisionRect.Width, 0);
-
-                check += 16;
-                if (check >= playerBound.Bottom)
-                    check = playerBound.Bottom;
-            }
-
-            check = playerBound.Bottom;
-            while (check != playerBound.Top && updateLocation.X < 0)
-            {
-                Rectangle collisionRect = getCollisionRectangle(playerBound, playerBound.Left, check);
-                if (!collisionRect.IsEmpty) 
-                    playerBound.Offset(collisionRect.Width, 0);
-                check -= 16;
-                if (check <= playerBound.Top)
-                    check = playerBound.Top;
-            }
-
-
-
-            // Continue
-
-            /*
-            if (update.Y == 0)
-            {
-                if (checkCollision(playerLocation.X + 7, playerLocation.Y + 29) &&
-                        checkCollision(playerLocation.X + 28, playerLocation.Y + 29))
-                    player.setFalling(true);
-            }
-            else if (checkCollision(playerLocation.X + 7, newLocation.Y + 4) &&
-                    checkCollision(playerLocation.X + 7, newLocation.Y + 27) &&
-                    checkCollision(playerLocation.X + 28, newLocation.Y + 27) &&
-                    checkCollision(playerLocation.X + 28, newLocation.Y + 4))
-            {
-                Console.WriteLine("Updating Y");
-                playerLocation.Y = newLocation.Y;
-            }
-            else
-            {
-                if (update.Y < 0)
-                {
-                    if (!(checkCollision(playerLocation.X + 7, newLocation.Y + 4) &&
-                    checkCollision(playerLocation.X + 28, newLocation.Y + 4)))
-                    {
-                        Console.WriteLine("Colliding Y Up");
-                    }
-                }
-                else if (update.Y > 0)
-                {
-                    if (!(checkCollision(playerLocation.X + 7, newLocation.Y + 27) &&
-                        checkCollision(playerLocation.X + 28, newLocation.Y + 27)))
-                    {
-                        playerLocation.Y = newLocation.Y;
-                        Console.WriteLine("Colliding Y Down" + playerLocation.Y);
-                        player.setJumping(false);
-                        player.setFalling(false);
-                        playerLocation.Y -= (playerLocation.Y % 16) - 4;
-                        Console.WriteLine("Blocation.Y: " + newLocation.Y + " updateLocation.Y: " + update.Y + "Alocation.Y" + playerLocation.Y);
-                    }
-                }
-            }
-            if ((checkCollision(newLocation.X + 7, playerLocation.Y + 4) &&
-                checkCollision(newLocation.X + 7, playerLocation.Y + 27) &&
-                checkCollision(newLocation.X + 28, playerLocation.Y + 27) &&
-                checkCollision(newLocation.X + 28, playerLocation.Y + 4)))
-            {
-                Console.WriteLine("Updating X");
-                playerLocation.X = newLocation.X;
-            }
-            */
-
-            return new Vector2(playerBound.X, playerBound.Y);
+            if (xDiff < yDiff)
+                return horizBound.Location.ToVector2();
+            return vertBound.Location.ToVector2();
+            
         }
 
-        public Rectangle getTileRectangle(int x, int y)
+        public TileRect getTileRectangle(int x, int y)
         {
             int xTile = ((int)x) / tileWidth;
             int yTile = ((int)y + heightDiff) / tileHeight;
             int tile = yTile * ((int)mapWidth) + xTile;
             TmxLayerTile tmxTile = collision.Tiles[tile];
-            if (tmxTile.Gid == 211)
-                return new Rectangle(tmxTile.X * tileWidth, tmxTile.Y * tileHeight - heightDiff, tileWidth, tileHeight);
-            else
-                return Rectangle.Empty;
+            return new TileRect(tmxTile.Gid, new Rectangle(tmxTile.X * tileWidth, tmxTile.Y * tileHeight - heightDiff, tileWidth, tileHeight));
         }
 
         public bool checkCollision(float x, float y)

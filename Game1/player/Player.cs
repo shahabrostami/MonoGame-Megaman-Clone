@@ -76,6 +76,9 @@ namespace Game1
 
         public bool updateLocation(Vector2 updateLocation)
         {
+            if (updateLocation.X == 0 && updateLocation.Y == 0)
+                return false;
+
             float newX = (location.X + updateLocation.X);
             float newY = (location.Y + updateLocation.Y);
             newX -= newX % 1;
