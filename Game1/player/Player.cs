@@ -81,15 +81,21 @@ namespace Game1
 
             float newX = (location.X + updateLocation.X);
             float newY = (location.Y + updateLocation.Y);
-            newX -= newX % 1;
-            newY -= newY % 1;
-            Rectangle newBound = new Rectangle((int) (newX + playerTextureOffset.X), (int) (newY + playerTextureOffset.Y-1), 20, 23);
+            newX = (int)Math.Round(newX, 0);
+            newY = (int)Math.Round(newY, 0);
+            Rectangle newBound = new Rectangle((int) (newX + playerTextureOffset.X), (int) (newY + playerTextureOffset.Y), 20, 23);
             location = map.checkCollisions(newBound, updateLocation);
             location.X -= playerTextureOffset.X;
-            location.Y -= playerTextureOffset.Y - 1;
+            location.Y -= playerTextureOffset.Y;
             return true;
         }
 
+        public void setFalling(bool fall)
+        {
+            if(fall == false)
+                PlayerStates.FALL.animation.reset();
+            this.falling = fall;
+        }
         public void setMap(Map map)
         {
             this.map = map;

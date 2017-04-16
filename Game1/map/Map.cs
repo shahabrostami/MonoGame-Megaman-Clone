@@ -101,9 +101,7 @@ namespace Game1
                     if (check < playerBound.Right)
                         check = playerBound.Right;
                 }
-                player.falling = falling;
-                // Console.WriteLine("falling = true");
-                // Console.WriteLine("falling = false");
+                player.setFalling(falling);
             }
         }
 
@@ -118,7 +116,7 @@ namespace Game1
                     playerBound.Offset(0, tileRect.rectangle.Height*mult);
                     if (mult == -1)
                     {
-                        player.falling = false;
+                        player.setFalling(false);
                         player.jumping = false;
                     }
                 }
@@ -147,34 +145,22 @@ namespace Game1
 
         public Vector2 checkCollisions(Rectangle playerBound, Vector2 updateLocation)
         {
-            checkFalling(playerBound, updateLocation);
             Rectangle horizBound = playerBound;
             Rectangle vertBound = playerBound;
-            int xDiff = 0;
-            int yDiff = 0;
 
-            if (updateLocation.X > 0) {
-                horizBound = checkHorizCollision(playerBound, playerBound.Right, -1);
-                xDiff = horizBound.X - playerBound.X;
-            }
-            else if (updateLocation.X < 0) {
-                horizBound = checkHorizCollision(playerBound, playerBound.Left, 1);
-                xDiff = playerBound.X - horizBound.X;
-            }
+            // Need to check X collision, if it's still collision, need to not move, staggers mega left/right when jumping
+            if (updateLocation.X > 0) 
+                playerBound = checkHorizCollision(playerBound, playerBound.Right, -1);
+            else if (updateLocation.X < 0) 
+                playerBound = checkHorizCollision(playerBound, playerBound.Left, 1);
+            if (updateLocation.Y < 0) 
+                playerBound = checkVertCollision(playerBound, playerBound.Top, 1);
+            else if (updateLocation.Y > 0) 
+                playerBound = checkVertCollision(playerBound, playerBound.Bottom, -1);
 
-            if (updateLocation.Y < 0) {
-                vertBound = checkVertCollision(playerBound, playerBound.Top, 1);
-                yDiff = playerBound.Y - vertBound.Y;
-            }
-            else if (updateLocation.Y > 0) {
-                vertBound = checkVertCollision(playerBound, playerBound.Bottom, -1);
-                yDiff = vertBound.Y - playerBound.Y;
-            }
+            checkFalling(playerBound, updateLocation);
 
-            if (xDiff < yDiff)
-                return horizBound.Location.ToVector2();
-            return vertBound.Location.ToVector2();
-            
+            return playerBound.Location.ToVector2();
         }
 
         public TileRect getTileRectangle(int x, int y)

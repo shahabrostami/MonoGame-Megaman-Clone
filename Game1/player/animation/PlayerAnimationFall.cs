@@ -65,7 +65,6 @@ namespace Game1
 
         public override void reset()
         {
-            previousY = player.location.Y;
             velocity = currentCycle.velocity;
             velocity.Y *= -1;
             loopFinished = false;
