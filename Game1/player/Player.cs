@@ -25,7 +25,7 @@ namespace Game1
         private Vector2 playerTextureOffset = new Vector2(4, 6);
 
         // Player Location
-        public Vector2 location;
+        public Vector2 position;
 
         public Player() {
             bulletFactory = new BulletFactory(this);
@@ -36,13 +36,13 @@ namespace Game1
             falling = false;
             shooting = false;
         }
+
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
         {
             Sprite playerSprite = Content.Load<Sprite[]>("spritetest")[0];
             Texture2D playerTexture = Content.Load<Texture2D>(playerSprite.textureName);
             PlayerStates.LoadContent(this, playerTexture, playerSprite);
             bulletFactory.LoadContent(GraphicsDevice);
-
         }
 
         public void Update(GameTime gameTime)
@@ -70,7 +70,7 @@ namespace Game1
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            playerStateMachine.currentState.animation.Draw(spriteBatch, location);
+            playerStateMachine.currentState.animation.Draw(spriteBatch, position);
             bulletFactory.Draw(spriteBatch);
         }
 
@@ -79,14 +79,16 @@ namespace Game1
             if (updateLocation.X == 0 && updateLocation.Y == 0)
                 return false;
 
-            float newX = (location.X + updateLocation.X);
-            float newY = (location.Y + updateLocation.Y);
+            float newX = (position.X + updateLocation.X);
+            float newY = (position.Y + updateLocation.Y);
             newX = (int)Math.Round(newX, 0);
             newY = (int)Math.Round(newY, 0);
             Rectangle newBound = new Rectangle((int) (newX + playerTextureOffset.X), (int) (newY + playerTextureOffset.Y), 20, 23);
-            location = map.checkCollisions(newBound, updateLocation);
-            location.X -= playerTextureOffset.X;
-            location.Y -= playerTextureOffset.Y;
+
+            position = map.checkPlayerCollisions(newBound, updateLocation);
+
+            position.X -= playerTextureOffset.X;
+            position.Y -= playerTextureOffset.Y;
             return true;
         }
 
@@ -103,7 +105,7 @@ namespace Game1
 
         public string getDebugInfo()
         {
-            return "Player: (" + (int)location.X + "," + (int)location.Y + ")" + "\n" + bulletFactory.GetDebugInfo();
+            return "Player: (" + (int)position.X + "," + (int)position.Y + ")" + "\n" + bulletFactory.GetDebugInfo();
         }
     }
 }

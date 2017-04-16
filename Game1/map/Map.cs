@@ -24,14 +24,13 @@ namespace Game1
 
     class Map
     {
-        int width, height, heightDiff;
-        int screenWidthCap, screenHeightCap;
-        int tileWidth, tileHeight, mapWidth, mapHeight;
+        static int width, height, heightDiff;
+        static int screenWidthCap, screenHeightCap;
+        static int tileWidth, tileHeight, mapWidth, mapHeight;
+        static TmxLayer background, wall, collision;
         int tiles;
         Texture2D textureTileset;
         TmxTileset tmxTileset;
-        TmxLayerTile collisionTile;
-        TmxLayer background, wall, collision;
         Player player;
         static Map inst;
         private int collisionTileId = 211;
@@ -64,7 +63,7 @@ namespace Game1
             textureTileset = Content.Load<Texture2D>(map.Tilesets[0].Name);
             heightDiff = (map.Height * tileHeight) - height;
 
-            player.location = new Vector2((int)map.ObjectGroups[0].Objects[0].X, (int)map.ObjectGroups[0].Objects[0].Y - heightDiff);
+            player.position = new Vector2((int)map.ObjectGroups[0].Objects[0].X, (int)map.ObjectGroups[0].Objects[0].Y - heightDiff);
             player.setMap(this);
         }
 
@@ -97,7 +96,7 @@ namespace Game1
                     if (collisionRect.rectangle.IsEmpty && collisionRect.tileId != emptyTileId)
                         falling = false;
 
-                    check += 16;
+                    check += tileWidth;
                     if (check < playerBound.Right)
                         check = playerBound.Right;
                 }
@@ -107,7 +106,7 @@ namespace Game1
 
         public Rectangle checkVertCollision(Rectangle playerBound, int checkY, int mult)
         {
-            int check = playerBound.Left;
+            int check = playerBound.Left + tileWidth;
             while (check < playerBound.Right)
             {
                 TileRect tileRect = getCollisionRectangle(playerBound, check, checkY);
@@ -143,20 +142,20 @@ namespace Game1
             return playerBound;
         }
 
-        public Vector2 checkCollisions(Rectangle playerBound, Vector2 updateLocation)
+        public Vector2 checkPlayerCollisions(Rectangle playerBound, Vector2 updateLocation)
         {
             Rectangle horizBound = playerBound;
             Rectangle vertBound = playerBound;
+            
+            if (updateLocation.Y < 0)
+                playerBound = checkVertCollision(playerBound, playerBound.Top, 1);
+            else if (updateLocation.Y > 0)
+                playerBound = checkVertCollision(playerBound, playerBound.Bottom, -1);
 
-            // Need to check X collision, if it's still collision, need to not move, staggers mega left/right when jumping
             if (updateLocation.X > 0) 
                 playerBound = checkHorizCollision(playerBound, playerBound.Right, -1);
             else if (updateLocation.X < 0) 
                 playerBound = checkHorizCollision(playerBound, playerBound.Left, 1);
-            if (updateLocation.Y < 0) 
-                playerBound = checkVertCollision(playerBound, playerBound.Top, 1);
-            else if (updateLocation.Y > 0) 
-                playerBound = checkVertCollision(playerBound, playerBound.Bottom, -1);
 
             checkFalling(playerBound, updateLocation);
 
@@ -172,25 +171,24 @@ namespace Game1
             return new TileRect(tmxTile.Gid, new Rectangle(tmxTile.X * tileWidth, tmxTile.Y * tileHeight - heightDiff, tileWidth, tileHeight));
         }
 
-        public bool checkCollision(float x, float y)
+        public static bool checkCollision(float x, float y)
         {
             int xTile = ((int)x) / tileWidth;
             int yTile = ((int)y + heightDiff) / tileHeight;
             int tile = yTile * ((int)mapWidth) + xTile;
-
-
-            collisionTile = collision.Tiles[tile];
-            if (collisionTile.Gid == 211)
-               return false;
-            return true;
+            
+        
+            if (collision.Tiles[tile].Gid == 211)
+               return true;
+            return false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            float capPosY = player.location.Y - screenHeightCap;
-            float capNegY = player.location.Y + screenHeightCap;
-            float capPosX = player.location.X + screenWidthCap;
-            float capNegX = player.location.X - screenWidthCap;
+            float capPosY = player.position.Y - screenHeightCap;
+            float capNegY = player.position.Y + screenHeightCap;
+            float capPosX = player.position.X + screenWidthCap;
+            float capNegX = player.position.X - screenWidthCap;
 
             foreach (TmxLayerTile tile in background.Tiles)
             {
@@ -218,8 +216,8 @@ namespace Game1
 
         public string GetDebugInfo()
         {
-            int xTile = ( (int)player.location.X + 15) / tileWidth;
-            int yTile = ( (int)player.location.Y + 15 + heightDiff) / tileHeight;
+            int xTile = ( (int)player.position.X + 15) / tileWidth;
+            int yTile = ( (int)player.position.Y + 15 + heightDiff) / tileHeight;
             int tile = yTile * ((int)mapWidth) + xTile;
             
 

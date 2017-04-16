@@ -11,12 +11,9 @@ namespace Game1
 {
     class PlayerAnimationFall : BasePlayerAnimation
     {
-        float previousY;
-
         public PlayerAnimationFall(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
-            velocity.Y *= -1;
             reset();
         }
 
@@ -29,8 +26,7 @@ namespace Game1
             }
             
             timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-
+            
             player.updateLocation(velocity * (timeSinceLastFrame * 10));
             velocity += (gravity * (timeSinceLastFrame * 10));
             return true;
@@ -65,7 +61,7 @@ namespace Game1
 
         public override void reset()
         {
-            velocity = currentCycle.velocity;
+            velocity = currentCycle.velocity / 4;
             velocity.Y *= -1;
             loopFinished = false;
         }

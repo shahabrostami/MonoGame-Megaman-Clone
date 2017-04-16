@@ -38,13 +38,19 @@ namespace Game1
             if (timeSinceLastFrame > delay) { 
 
                 if (isShooting) {
-                    bullets.Add(new Bullet(isJumping, (player.location), player.direction));
+                    bullets.Add(new Bullet(isJumping, (player.position), player.direction));
                     timeSinceLastFrame = 0;
                 }
             }
             
             foreach (var bullet in bullets)
                 bullet.Update(gameTime);
+
+            var bulletsHitWorld = bullets.Where(i => Map.checkCollision(i.position.X, i.position.Y)).ToList();
+
+            foreach (var bullet in bulletsHitWorld)
+                bullets.Remove(bullet);
+
 
             var bulletsOffScreen = bullets.Where(i => IsOffScreen(i)).ToList();
 
@@ -55,7 +61,7 @@ namespace Game1
 
         private Boolean IsOffScreen(Bullet bullet)
         {
-            if (bullet.position.X <= player.location.X - screenWidth || bullet.position.X >= player.location.X + screenWidth)
+            if (bullet.position.X <= player.position.X - screenWidth || bullet.position.X >= player.position.X + screenWidth)
                 return true;
             return false;
         }

@@ -46,8 +46,8 @@ namespace Game1
                 Position.X += 1.0F;
             }
 
-            Position.X = player.location.X - Origin.X;
-            Position.Y = player.location.Y - Origin.Y;
+            Position.X = player.position.X - Origin.X;
+            Position.Y = player.position.Y - Origin.Y;
         }
 
         public Matrix getViewMatrix()
