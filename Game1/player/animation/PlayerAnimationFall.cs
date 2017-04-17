@@ -14,7 +14,6 @@ namespace Game1
         public PlayerAnimationFall(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
-            reset();
         }
 
         override public bool Update(GameTime gameTime)
@@ -26,7 +25,6 @@ namespace Game1
             }
             
             timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            
             player.updateLocation(velocity * (timeSinceLastFrame * 10));
             velocity += (gravity * (timeSinceLastFrame * 10));
             return true;

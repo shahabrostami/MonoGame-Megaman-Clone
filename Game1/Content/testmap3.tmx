@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="10">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="80" tilewidth="16" tileheight="16" nextobjectid="20">
  <tileset firstgid="1" name="KITileset" tilewidth="16" tileheight="16" tilecount="400" columns="20">
   <image source="KITileset.png" trans="ff00ff" width="320" height="320"/>
  </tileset>
@@ -16012,7 +16012,8 @@
   </data>
  </layer>
  <objectgroup name="mapObjects">
-  <object id="4" name="start" x="208" y="1140" width="32" height="32"/>
+  <object id="4" name="start" type="Marker" x="208" y="1140" width="32" height="32"/>
+  <object id="18" name="enemy1" type="Enemy" x="860" y="1112" width="24" height="24"/>
  </objectgroup>
  <layer name="collision" width="100" height="80">
   <data>

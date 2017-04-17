@@ -33,6 +33,7 @@ namespace Game1.player.bullet
                 this.position += leftDisplace;
             }
 
+            // The bullet has different origin if player is jumping due to sprite difference
             if (isJumping)
                 this.position.Y += jumpDisplace;
 

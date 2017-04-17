@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="map\CollisionHandler.cs" />
+    <Compile Include="player\animation\BaseAnimation.cs" />
     <Compile Include="player\animation\PlayerAnimationFall.cs" />
     <Compile Include="player\bullet\Bullet.cs" />
     <Compile Include="player\bullet\BulletFactory.cs" />

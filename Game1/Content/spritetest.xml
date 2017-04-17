@@ -123,5 +123,45 @@
         </Item>
       </animations>
     </Item>
+    <Item>
+      <textureName>megaman_enemy1</textureName>
+      <rows>1</rows>
+      <columns>6</columns>
+      <animations>
+        <Item>
+          <name>stand</name>
+          <loop>true</loop>
+          <cycles>
+            <Item>
+              <row>0</row>
+              <sf>0</sf>
+              <ef>1</ef>
+              <velocity>0 0</velocity>
+              <ms>500</ms>
+            </Item>
+            <Item>
+              <row>1</row>
+            </Item>
+          </cycles>
+        </Item>
+
+        <Item>
+          <name>run</name>
+          <loop>true</loop>
+          <cycles>
+            <Item>
+              <row>0</row>
+              <sf>0</sf>
+              <ef>7</ef>
+              <velocity>0 0</velocity>
+              <ms>100</ms>
+            </Item>
+            <Item>
+              <row>1</row>
+            </Item>
+          </cycles>
+        </Item>
+      </animations>
+    </Item>
   </Asset>
 </XnaContent>

@@ -35,6 +35,7 @@ namespace Game1
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
+            // Create new bullets
             if (timeSinceLastFrame > delay) { 
 
                 if (isShooting) {
@@ -43,25 +44,25 @@ namespace Game1
                 }
             }
             
+            // Update each bullet
             foreach (var bullet in bullets)
                 bullet.Update(gameTime);
 
+            // Check world collision
             var bulletsHitWorld = bullets.Where(i => Map.checkCollision(i.position.X, i.position.Y)).ToList();
-
             foreach (var bullet in bulletsHitWorld)
                 bullets.Remove(bullet);
-
-
+            
+            // Check bullet offscreen
             var bulletsOffScreen = bullets.Where(i => IsOffScreen(i)).ToList();
-
             foreach (var bullet in bulletsOffScreen)
                 bullets.Remove(bullet);
-
         }
 
         private Boolean IsOffScreen(Bullet bullet)
         {
-            if (bullet.position.X <= player.position.X - screenWidth || bullet.position.X >= player.position.X + screenWidth)
+            // Bullets only travel horizontally
+            if (bullet.position.X <= (player.position.X - screenWidth) || bullet.position.X >= (player.position.X + screenWidth))
                 return true;
             return false;
         }
@@ -74,9 +75,7 @@ namespace Game1
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (var bullet in bullets)
-            {
                 bullet.Draw(spriteBatch, bulletTexture);
-            }
         }
     }
 }

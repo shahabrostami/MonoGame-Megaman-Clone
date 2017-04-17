@@ -105,7 +105,7 @@ namespace Game1
 
         public string getDebugInfo()
         {
-            return "Player: (" + (int)position.X + "," + (int)position.Y + ")" + "\n" + bulletFactory.GetDebugInfo();
+            return String.Format("Player: ({0},{1}) \nAction: {2}\nState: {3} \n{4}", (int)position.X, (int)position.Y, playerAction, playerState, bulletFactory.GetDebugInfo());
         }
     }
 }

@@ -11,12 +11,9 @@ namespace Game1
 {
     class PlayerAnimationJump : BasePlayerAnimation
     {
-        float previousY;
-
         public PlayerAnimationJump(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
-            reset();
         }
 
         override public bool Update(GameTime gameTime)
@@ -66,7 +63,6 @@ namespace Game1
 
         public override void reset()
         {
-            previousY = player.position.Y;
             velocity = currentCycle.velocity;
             loopFinished = false;
         }
