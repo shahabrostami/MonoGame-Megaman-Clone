@@ -8,10 +8,10 @@ namespace Game1
 {
     class PlayerStateTransition
     {
-        PlayerState state;
+        PlayerStateAnimation state;
         PlayerAction action;
 
-        public PlayerStateTransition(PlayerState state, PlayerAction action)
+        public PlayerStateTransition(PlayerStateAnimation state, PlayerAction action)
         {
             this.state = state;
             this.action = action;

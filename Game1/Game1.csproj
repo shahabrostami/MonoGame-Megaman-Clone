@@ -38,9 +38,14 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="animation\BaseAnimation.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="enemy\BaseEnemyAnimation.cs" />
+    <Compile Include="enemy\Enemy.cs" />
+    <Compile Include="enemy\EnemyFactory.cs" />
+    <Compile Include="enemy\EnemyAnimation.cs" />
+    <Compile Include="enemy\EnemyTypes.cs" />
     <Compile Include="map\CollisionHandler.cs" />
-    <Compile Include="player\animation\BaseAnimation.cs" />
     <Compile Include="player\animation\PlayerAnimationFall.cs" />
     <Compile Include="player\bullet\Bullet.cs" />
     <Compile Include="player\bullet\BulletFactory.cs" />
@@ -57,7 +62,7 @@
     <Compile Include="animation\Animation.cs" />
     <Compile Include="animation\SpriteSpec.cs" />
     <Compile Include="player\action\PlayerActionHandler.cs" />
-    <Compile Include="player\state\PlayerState.cs" />
+    <Compile Include="player\animation\PlayerStateAnimation.cs" />
     <Compile Include="player\state\PlayerStates.cs" />
     <Compile Include="player\Player.cs" />
     <Compile Include="Game1.cs" />

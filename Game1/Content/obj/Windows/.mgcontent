@@ -4,11 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/megamanboth.png</File>
-    <File>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/spritetest.xml</File>
-    <File>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/megamanfull.png</File>
-    <File>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/KITileset.png</File>
-    <File>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/Arial.spritefont</File>
-    <File>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/megaman_enemy1.png</File>
+    <File>C:/Users/rostami/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/megamanboth.png</File>
+    <File>C:/Users/rostami/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/spritetest.xml</File>
+    <File>C:/Users/rostami/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/megamanfull.png</File>
+    <File>C:/Users/rostami/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/KITileset.png</File>
+    <File>C:/Users/rostami/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/Arial.spritefont</File>
+    <File>C:/Users/rostami/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/megaman_enemy1.png</File>
   </SourceFiles>
 </SourceFileCollection>

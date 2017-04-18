@@ -12,7 +12,7 @@ namespace Game1
         // Player Related Objects
         private PlayerStateMachine playerStateMachine;
         private PlayerActionHandler playerActionHandler;
-        private PlayerState playerState;
+        private PlayerStateAnimation playerState;
         private PlayerAction playerAction;
         private BulletFactory bulletFactory;
         private Map map;

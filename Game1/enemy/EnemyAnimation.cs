@@ -4,16 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1
+namespace Game1.enemy
 {
-    class PlayerState
+    class EnemyAnimation
     {
         private String desc;
-        public BasePlayerAnimation animation { get; set; }
+        private int type;
+        public BaseAnimation animation { get; set; }
 
-        public PlayerState(String desc)
+        public EnemyAnimation(int type, String desc)
         {
+            this.type = type;
             this.desc = desc;
+        }
+
+        public int getType ()
+        {
+            return type;
         }
         public override String ToString()
         {

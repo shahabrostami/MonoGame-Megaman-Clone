@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1.player.enemy
+namespace Game1.enemy
 {
-    class Class1
+    class Enemy
     {
+        public Enemy()
+        {
+
+        }
     }
 }

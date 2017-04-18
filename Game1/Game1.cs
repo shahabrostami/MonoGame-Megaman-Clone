@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1.enemy;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MyObjects;
@@ -7,19 +8,27 @@ namespace Game1
 {
     public class Game1 : Game
     {
+        // Graphic Objects
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        // Game Objects
         Player player;
         Map map;
         Camera camera;
+        EnemyFactory enemyFactory;
+
+        // Font Objects
         SpriteFont Arial;
         Vector2 DebugPos;
+
         string debugText;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             player = new Player();
+            enemyFactory = new EnemyFactory();
             map = new Map(20, player);
             IsMouseVisible = true;
         }
@@ -33,10 +42,13 @@ namespace Game1
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            //Font
             Arial = Content.Load<SpriteFont>("Arial");
+            DebugPos = new Vector2(80, 50);
+            //Game
             map.LoadContent(GraphicsDevice, Content);
             player.LoadContent(GraphicsDevice, Content);
-            DebugPos = new Vector2(80,50);
+            enemyFactory.LoadContent(GraphicsDevice, Content);
 
         }
 

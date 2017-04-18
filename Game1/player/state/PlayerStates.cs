@@ -10,10 +10,10 @@ namespace Game1
 {
     class PlayerStates
     {
-        public static PlayerState RUN = new PlayerState("RUN");
-        public static PlayerState JUMP = new PlayerState("JUMP");
-        public static PlayerState STAND = new PlayerState("STAND");
-        public static PlayerState FALL = new PlayerState("FALL");
+        public static PlayerStateAnimation RUN = new PlayerStateAnimation("RUN");
+        public static PlayerStateAnimation JUMP = new PlayerStateAnimation("JUMP");
+        public static PlayerStateAnimation STAND = new PlayerStateAnimation("STAND");
+        public static PlayerStateAnimation FALL = new PlayerStateAnimation("FALL");
 
         public static void LoadContent(Player player, Texture2D texture, Sprite sprite)
         {

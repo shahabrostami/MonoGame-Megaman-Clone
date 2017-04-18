@@ -8,16 +8,16 @@ namespace Game1
 {
     class PlayerStateMachine
     {
-        public PlayerState currentState { get; set; }
-        public PlayerState previousState { get; set; }
+        public PlayerStateAnimation currentState { get; set; }
+        public PlayerStateAnimation previousState { get; set; }
 
-        Dictionary<PlayerStateTransition, PlayerState> transitions;
+        Dictionary<PlayerStateTransition, PlayerStateAnimation> transitions;
 
         public PlayerStateMachine()
         {
             currentState = PlayerStates.STAND;
 
-            transitions = new Dictionary<PlayerStateTransition, PlayerState>
+            transitions = new Dictionary<PlayerStateTransition, PlayerStateAnimation>
             {
                 { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE), PlayerStates.RUN },
                 { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.JUMP), PlayerStates.JUMP},
@@ -26,10 +26,10 @@ namespace Game1
             };
         }
 
-        public PlayerState Update(PlayerAction playerAction)
+        public PlayerStateAnimation Update(PlayerAction playerAction)
         {
             PlayerStateTransition transition = new PlayerStateTransition(currentState, playerAction);
-            PlayerState newState;
+            PlayerStateAnimation newState;
             if (!transitions.TryGetValue(transition, out newState))
             {
                 newState = currentState;

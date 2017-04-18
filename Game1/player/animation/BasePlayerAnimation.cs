@@ -19,7 +19,7 @@ namespace Game1
             this.player = player;
         }
 
-        public abstract void updateOnAction(PlayerState pState, PlayerAction pAction);
+        public abstract void updateOnAction(PlayerStateAnimation pState, PlayerAction pAction);
     }
 
 
