@@ -8,7 +8,7 @@ namespace Game1.enemy
 {
     class Enemy
     {
-        public Enemy()
+        public Enemy(EnemyAnimation enemyAnim)
         {
 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyObjects;
 
 namespace Game1.enemy
 {
@@ -26,6 +27,5 @@ namespace Game1.enemy
         {
             return desc;
         }
-
     }
 }

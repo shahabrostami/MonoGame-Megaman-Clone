@@ -19,9 +19,7 @@ namespace Game1.enemy
             EnemyTypes.enemyFactory = enemyFactory;
 
             Enemy enemy = new Enemy();
-            BaseEnemyAnimation walkerAnimation = new BaseEnemyAnimation(enemy, spriteSpec, sprite.animations[0]);
-
-            WALKER.animation = walkerAnimation;
+            WALKER.setAnimation(spriteSpec, sprite.animations[0]);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Game1
 
         public override bool Update(GameTime gameTime)
         {
-            
+            return true;
         }
     }
 

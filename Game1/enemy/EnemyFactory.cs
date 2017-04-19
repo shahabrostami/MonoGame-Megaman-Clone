@@ -13,14 +13,13 @@ namespace Game1.enemy
     {
         public EnemyFactory()
         {
-
+            Enemy enemy = new Enemy()
         }
 
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
         {
             Sprite enemySprite = Content.Load<Sprite[]>("spritetest")[1];
             Texture2D enemyTexture = Content.Load<Texture2D>(enemySprite.textureName);
-            BaseAnimation stand = new PlayerAnimationBlink(player, playerSpriteSpec, sprite.animations[0]);
         }
     }
 }
