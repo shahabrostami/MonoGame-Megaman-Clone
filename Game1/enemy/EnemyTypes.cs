@@ -16,10 +16,6 @@ namespace Game1.enemy
         public static void LoadContent(EnemyFactory enemyFactory, Texture2D texture, Sprite sprite)
         {
             SpriteSpec spriteSpec = new SpriteSpec(texture, sprite.rows, sprite.columns);
-            EnemyTypes.enemyFactory = enemyFactory;
-
-            Enemy enemy = new Enemy();
-            WALKER.setAnimation(spriteSpec, sprite.animations[0]);
         }
     }
 }
