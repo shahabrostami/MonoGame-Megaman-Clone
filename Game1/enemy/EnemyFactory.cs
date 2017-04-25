@@ -23,8 +23,7 @@ namespace Game1.enemy
             SpriteSpec spriteSpec = new SpriteSpec(enemyTexture, enemySprite.rows, enemySprite.columns);
 
             EnemyWalker enemyWalker1 = new EnemyWalker();
-            EnemyWalker.LoadContent(spriteSpec);
-            EnemyWalker.LoadContent(spriteSpec, walkerAnimation);
+            WalkerEnemyAnimation walkerAnimation = new WalkerEnemyAnimation(enemyWalker1, spriteSpec, enemySprite.animations[0]);
         }
     }
 }

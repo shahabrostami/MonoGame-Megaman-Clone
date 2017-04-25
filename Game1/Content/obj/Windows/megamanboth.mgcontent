@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/megamanboth.png</SourceFile>
-  <SourceTime>2017-03-10T13:03:41.8083829+00:00</SourceTime>
-  <DestFile>C:/Users/Bro-W/Documents/Visual Studio 2015/Projects/Game1/monogame-testing/Game1/Content/bin/Windows/megamanboth.xnb</DestFile>
-  <DestTime>2017-04-19T19:20:07.4710087+01:00</DestTime>
+  <SourceFile>C:/Users/IBM_ADMIN/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/megamanboth.png</SourceFile>
+  <SourceTime>2017-04-25T12:43:02.5323525+01:00</SourceTime>
+  <DestFile>C:/Users/IBM_ADMIN/Documents/Visual Studio 2017/Projects/monogame-testing/Game1/Content/bin/Windows/megamanboth.xnb</DestFile>
+  <DestTime>2017-04-25T12:44:00.673918+01:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2016-03-30T07:36:08+01:00</ImporterTime>
+  <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2016-03-30T07:36:08+01:00</ProcessorTime>
+  <ProcessorTime>2017-03-01T15:05:36+00:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

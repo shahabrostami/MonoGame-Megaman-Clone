@@ -14,5 +14,10 @@ namespace Game1.enemy
         {
 
         }
+
+        internal static void LoadContent(EnemyWalker enemyWalker1, WalkerEnemyAnimation walkerAnimation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
