@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TiledSharp;
 
 namespace Game1.enemy
 {
@@ -13,6 +14,14 @@ namespace Game1.enemy
     {
         public EnemyFactory()
         {
+        }
+
+        internal static void setEnemyMapping(TmxList<TmxObject> objects)
+        {
+            foreach(TmxObject enemyMapping in objects)
+            {
+
+            }
         }
 
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)

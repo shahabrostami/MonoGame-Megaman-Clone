@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Game1
 {
-    class Player
+    class Player : MovingObject
     {
         // Player Related Objects
         private PlayerStateMachine playerStateMachine;

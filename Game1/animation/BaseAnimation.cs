@@ -34,7 +34,8 @@ namespace Game1
             this.cycles = animation.cycles;
             this.direction = Direction.RIGHT;
             this.currentCycle = cycles[0];
-            this.currentFrame = currentCycle.frames[0];
+            if(cycles[0].frames != null)
+                this.currentFrame = currentCycle.frames[0];
             this.currentFrameIndex = currentCycle.sf;
             reset();
         }
