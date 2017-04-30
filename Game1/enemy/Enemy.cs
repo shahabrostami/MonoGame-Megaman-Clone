@@ -14,15 +14,21 @@ namespace Game1.enemy
         int hp;
         Vector2 position;
         Vector2 velocity;
+        BaseEnemyAnimation animation;
 
         public Enemy()
         {
             this.hp = 100;
         }
 
+        public void setAnimation(BaseEnemyAnimation enemyAnimation)
+        {
+            this.animation = enemyAnimation;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            animation.Draw(spriteBatch, position);
         }
 
         public string getDebugInfo()
@@ -42,7 +48,8 @@ namespace Game1.enemy
 
         public bool updateLocation(Vector2 updateLocation)
         {
-            throw new NotImplementedException();
+            this.position += updateLocation;
+            return true;
         }
     }
 }

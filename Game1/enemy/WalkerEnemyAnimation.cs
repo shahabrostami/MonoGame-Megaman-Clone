@@ -13,13 +13,9 @@ namespace Game1
     class WalkerEnemyAnimation : BaseEnemyAnimation
     {
 
-        public WalkerEnemyAnimation(Enemy enemy, SpriteSpec spriteSpec, AnimationSpec animationSpec) :
-            base(enemy, spriteSpec, animationSpec)
+        public WalkerEnemyAnimation(SpriteSpec spriteSpec, AnimationSpec animationSpec) :
+            base(spriteSpec, animationSpec)
         {
         }
-        
-        
     }
-
-
 }

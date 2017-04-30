@@ -23,8 +23,10 @@ namespace Game1
             
             timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            player.updateLocation(velocity * (timeSinceLastFrame * 10));
-            velocity += (gravity * (timeSinceLastFrame * 10));
+            if (player.updateLocation(velocity * (timeSinceLastFrame * 10)))
+                velocity += (gravity * (timeSinceLastFrame * 10));
+            else
+                velocity.Y = 0;
 
             if (!player.jumping)
             {

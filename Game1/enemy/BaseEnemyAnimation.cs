@@ -14,8 +14,12 @@ namespace Game1
     {
         protected Enemy enemy;
 
-        public BaseEnemyAnimation(Enemy enemy, SpriteSpec spriteSpec, AnimationSpec animation) :
+        public BaseEnemyAnimation(SpriteSpec spriteSpec, AnimationSpec animation) :
             base(spriteSpec, animation)
+        {
+        }
+
+        public void setEnemy(Enemy enemy)
         {
             this.enemy = enemy;
         }

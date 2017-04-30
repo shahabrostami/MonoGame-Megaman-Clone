@@ -12,12 +12,6 @@ namespace Game1.enemy
         public EnemyWalker() : 
             base()
         {
-
-        }
-
-        internal static void LoadContent(EnemyWalker enemyWalker1, WalkerEnemyAnimation walkerAnimation)
-        {
-            throw new NotImplementedException();
         }
     }
 }
