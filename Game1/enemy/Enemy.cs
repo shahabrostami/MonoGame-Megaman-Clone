@@ -12,7 +12,7 @@ namespace Game1.enemy
     class Enemy : MovingObject
     {
         int hp;
-        Vector2 position;
+        public Vector2 position;
         Vector2 velocity;
         BaseEnemyAnimation animation;
 
@@ -43,7 +43,7 @@ namespace Game1.enemy
 
         public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            animation.Update(gameTime);   
         }
 
         public bool updateLocation(Vector2 updateLocation)

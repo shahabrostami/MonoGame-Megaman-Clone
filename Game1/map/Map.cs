@@ -66,8 +66,8 @@ namespace Game1
 
             player.position = new Vector2((int)map.ObjectGroups[0].Objects[0].X, (int)map.ObjectGroups[0].Objects[0].Y - heightDiff);
             player.setMap(this);
-
-            EnemyFactory.setEnemyMapping(map.ObjectGroups[1].Objects);
+            
+            EnemyFactory.setEnemyMapping(map.ObjectGroups[1].Objects, heightDiff);
         }
 
 

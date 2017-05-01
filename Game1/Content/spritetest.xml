@@ -125,8 +125,8 @@
     </Item>
     <Item>
       <textureName>megaman_enemy1</textureName>
-      <rows>1</rows>
-      <columns>6</columns>
+      <rows>2</rows>
+      <columns>8</columns>
       <animations>
         <Item>
           <name>stand</name>

@@ -13,7 +13,7 @@ namespace Game1.enemy
 {
     class EnemyFactory
     {
-        List<EnemyWalker> enemyWalkers;
+        static List<EnemyWalker> enemyWalkers;
 
         public EnemyFactory()
         {
@@ -27,8 +27,10 @@ namespace Game1.enemy
                     };
         }
 
-        internal static void setEnemyMapping(TmxList<TmxObject> objects)
+        internal static void setEnemyMapping(TmxList<TmxObject> objects, int heightDiff)
         {
+            // foreach (TmxObject tmxObj in objects)
+            enemyWalkers[0].position = new Vector2((int)objects[0].X, (int)objects[0].Y - heightDiff);
         }
 
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
@@ -39,7 +41,8 @@ namespace Game1.enemy
             SpriteSpec spriteSpec = new SpriteSpec(enemyTexture, enemySprite.rows, enemySprite.columns);
             
             WalkerEnemyAnimation walkerAnimation = new WalkerEnemyAnimation(spriteSpec, enemySprite.animations[0]);
-            enemyWalkers[0].setAnimation(walkerAnimation);
+            foreach (EnemyWalker enemyWalker in enemyWalkers)
+                enemyWalker.setAnimation(walkerAnimation);
         }
 
         public void Update(GameTime gameTime)
@@ -50,8 +53,8 @@ namespace Game1.enemy
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (EnemyWalker enemyWalker in enemyWalkers)
-                enemyWalker.Draw(spriteBatch);
+            // foreach (EnemyWalker enemyWalker in enemyWalkers)
+            enemyWalkers[0].Draw(spriteBatch);
         }
     }
 }

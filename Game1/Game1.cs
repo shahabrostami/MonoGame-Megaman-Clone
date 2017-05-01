@@ -66,6 +66,7 @@ namespace Game1
 
             player.Update(gameTime);
             camera.Update(player, gameTime);
+            enemyFactory.Update(gameTime);
             debugText = player.getDebugInfo();
             debugText = debugText + "\nMouse: (" + Mouse.GetState().X + "," + Mouse.GetState().Y + ")";
             debugText = debugText + "\n" + map.GetDebugInfo();
@@ -79,11 +80,11 @@ namespace Game1
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: updateMatrix);
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            enemyFactory.Draw(spriteBatch);
             spriteBatch.End();
 
 
             spriteBatch.Begin();
-            
             Vector2 FontOrigin = Arial.MeasureString(debugText) / 2;
             spriteBatch.DrawString(Arial, debugText, DebugPos, Color.White, 0, FontOrigin, 1.0f, SpriteEffects.None, 0.5f);
             spriteBatch.End();
