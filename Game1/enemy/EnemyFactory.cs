@@ -40,7 +40,7 @@ namespace Game1.enemy
 
             SpriteSpec spriteSpec = new SpriteSpec(enemyTexture, enemySprite.rows, enemySprite.columns);
             
-            WalkerEnemyAnimation walkerAnimation = new WalkerEnemyAnimation(spriteSpec, enemySprite.animations[0]);
+            WalkerEnemyAnimation walkerAnimation = new WalkerEnemyAnimation(spriteSpec, enemySprite.animations);
             foreach (EnemyWalker enemyWalker in enemyWalkers)
                 enemyWalker.setAnimation(walkerAnimation);
         }

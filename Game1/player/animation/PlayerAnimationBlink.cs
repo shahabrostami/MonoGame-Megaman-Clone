@@ -12,8 +12,8 @@ namespace Game1
     class PlayerAnimationBlink : BasePlayerAnimation
     {
 
-        public PlayerAnimationBlink(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
-            base(player, spriteSpec, animation)
+        public PlayerAnimationBlink(Player player, SpriteSpec spriteSpec, AnimationSpec animationSpec) :
+            base(player, spriteSpec, animationSpec)
         {
             cycles[1].frames = cycles[0].frames;
             cycles[1].ef = cycles[0].ef;

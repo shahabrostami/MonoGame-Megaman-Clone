@@ -13,8 +13,8 @@ namespace Game1
     {
         protected Player player;
 
-        public BasePlayerAnimation(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
-            base(spriteSpec, animation)
+        public BasePlayerAnimation(Player player, SpriteSpec spriteSpec, AnimationSpec animationSpec) :
+            base(spriteSpec, animationSpec)
         {
             this.player = player;
         }

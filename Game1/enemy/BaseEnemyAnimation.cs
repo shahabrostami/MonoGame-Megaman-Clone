@@ -14,8 +14,8 @@ namespace Game1
     {
         protected Enemy enemy;
 
-        public BaseEnemyAnimation(SpriteSpec spriteSpec, AnimationSpec animation) :
-            base(spriteSpec, animation)
+        public BaseEnemyAnimation(SpriteSpec spriteSpec, AnimationSpec[] animationSpecs) :
+            base(spriteSpec, animationSpecs)
         {
         }
 

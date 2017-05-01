@@ -12,6 +12,7 @@ namespace Game1
     abstract class BaseAnimation
     {
         protected readonly Vector2 gravity = new Vector2(0, 9.8f);
+        AnimationSpec[] animationSpecs;
 
         private SpriteSpec spriteSpec;
         protected Direction direction;
@@ -26,12 +27,28 @@ namespace Game1
         protected float timeSinceLastFrame = 0;
         protected Vector2 velocity;
 
-        public BaseAnimation(SpriteSpec spriteSpec, AnimationSpec animation)
+        public BaseAnimation(SpriteSpec spriteSpec, AnimationSpec[] animationSpecs)
         {
+            this.animationSpecs = animationSpecs;
             this.spriteSpec = spriteSpec;
             this.loopFinished = false;
-            this.loopAnimation = animation.loop;
-            this.cycles = animation.cycles;
+            updateAnimationSpec(animationSpecs[0]);
+        }
+
+        public BaseAnimation(SpriteSpec spriteSpec, AnimationSpec animationSpec)
+        {
+
+            this.animationSpecs = new AnimationSpec[1];
+            animationSpecs[0] = animationSpec;
+            this.spriteSpec = spriteSpec;
+            this.loopFinished = false;
+            updateAnimationSpec(animationSpec);
+        }
+
+        public void updateAnimationSpec(AnimationSpec animationSpec)
+        {
+            this.loopAnimation = animationSpec.loop;
+            this.cycles = animationSpec.cycles;
             this.direction = Direction.RIGHT;
             this.currentCycle = cycles[0];
             if (cycles[0].frames != null)

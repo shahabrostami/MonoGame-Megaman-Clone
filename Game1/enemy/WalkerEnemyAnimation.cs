@@ -14,10 +14,11 @@ namespace Game1
     {
         private int ms;
 
-        public WalkerEnemyAnimation(SpriteSpec spriteSpec, AnimationSpec animationSpec) :
-            base(spriteSpec, animationSpec)
+        public WalkerEnemyAnimation(SpriteSpec spriteSpec, AnimationSpec[] animationSpecs) :
+            base(spriteSpec, animationSpecs)
         {
-            ms = animationSpec.cycles[0].ms;
+            ms = animationSpecs[0].cycles[0].ms;
+            updateAnimationSpec(animationSpecs[1]);
         }
 
         override public bool Update(GameTime gameTime)

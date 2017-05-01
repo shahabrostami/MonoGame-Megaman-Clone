@@ -13,15 +13,15 @@ namespace Game1
     {
         private int ms;
 
-        public PlayerAnimationRun(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
-            base(player, spriteSpec, animation)
+        public PlayerAnimationRun(Player player, SpriteSpec spriteSpec, AnimationSpec animationSpec) :
+            base(player, spriteSpec, animationSpec)
         {
             cycles[1].frames = cycles[0].frames;
             cycles[1].velocity = new Vector2(cycles[0].velocity.X * -1, cycles[0].velocity.Y);
             cycles[2].frames = cycles[0].frames;
             cycles[3].frames = cycles[1].frames;
 
-            ms = animation.cycles[0].ms;
+            ms = animationSpec.cycles[0].ms;
         }
 
         override public bool Update(GameTime gameTime)
