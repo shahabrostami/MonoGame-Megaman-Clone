@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Game1.enemy
         public EnemyWalker() : 
             base()
         {
+            this.textureSize = new Vector2(24, 24);
         }
     }
 }

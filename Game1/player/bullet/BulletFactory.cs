@@ -48,11 +48,11 @@ namespace Game1
             foreach (var bullet in bullets)
                 bullet.Update(gameTime);
 
-            // Check world collision
-            var bulletsHitWorld = bullets.Where(i => Map.checkCollision(i.position.X, i.position.Y)).ToList();
+            // Check collisions
+            var bulletsHitWorld = bullets.Where(i => CollisionHandler.checkCollisions((int) i.position.X, (int) i.position.Y)).ToList();
             foreach (var bullet in bulletsHitWorld)
                 bullets.Remove(bullet);
-            
+
             // Check bullet offscreen
             var bulletsOffScreen = bullets.Where(i => IsOffScreen(i)).ToList();
             foreach (var bullet in bulletsOffScreen)

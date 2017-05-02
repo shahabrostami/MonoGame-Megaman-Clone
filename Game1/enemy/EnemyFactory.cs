@@ -27,6 +27,18 @@ namespace Game1.enemy
                     };
         }
 
+        internal static bool checkCollision(int x, int y)
+        {
+            bool hasHit = false;
+            foreach (EnemyWalker enemyWalker in enemyWalkers)
+            {
+                if (enemyWalker.checkCollision(x, y))
+                    hasHit = true;
+            }
+
+            return hasHit;
+        }
+
         internal static void setEnemyMapping(TmxList<TmxObject> objects, int heightDiff)
         {
             // foreach (TmxObject tmxObj in objects)
@@ -47,8 +59,16 @@ namespace Game1.enemy
 
         public void Update(GameTime gameTime)
         {
+            List<Enemy> deadEnemies = new List<Enemy>();
             foreach (EnemyWalker enemyWalker in enemyWalkers)
+            {
                 enemyWalker.Update(gameTime);
+                if (!enemyWalker.isEnemyAlive())
+                    deadEnemies.Add(enemyWalker);
+            }
+
+            foreach (EnemyWalker deadEnemy in deadEnemies)
+                enemyWalkers.Remove(deadEnemy);
         }
 
         public void Draw(SpriteBatch spriteBatch)

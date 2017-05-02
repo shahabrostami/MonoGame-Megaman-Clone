@@ -13,12 +13,37 @@ namespace Game1.enemy
     {
         int hp;
         public Vector2 position;
+        public Vector2 textureSize;
         Vector2 velocity;
+
         BaseEnemyAnimation animation;
 
         public Enemy()
         {
             this.hp = 100;
+        }
+
+        public bool isEnemyAlive()
+        {
+            if (hp < 0)
+                return false;
+            return true;
+        }
+
+        public void enemyHit()
+        {
+            hp -= 5;
+        }
+
+        public bool checkCollision(int x, int y)
+        {
+            if (x >= position.X && x <= (position.X + textureSize.X) &&
+                y >= position.Y && x <= (position.X + textureSize.Y))
+            {
+                enemyHit();
+                return true;
+            }
+            return false;
         }
 
         public void setAnimation(BaseEnemyAnimation enemyAnimation)
