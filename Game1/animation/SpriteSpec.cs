@@ -11,16 +11,18 @@ namespace Game1
     class SpriteSpec
     {
         private Texture2D Texture { get; set; }
+        public Vector2 textureOffset;
         private int Rows { get; set; }
         private int Columns { get; set; }
-        private int width;
-        private int height;
+        public int width;
+        public int height;
 
-        public SpriteSpec(Texture2D texture, int rows, int columns)
+        public SpriteSpec(Texture2D texture, Vector2 offset, int rows, int columns)
         {
             Texture = texture;
             Rows = rows;
             Columns = columns;
+            textureOffset = offset;
             width = Texture.Width / Columns;
             height = (Texture.Height / Rows);
         }

@@ -13,7 +13,6 @@ namespace Game1.enemy
         public EnemyWalker() : 
             base()
         {
-            this.textureSize = new Vector2(24, 24);
         }
     }
 }

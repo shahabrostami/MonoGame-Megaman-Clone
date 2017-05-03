@@ -50,7 +50,7 @@ namespace Game1.enemy
             Sprite enemySprite = Content.Load<Sprite[]>("spritetest")[1];
             Texture2D enemyTexture = Content.Load<Texture2D>(enemySprite.textureName);
 
-            SpriteSpec spriteSpec = new SpriteSpec(enemyTexture, enemySprite.rows, enemySprite.columns);
+            SpriteSpec spriteSpec = new SpriteSpec(enemyTexture, enemySprite.offset, enemySprite.rows, enemySprite.columns);
             
             WalkerEnemyAnimation walkerAnimation = new WalkerEnemyAnimation(spriteSpec, enemySprite.animations);
             foreach (EnemyWalker enemyWalker in enemyWalkers)

@@ -14,6 +14,7 @@ namespace MyObjects
         public string textureName;
         public int rows;
         public int columns;
+        public Vector2 offset;
         public AnimationSpec[] animations;
     }
 

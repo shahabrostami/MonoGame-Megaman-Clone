@@ -13,8 +13,8 @@ namespace Game1
         private Texture2D Texture { get; set; }
         private int Rows { get; set; }
         private int Columns { get; set; }
-        private int width;
-        private int height;
+        public int width;
+        public int height;
 
         public Animation(Texture2D texture, int rows, int columns)
         {

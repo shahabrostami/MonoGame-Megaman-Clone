@@ -17,7 +17,7 @@ namespace Game1
 
         public static void LoadContent(Player player, Texture2D texture, Sprite sprite)
         {
-            SpriteSpec playerSpriteSpec = new SpriteSpec(texture, sprite.rows, sprite.columns);
+            SpriteSpec playerSpriteSpec = new SpriteSpec(texture, sprite.offset, sprite.rows, sprite.columns);
 
             BasePlayerAnimation stand = new PlayerAnimationBlink(player, playerSpriteSpec, sprite.animations[0]);
             BasePlayerAnimation run = new PlayerAnimationRun(player, playerSpriteSpec, sprite.animations[1]);

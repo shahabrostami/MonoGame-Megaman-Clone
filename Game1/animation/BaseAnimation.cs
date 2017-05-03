@@ -27,22 +27,28 @@ namespace Game1
         protected float timeSinceLastFrame = 0;
         protected Vector2 velocity;
 
-        public BaseAnimation(SpriteSpec spriteSpec, AnimationSpec[] animationSpecs)
+        public Vector2 textureOffset;
+        public Vector2 textureSize;
+
+        public BaseAnimation(SpriteSpec spriteSpec, AnimationSpec[] animationSpecs) : this(spriteSpec)
         {
             this.animationSpecs = animationSpecs;
-            this.spriteSpec = spriteSpec;
-            this.loopFinished = false;
             updateAnimationSpec(animationSpecs[0]);
         }
 
-        public BaseAnimation(SpriteSpec spriteSpec, AnimationSpec animationSpec)
+        public BaseAnimation(SpriteSpec spriteSpec, AnimationSpec animationSpec) : this(spriteSpec)
         {
-
             this.animationSpecs = new AnimationSpec[1];
             animationSpecs[0] = animationSpec;
+            updateAnimationSpec(animationSpec);
+        }
+
+        public BaseAnimation(SpriteSpec spriteSpec)
+        {
             this.spriteSpec = spriteSpec;
             this.loopFinished = false;
-            updateAnimationSpec(animationSpec);
+            this.textureSize = new Vector2(spriteSpec.width, spriteSpec.height);
+            this.textureOffset = spriteSpec.textureOffset;
         }
 
         public void updateAnimationSpec(AnimationSpec animationSpec)

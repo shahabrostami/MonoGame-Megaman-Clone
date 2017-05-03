@@ -6,6 +6,7 @@
       <textureName>megamanfull</textureName>
       <rows>4</rows>
       <columns>6</columns>
+      <offset>4 6</offset>
       <animations>
         <Item>
           <name>stand</name>
@@ -127,6 +128,7 @@
       <textureName>megaman_enemy1</textureName>
       <rows>2</rows>
       <columns>8</columns>
+      <offset>4 4</offset>
       <animations>
         <Item>
           <name>stand</name>

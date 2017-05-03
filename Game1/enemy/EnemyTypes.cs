@@ -14,7 +14,7 @@ namespace Game1.enemy
 
         public static void LoadContent(EnemyFactory enemyFactory, Texture2D texture, Sprite sprite)
         {
-            SpriteSpec spriteSpec = new SpriteSpec(texture, sprite.rows, sprite.columns);
+            SpriteSpec spriteSpec = new SpriteSpec(texture, sprite.offset, sprite.rows, sprite.columns);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Game1
         public bool shooting { get; set; }
         public bool jumping { get; set; }
         public bool falling { get; set; }
-        private Vector2 playerTextureOffset = new Vector2(4, 6);
+        private Vector2 playerTextureOffset;
 
         // Player Location
         public Vector2 position;
@@ -42,6 +42,7 @@ namespace Game1
             Sprite playerSprite = Content.Load<Sprite[]>("spritetest")[0];
             Texture2D playerTexture = Content.Load<Texture2D>(playerSprite.textureName);
             PlayerStates.LoadContent(this, playerTexture, playerSprite);
+            playerTextureOffset = playerSprite.offset;
             bulletFactory.LoadContent(GraphicsDevice);
         }
 

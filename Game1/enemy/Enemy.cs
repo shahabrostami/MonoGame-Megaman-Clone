@@ -37,8 +37,8 @@ namespace Game1.enemy
 
         public bool checkCollision(int x, int y)
         {
-            if (x >= position.X && x <= (position.X + textureSize.X) &&
-                y >= position.Y && x <= (position.X + textureSize.Y))
+            if (x >= position.X + animation.textureOffset.X && x <= (position.X + animation.textureSize.X) &&
+                y >= position.Y + animation.textureOffset.Y && x <= (position.Y + animation.textureSize.Y))
             {
                 enemyHit();
                 return true;
