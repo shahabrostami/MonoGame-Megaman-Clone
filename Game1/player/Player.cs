@@ -80,6 +80,7 @@ namespace Game1
             if (updateLocation.X == 0 && updateLocation.Y == 0)
                 return false;
 
+            Console.WriteLine(updateLocation);
             float newX = (position.X + updateLocation.X);
             float newY = (position.Y + updateLocation.Y);
             newX = (int)Math.Round(newX, 0);

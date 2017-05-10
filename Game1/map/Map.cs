@@ -109,7 +109,8 @@ namespace Game1
 
         public Rectangle checkVertCollision(Rectangle playerBound, int checkY, int mult)
         {
-            int check = playerBound.Left + tileWidth;
+            Console.WriteLine("Vertical");
+            int check = playerBound.Left + tileWidth/2;
             while (check < playerBound.Right)
             {
                 TileRect tileRect = getCollisionRectangle(playerBound, check, checkY);
@@ -122,7 +123,7 @@ namespace Game1
                         player.jumping = false;
                     }
                 }
-                check += tileHeight;
+                check += tileHeight/2;
                 if (check > playerBound.Right)
                     check = playerBound.Right;
             }
@@ -131,6 +132,7 @@ namespace Game1
 
         public Rectangle checkHorizCollision(Rectangle playerBound, int checkX, int mult)
         {
+            Console.WriteLine("Horiz");
             // Check Below
             int check = playerBound.Top;
             while (check < playerBound.Bottom)
@@ -138,7 +140,7 @@ namespace Game1
                 TileRect tileRect = getCollisionRectangle(playerBound, checkX, check);
                 if (!tileRect.rectangle.IsEmpty && tileRect.tileId == collisionTileId)
                     playerBound.Offset(tileRect.rectangle.Width * mult, 0);
-                check += tileWidth;
+                check += tileWidth/2;
                 if (check > playerBound.Bottom)
                     check = playerBound.Bottom;
             }
