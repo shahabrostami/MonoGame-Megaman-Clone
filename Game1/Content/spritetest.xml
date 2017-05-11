@@ -122,6 +122,27 @@
             </Item>
           </cycles>
         </Item>
+        <Item>
+          <name>hit</name>
+          <loop>false</loop>
+          <cycles>
+            <Item>
+              <row>4</row>
+              <sf>0</sf>
+              <ef>2</ef>
+              <velocity>-10 0</velocity>
+              <frames>
+                <Item></Item>
+              </frames>
+            </Item>
+            <Item>
+              <row>5</row>
+              <sf>0</sf>
+              <ef>2</ef>
+              <velocity>0 -10</velocity>
+            </Item>
+          </cycles>
+        </Item>
       </animations>
     </Item>
     <Item>
