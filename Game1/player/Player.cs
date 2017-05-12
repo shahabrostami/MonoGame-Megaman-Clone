@@ -22,6 +22,7 @@ namespace Game1
         public bool shooting { get; set; }
         public bool jumping { get; set; }
         public bool falling { get; set; }
+        public bool damaged { get; set; }
         private Vector2 playerTextureOffset;
 
         // Player Location
@@ -35,6 +36,7 @@ namespace Game1
             jumping = false;
             falling = false;
             shooting = false;
+            damaged = false;
         }
 
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
@@ -48,6 +50,10 @@ namespace Game1
 
         public void Update(GameTime gameTime)
         {
+            // Check Player collisions
+            if (CollisionHandler.checkPlayerEnemyCollisions((int) position.X , (int)position.Y + 10))
+                setDamaged(true);
+
             // Retrieve Player Action
             playerAction = playerActionHandler.Update(gameTime);
 
@@ -56,6 +62,9 @@ namespace Game1
 
             if (falling)
                 playerState = PlayerStates.FALL;
+
+            if (damaged)
+                playerState = PlayerStates.HURT;
 
             // Update Player Animation
             playerState.animation.updateOnAction(playerState, playerAction);
@@ -92,6 +101,13 @@ namespace Game1
             position.X -= playerTextureOffset.X;
             position.Y -= playerTextureOffset.Y;
             return true;
+        }
+
+        public void setDamaged(bool damaged)
+        {
+            if (damaged == false)
+                PlayerStates.HURT.animation.reset();
+            this.damaged = damaged;
         }
 
         public void setFalling(bool fall)

@@ -48,6 +48,7 @@
     <Compile Include="enemy\EnemyTypes.cs" />
     <Compile Include="MovingObject.cs" />
     <Compile Include="map\CollisionHandler.cs" />
+    <Compile Include="player\animation\PlayerAnimationHurt.cs" />
     <Compile Include="player\animation\PlayerAnimationFall.cs" />
     <Compile Include="player\bullet\Bullet.cs" />
     <Compile Include="player\bullet\BulletFactory.cs" />

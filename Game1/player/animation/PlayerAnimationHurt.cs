@@ -17,10 +17,23 @@ namespace Game1
         }
 
         override public bool Update(GameTime gameTime)
-        {            
-            timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            player.updateLocation(velocity * (timeSinceLastFrame * 10));
-            velocity += (gravity * (timeSinceLastFrame * 10));
+        {
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+
+            if (timeSinceLastFrame > currentCycle.ms)
+            {
+                timeSinceLastFrame -= currentCycle.ms;
+                currentFrameIndex++;
+
+                if (currentFrameIndex > currentCycle.ef)
+                {
+                    loopFinished = true;
+                    player.setDamaged(false);
+                    return false;
+                }
+            }
+
+            player.updateLocation(currentCycle.velocity * (timeSinceLastFrame / 1000));
             return true;
         }
         
@@ -28,22 +41,9 @@ namespace Game1
         {
             direction = player.direction;
             if (direction == Direction.RIGHT)
-            {
-                if (player.shooting)
-                    updateCycle(cycles[2]);
-                else updateCycle(cycles[0]);
-            }
+                updateCycle(cycles[0]);
             else if (direction == Direction.LEFT)
-            {
-                if (player.shooting)
-                    updateCycle(cycles[3]);
-                else updateCycle(cycles[1]);
-            }
-
-            if (pAction == PlayerAction.STOP)
-                velocity.X = 0;
-            else 
-                velocity.X = currentCycle.velocity.X;
+                updateCycle(cycles[1]);
         }
 
         public override bool hasMovement()

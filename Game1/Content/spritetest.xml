@@ -129,17 +129,24 @@
             <Item>
               <row>4</row>
               <sf>0</sf>
-              <ef>2</ef>
+              <ef>1</ef>
               <velocity>-10 0</velocity>
+              <ms>200</ms>
               <frames>
+                <Item></Item>
                 <Item></Item>
               </frames>
             </Item>
             <Item>
               <row>5</row>
               <sf>0</sf>
-              <ef>2</ef>
-              <velocity>0 -10</velocity>
+              <ef>1</ef>
+              <velocity>10 0</velocity>
+              <ms>200</ms>
+              <frames>
+                <Item></Item>
+                <Item></Item>
+              </frames>
             </Item>
           </cycles>
         </Item>

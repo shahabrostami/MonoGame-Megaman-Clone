@@ -13,27 +13,34 @@ namespace Game1
 {
     class CollisionHandler
     {
-
-        public static bool checkCollisions(int x, int y)
+        public static bool checkPlayerEnemyCollisions(int x, int y)
         {
             bool checkCollision = false;
-            if (checkMapCollisions(x, y))
+            if (checkEnemyCollision(x, y, false))
+                checkCollision = true;
+            return checkCollision;
+        }
+
+        public static bool checkBulletCollisions(int x, int y)
+        {
+            bool checkCollision = false;
+            if (checkMapCollision(x, y))
                 checkCollision = true;
 
-            if (checkEnemyCollisions(x, y))
+            if (checkEnemyCollision(x, y, true))
                 checkCollision = true;
 
             return checkCollision;
 
         }
-        private static bool checkMapCollisions(int x, int y)
+        private static bool checkMapCollision(int x, int y)
         {
             return Map.checkCollision(x, y);
         }
 
-        private static bool checkEnemyCollisions(int x, int y)
+        private static bool checkEnemyCollision(int x, int y, bool canDamage)
         {
-            return EnemyFactory.checkCollision(x, y);
+            return EnemyFactory.checkCollision(x, y, canDamage);
         }
     }
 }

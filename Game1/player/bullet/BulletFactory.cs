@@ -49,7 +49,7 @@ namespace Game1
                 bullet.Update(gameTime);
 
             // Check collisions
-            var bulletsHitWorld = bullets.Where(i => CollisionHandler.checkCollisions((int) i.position.X, (int) i.position.Y)).ToList();
+            var bulletsHitWorld = bullets.Where(i => CollisionHandler.checkBulletCollisions((int) i.position.X, (int) i.position.Y)).ToList();
             foreach (var bullet in bulletsHitWorld)
                 bullets.Remove(bullet);
 
