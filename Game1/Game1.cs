@@ -67,6 +67,9 @@ namespace Game1
             player.Update(gameTime);
             camera.Update(player, gameTime);
             enemyFactory.Update(gameTime);
+
+            CollisionHandler.checkAllCollisions(map, player, enemyFactory);
+
             debugText = player.getDebugInfo();
             debugText = debugText + "\nMouse: (" + Mouse.GetState().X + "," + Mouse.GetState().Y + ")";
             debugText = debugText + "\n" + map.GetDebugInfo();

@@ -1,4 +1,5 @@
 ﻿using Game1.enemy;
+using Game1.player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,6 +14,13 @@ namespace Game1
 {
     class CollisionHandler
     {
+        public static void checkAllCollisions(Map map, Player player, EnemyFactory enemyFactory)
+        {
+            if (checkPlayerEnemyCollisions((int)player.position.X, (int)player.position.Y))
+                player.addEvent(new PlayerEventDamaged(player));
+
+        }
+
         public static bool checkPlayerEnemyCollisions(int x, int y)
         {
             bool checkCollision = false;

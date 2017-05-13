@@ -37,7 +37,6 @@ namespace Game1.enemy
 
         public bool checkCollision(int x, int y, bool canDamage)
         {
-            Console.WriteLine(position.X + "," + position.Y);
             if (x >= position.X + animation.textureOffset.X && x <= (position.X + animation.textureSize.X) &&
                 y >= position.Y + animation.textureOffset.Y && y <= (position.Y + animation.textureSize.Y))
             {

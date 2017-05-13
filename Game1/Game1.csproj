@@ -47,7 +47,7 @@
     <Compile Include="enemy\EnemyFactory.cs" />
     <Compile Include="enemy\EnemyTypes.cs" />
     <Compile Include="MovingObject.cs" />
-    <Compile Include="map\CollisionHandler.cs" />
+    <Compile Include="CollisionHandler.cs" />
     <Compile Include="player\animation\PlayerAnimationHurt.cs" />
     <Compile Include="player\animation\PlayerAnimationFall.cs" />
     <Compile Include="player\bullet\Bullet.cs" />
@@ -56,6 +56,8 @@
     <Compile Include="player\animation\BasePlayerAnimation.cs" />
     <Compile Include="animation\AnimationCycle.cs" />
     <Compile Include="map\Map.cs" />
+    <Compile Include="player\event\PlayerEventDamaged.cs" />
+    <Compile Include="player\event\PlayerEvent.cs" />
     <Compile Include="player\state\PlayerStateMachine.cs" />
     <Compile Include="player\state\PlayerStateTransition.cs" />
     <Compile Include="player\animation\PlayerAnimationJump.cs" />
@@ -102,7 +104,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <Compile Include="player\event\PlayerEventType.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,11 +4,16 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using MyObjects;
 using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+using Game1.player;
 
 namespace Game1
 {
     class Player : MovingObject
     {
+        // Player event list
+        private List<PlayerEvent> playerEvents = new List<PlayerEvent>();
+
         // Player Related Objects
         private PlayerStateMachine playerStateMachine;
         private PlayerActionHandler playerActionHandler;
@@ -50,9 +55,6 @@ namespace Game1
 
         public void Update(GameTime gameTime)
         {
-            // Check Player collisions
-            if (CollisionHandler.checkPlayerEnemyCollisions((int) position.X , (int)position.Y + 10))
-                setDamaged(true);
 
             // Retrieve Player Action
             playerAction = playerActionHandler.Update(gameTime);
@@ -76,6 +78,9 @@ namespace Game1
             // Update Bullets
             bulletFactory.Update(shooting, jumping, gameTime);
 
+            // Check Player collisions
+            if (CollisionHandler.checkPlayerEnemyCollisions((int)position.X, (int)position.Y + 10))
+                setDamaged(true);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -84,12 +89,15 @@ namespace Game1
             bulletFactory.Draw(spriteBatch);
         }
 
+        public void addEvent(PlayerEvent pEvent) {
+            playerEvents.Add(pEvent);
+        }
+
         public bool updateLocation(Vector2 updateLocation)
         {
             if (updateLocation.X == 0 && updateLocation.Y == 0)
                 return false;
 
-            Console.WriteLine(updateLocation);
             float newX = (position.X + updateLocation.X);
             float newY = (position.Y + updateLocation.Y);
             newX = (int)Math.Round(newX, 0);

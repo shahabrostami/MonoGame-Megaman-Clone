@@ -109,7 +109,6 @@ namespace Game1
 
         public Rectangle checkVertCollision(Rectangle playerBound, int checkY, int mult)
         {
-            Console.WriteLine("Vertical");
             int check = playerBound.Left + tileWidth/2;
             while (check < playerBound.Right)
             {
@@ -132,7 +131,6 @@ namespace Game1
 
         public Rectangle checkHorizCollision(Rectangle playerBound, int checkX, int mult)
         {
-            Console.WriteLine("Horiz");
             // Check Below
             int check = playerBound.Top;
             while (check < playerBound.Bottom)
