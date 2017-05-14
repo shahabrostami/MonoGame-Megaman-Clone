@@ -13,7 +13,7 @@ namespace Game1.enemy
     {
         int hp;
         public Vector2 position;
-        public Vector2 textureSize;
+        Rectangle enemyBound;
         Vector2 velocity;
 
         BaseEnemyAnimation animation;
@@ -35,10 +35,18 @@ namespace Game1.enemy
             hp -= 5;
         }
 
+        public bool checkCollision(Rectangle collisionRect, bool canDamage)
+        {
+            Rectangle intersect = Rectangle.Intersect(collisionRect, enemyBound);
+            if (intersect.IsEmpty)
+                return false;
+            return true;
+        }
+
         public bool checkCollision(int x, int y, bool canDamage)
         {
-            if (x >= position.X + animation.textureOffset.X && x <= (position.X + animation.textureSize.X) &&
-                y >= position.Y + animation.textureOffset.Y && y <= (position.Y + animation.textureSize.Y))
+            if (x >= position.X + animation.textureOffset.X && x <= (position.X - animation.textureOffset.X + animation.textureSize.X) &&
+                y >= position.Y + animation.textureOffset.Y && y <= (position.Y - animation.textureOffset.Y + animation.textureSize.Y))
             {
                 if(canDamage)
                     enemyHit();
@@ -69,6 +77,7 @@ namespace Game1.enemy
 
         public void Update(GameTime gameTime)
         {
+            enemyBound = new Rectangle(position.ToPoint(), animation.textureSize.ToPoint());
             animation.Update(gameTime);   
         }
 

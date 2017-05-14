@@ -16,15 +16,15 @@ namespace Game1
     {
         public static void checkAllCollisions(Map map, Player player, EnemyFactory enemyFactory)
         {
-            if (checkPlayerEnemyCollisions((int)player.position.X, (int)player.position.Y))
+            if (checkPlayerEnemyCollisions(player.getPlayerBound()))
                 player.addEvent(new PlayerEventDamaged(player));
 
         }
 
-        public static bool checkPlayerEnemyCollisions(int x, int y)
+        public static bool checkPlayerEnemyCollisions(Rectangle playerBound)
         {
             bool checkCollision = false;
-            if (checkEnemyCollision(x, y, false))
+            if (checkEnemyCollision(playerBound, false))
                 checkCollision = true;
             return checkCollision;
         }
@@ -44,6 +44,11 @@ namespace Game1
         private static bool checkMapCollision(int x, int y)
         {
             return Map.checkCollision(x, y);
+        }
+
+        private static bool checkEnemyCollision(Rectangle collisionRect, bool canDamage)
+        {
+            return EnemyFactory.checkCollision(collisionRect, canDamage);
         }
 
         private static bool checkEnemyCollision(int x, int y, bool canDamage)

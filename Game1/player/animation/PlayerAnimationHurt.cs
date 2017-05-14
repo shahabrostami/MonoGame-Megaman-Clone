@@ -54,6 +54,7 @@ namespace Game1
         public override void reset()
         {
             velocity = currentCycle.velocity;
+            currentFrameIndex = 0;
             loopFinished = false;
         }
     }

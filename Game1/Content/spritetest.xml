@@ -4,7 +4,7 @@
   <Asset Type="MyObjects.Sprite[]">
     <Item>
       <textureName>megamanfull</textureName>
-      <rows>4</rows>
+      <rows>6</rows>
       <columns>6</columns>
       <offset>4 6</offset>
       <animations>
@@ -123,15 +123,15 @@
           </cycles>
         </Item>
         <Item>
-          <name>hit</name>
+          <name>damaged</name>
           <loop>false</loop>
           <cycles>
             <Item>
               <row>4</row>
               <sf>0</sf>
               <ef>1</ef>
-              <velocity>-10 0</velocity>
-              <ms>200</ms>
+              <velocity>-100 0</velocity>
+              <ms>100</ms>
               <frames>
                 <Item></Item>
                 <Item></Item>
@@ -141,8 +141,8 @@
               <row>5</row>
               <sf>0</sf>
               <ef>1</ef>
-              <velocity>10 0</velocity>
-              <ms>200</ms>
+              <velocity>100 0</velocity>
+              <ms>100</ms>
               <frames>
                 <Item></Item>
                 <Item></Item>

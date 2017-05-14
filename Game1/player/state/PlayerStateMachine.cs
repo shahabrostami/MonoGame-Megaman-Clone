@@ -17,12 +17,15 @@ namespace Game1
         {
             currentState = PlayerStates.STAND;
 
-            transitions = new Dictionary<PlayerStateTransition, PlayerStateAnimation>
+           transitions = new Dictionary<PlayerStateTransition, PlayerStateAnimation>
             {
                 { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE), PlayerStates.RUN },
                 { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.JUMP), PlayerStates.JUMP},
+                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.HIT), PlayerStates.DAMAGED},
                 { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.JUMP), PlayerStates.JUMP},
-                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.STOP), PlayerStates.STAND}
+                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.STOP), PlayerStates.STAND},
+                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.HIT), PlayerStates.DAMAGED},
+                { new PlayerStateTransition(PlayerStates.JUMP, PlayerAction.HIT), PlayerStates.DAMAGED}
             };
         }
 

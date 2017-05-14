@@ -11,6 +11,7 @@ namespace Game1
         MOVE,
         JUMP,
         SHOOT,
+        HIT,
         STOP
     }
 }

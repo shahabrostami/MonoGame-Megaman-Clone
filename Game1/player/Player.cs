@@ -17,7 +17,7 @@ namespace Game1
         // Player Related Objects
         private PlayerStateMachine playerStateMachine;
         private PlayerActionHandler playerActionHandler;
-        private PlayerStateAnimation playerState;
+        public PlayerStateAnimation playerState;
         private PlayerAction playerAction;
         private BulletFactory bulletFactory;
         private Map map;
@@ -32,6 +32,7 @@ namespace Game1
 
         // Player Location
         public Vector2 position;
+        public Rectangle playerBound;
 
         public Player() {
             bulletFactory = new BulletFactory(this);
@@ -53,8 +54,20 @@ namespace Game1
             bulletFactory.LoadContent(GraphicsDevice);
         }
 
+        public void handlePlayerEvent()
+        {
+            int count = playerEvents.Count;
+            if (count > 0)
+            {
+                PlayerEvent pEvent = playerEvents[count - 1];
+                playerEvents.RemoveAt(count - 1);
+                pEvent.Handle();
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
+            handlePlayerEvent();
 
             // Retrieve Player Action
             playerAction = playerActionHandler.Update(gameTime);
@@ -65,9 +78,6 @@ namespace Game1
             if (falling)
                 playerState = PlayerStates.FALL;
 
-            if (damaged)
-                playerState = PlayerStates.HURT;
-
             // Update Player Animation
             playerState.animation.updateOnAction(playerState, playerAction);
             playerState.animation.Update(gameTime);
@@ -77,10 +87,6 @@ namespace Game1
 
             // Update Bullets
             bulletFactory.Update(shooting, jumping, gameTime);
-
-            // Check Player collisions
-            if (CollisionHandler.checkPlayerEnemyCollisions((int)position.X, (int)position.Y + 10))
-                setDamaged(true);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -93,6 +99,16 @@ namespace Game1
             playerEvents.Add(pEvent);
         }
 
+        public Rectangle getPlayerBound()
+        {
+            return playerBound;
+        }
+
+        public Rectangle getPlayerBound(float x, float y)
+        {
+            return new Rectangle((int)(x + playerTextureOffset.X), (int)(y + playerTextureOffset.Y), 20, 23); 
+        }
+
         public bool updateLocation(Vector2 updateLocation)
         {
             if (updateLocation.X == 0 && updateLocation.Y == 0)
@@ -102,26 +118,23 @@ namespace Game1
             float newY = (position.Y + updateLocation.Y);
             newX = (int)Math.Round(newX, 0);
             newY = (int)Math.Round(newY, 0);
-            Rectangle newBound = new Rectangle((int) (newX + playerTextureOffset.X), (int) (newY + playerTextureOffset.Y), 20, 23);
+            Rectangle newBound = getPlayerBound(newX, newY);
 
             position = map.checkPlayerCollisions(newBound, updateLocation);
             
             position.X -= playerTextureOffset.X;
             position.Y -= playerTextureOffset.Y;
+            playerBound = newBound;
             return true;
         }
 
         public void setDamaged(bool damaged)
         {
-            if (damaged == false)
-                PlayerStates.HURT.animation.reset();
             this.damaged = damaged;
         }
 
         public void setFalling(bool fall)
         {
-            if(fall == false)
-                PlayerStates.FALL.animation.reset();
             this.falling = fall;
         }
         public void setMap(Map map)

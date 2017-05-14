@@ -27,6 +27,18 @@ namespace Game1.enemy
                     };
         }
 
+        internal static bool checkCollision(Rectangle collisionRect, bool canDamage)
+        {
+            bool hasHit = false;
+            foreach (EnemyWalker enemyWalker in enemyWalkers)
+            {
+                if (enemyWalker.checkCollision(collisionRect, canDamage))
+                    hasHit = true;
+            }
+
+            return hasHit;
+        }
+
         internal static bool checkCollision(int x, int y, bool canDamage)
         {
             bool hasHit = false;
