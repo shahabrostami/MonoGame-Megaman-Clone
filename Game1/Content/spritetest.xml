@@ -7,6 +7,7 @@
       <rows>6</rows>
       <columns>6</columns>
       <offset>4 6</offset>
+      <actualTextureSize>20 23</actualTextureSize>
       <animations>
         <Item>
           <name>stand</name>
@@ -130,8 +131,8 @@
               <row>4</row>
               <sf>0</sf>
               <ef>1</ef>
-              <velocity>-100 0</velocity>
-              <ms>100</ms>
+              <velocity>-20 0</velocity>
+              <ms>200</ms>
               <frames>
                 <Item></Item>
                 <Item></Item>
@@ -141,7 +142,7 @@
               <row>5</row>
               <sf>0</sf>
               <ef>1</ef>
-              <velocity>100 0</velocity>
+              <velocity>20 0</velocity>
               <ms>100</ms>
               <frames>
                 <Item></Item>
@@ -157,6 +158,7 @@
       <rows>2</rows>
       <columns>8</columns>
       <offset>4 4</offset>
+      <actualTextureSize>15 15</actualTextureSize>
       <animations>
         <Item>
           <name>stand</name>

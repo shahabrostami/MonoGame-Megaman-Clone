@@ -16012,7 +16012,7 @@
   </data>
  </layer>
  <objectgroup name="mapObjects">
-  <object id="4" name="start" type="Marker" x="208" y="1140" width="32" height="32"/>
+  <object id="4" name="start" type="Marker" x="208" y="1139" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemyObjects">
   <object id="18" name="enemy1" type="Enemy" x="860" y="1112" width="24" height="24"/>

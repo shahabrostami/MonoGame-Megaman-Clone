@@ -100,10 +100,13 @@ namespace Game1
                         falling = false;
 
                     check += tileWidth;
-                    if (check < playerBound.Right)
+                    if (check > playerBound.Right)
                         check = playerBound.Right;
                 }
-                player.setFalling(falling);
+
+                if (falling)
+                    player.setFalling(true);
+
             }
         }
 

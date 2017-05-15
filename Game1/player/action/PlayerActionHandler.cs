@@ -62,6 +62,9 @@ namespace Game1
             if (currentAction == PlayerAction.JUMP)
                 player.jumping = true;
 
+            if (player.falling)
+                currentAction = PlayerAction.FALL;
+
             if (player.damaged)
                 currentAction = PlayerAction.HIT;
 

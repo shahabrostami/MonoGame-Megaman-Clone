@@ -29,6 +29,7 @@ namespace Game1
         public bool falling { get; set; }
         public bool damaged { get; set; }
         private Vector2 playerTextureOffset;
+        private Vector2 playerTextureSize;
 
         // Player Location
         public Vector2 position;
@@ -51,6 +52,7 @@ namespace Game1
             Texture2D playerTexture = Content.Load<Texture2D>(playerSprite.textureName);
             PlayerStates.LoadContent(this, playerTexture, playerSprite);
             playerTextureOffset = playerSprite.offset;
+            playerTextureSize = playerSprite.actualTextureSize;
             bulletFactory.LoadContent(GraphicsDevice);
         }
 
@@ -106,7 +108,7 @@ namespace Game1
 
         public Rectangle getPlayerBound(float x, float y)
         {
-            return new Rectangle((int)(x + playerTextureOffset.X), (int)(y + playerTextureOffset.Y), 20, 23); 
+            return new Rectangle((int)(x + playerTextureOffset.X), (int)(y + playerTextureOffset.Y), (int) playerTextureSize.X, (int)playerTextureSize.Y); 
         }
 
         public bool updateLocation(Vector2 updateLocation)
@@ -135,6 +137,8 @@ namespace Game1
 
         public void setFalling(bool fall)
         {
+            if (!fall)
+                PlayerStates.FALL.animation.reset();
             this.falling = fall;
         }
         public void setMap(Map map)

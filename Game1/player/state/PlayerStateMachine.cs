@@ -25,6 +25,7 @@ namespace Game1
                 { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.JUMP), PlayerStates.JUMP},
                 { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.STOP), PlayerStates.STAND},
                 { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.HIT), PlayerStates.DAMAGED},
+                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.FALL), PlayerStates.FALL},
                 { new PlayerStateTransition(PlayerStates.JUMP, PlayerAction.HIT), PlayerStates.DAMAGED}
             };
         }
