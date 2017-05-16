@@ -18,11 +18,12 @@ namespace Game1
 
         override public bool Update(GameTime gameTime)
         {
-            if (!player.falling)
+            if (player.playerState != PlayerStates.FALL)
             {
                 loopFinished = true;
                 return false;
             }
+
             timeSinceLastFrame = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.updateLocation(velocity * (timeSinceLastFrame * 10));
             velocity += (gravity * (timeSinceLastFrame * 10));

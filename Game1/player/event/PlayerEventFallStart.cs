@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game1.player
 {
-    class PlayerEventDamaged : PlayerEvent
+    class PlayerEventFallStart : PlayerEvent
     {
-        public PlayerEventDamaged(Player player) :
-            base (PlayerEventType.DAMAGED, player)
+        public PlayerEventFallStart(Player player) :
+            base (PlayerEventType.START_FALLING, player)
         {
         }
 
         public override PlayerAction Handle()
         {
-            return PlayerAction.HIT;
+            return PlayerAction.FALL;
         }
     }
 }

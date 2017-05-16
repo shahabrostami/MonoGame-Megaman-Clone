@@ -11,8 +11,6 @@ namespace Game1
 {
     class Player : MovingObject
     {
-        // Player event list
-        private List<PlayerEvent> playerEvents = new List<PlayerEvent>();
 
         // Player Related Objects
         private PlayerStateMachine playerStateMachine;
@@ -26,7 +24,6 @@ namespace Game1
         // Player Related Flags
         public bool shooting { get; set; }
         public bool jumping { get; set; }
-        public bool falling { get; set; }
         public bool damaged { get; set; }
         private Vector2 playerTextureOffset;
         private Vector2 playerTextureSize;
@@ -41,7 +38,6 @@ namespace Game1
             playerStateMachine = new PlayerStateMachine();
             playerState = PlayerStates.STAND;
             jumping = false;
-            falling = false;
             shooting = false;
             damaged = false;
         }
@@ -56,29 +52,13 @@ namespace Game1
             bulletFactory.LoadContent(GraphicsDevice);
         }
 
-        public void handlePlayerEvent()
-        {
-            int count = playerEvents.Count;
-            if (count > 0)
-            {
-                PlayerEvent pEvent = playerEvents[count - 1];
-                playerEvents.RemoveAt(count - 1);
-                pEvent.Handle();
-            }
-        }
-
         public void Update(GameTime gameTime)
         {
-            handlePlayerEvent();
-
             // Retrieve Player Action
             playerAction = playerActionHandler.Update(gameTime);
 
             // Update Player State
             playerState = playerStateMachine.Update(playerAction);
-
-            if (falling)
-                playerState = PlayerStates.FALL;
 
             // Update Player Animation
             playerState.animation.updateOnAction(playerState, playerAction);
@@ -98,7 +78,7 @@ namespace Game1
         }
 
         public void addEvent(PlayerEvent pEvent) {
-            playerEvents.Add(pEvent);
+            playerActionHandler.addEvent(pEvent);
         }
 
         public Rectangle getPlayerBound()
@@ -134,13 +114,7 @@ namespace Game1
         {
             this.damaged = damaged;
         }
-
-        public void setFalling(bool fall)
-        {
-            if (!fall)
-                PlayerStates.FALL.animation.reset();
-            this.falling = fall;
-        }
+        
         public void setMap(Map map)
         {
             this.map = map;

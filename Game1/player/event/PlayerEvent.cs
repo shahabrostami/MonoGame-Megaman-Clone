@@ -17,6 +17,6 @@ namespace Game1.player
             this.type = type;
         }
 
-        public abstract void Handle();
+        public abstract PlayerAction Handle();
     }
 }

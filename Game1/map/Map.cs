@@ -1,4 +1,5 @@
 ﻿using Game1.enemy;
+using Game1.player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -105,7 +106,7 @@ namespace Game1
                 }
 
                 if (falling)
-                    player.setFalling(true);
+                    player.addEvent(new PlayerEventFallStart(player));
 
             }
         }
@@ -121,7 +122,7 @@ namespace Game1
                     playerBound.Offset(0, tileRect.rectangle.Height*mult);
                     if (mult == -1)
                     {
-                        player.setFalling(false);
+                        player.addEvent(new PlayerEventFallStop(player));
                         player.jumping = false;
                     }
                 }

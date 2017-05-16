@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace Game1.player
 {
-    class PlayerEventDamaged : PlayerEvent
+    class PlayerEventFallStop : PlayerEvent
     {
-        public PlayerEventDamaged(Player player) :
-            base (PlayerEventType.DAMAGED, player)
+        public PlayerEventFallStop(Player player) :
+            base (PlayerEventType.STOP_FALLING, player)
         {
         }
 
         public override PlayerAction Handle()
         {
-            return PlayerAction.HIT;
+            PlayerStates.FALL.animation.reset();
+            return PlayerAction.LAND;
         }
     }
 }

@@ -8,10 +8,12 @@ namespace Game1
 {
     enum PlayerAction
     {
-        MOVE,
+        NONE,
+        MOVE, 
         JUMP,
         SHOOT,
         FALL,
+        LAND,
         HIT,
         STOP
     }
