@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game1.player
 {
-    class PlayerEventFallStart : PlayerEvent
+    class PlayerEventFall : PlayerEvent
     {
-        public PlayerEventFallStart(Player player) :
-            base (PlayerEventType.START_FALLING, player)
+        public PlayerEventFall(Player player) :
+            base (PlayerEventType.FALLING, player)
         {
         }
 
         public override PlayerAction Handle()
         {
+            player.grounded = false;
             return PlayerAction.FALL;
         }
     }

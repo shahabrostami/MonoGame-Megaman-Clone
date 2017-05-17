@@ -131,7 +131,7 @@
               <row>4</row>
               <sf>0</sf>
               <ef>1</ef>
-              <velocity>-20 0</velocity>
+              <velocity>-20 10</velocity>
               <ms>200</ms>
               <frames>
                 <Item></Item>
@@ -142,7 +142,7 @@
               <row>5</row>
               <sf>0</sf>
               <ef>1</ef>
-              <velocity>20 0</velocity>
+              <velocity>20 10</velocity>
               <ms>100</ms>
               <frames>
                 <Item></Item>

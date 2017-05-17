@@ -56,8 +56,8 @@
     <Compile Include="player\animation\BasePlayerAnimation.cs" />
     <Compile Include="animation\AnimationCycle.cs" />
     <Compile Include="map\Map.cs" />
-    <Compile Include="player\event\PlayerEventFallStop.cs" />
-    <Compile Include="player\event\PlayerEventFallStart.cs" />
+    <Compile Include="player\event\PlayerEventLanded.cs" />
+    <Compile Include="player\event\PlayerEventFall.cs" />
     <Compile Include="player\event\PlayerEventDamaged.cs" />
     <Compile Include="player\event\PlayerEvent.cs" />
     <Compile Include="player\state\PlayerStateMachine.cs" />

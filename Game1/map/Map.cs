@@ -106,7 +106,7 @@ namespace Game1
                 }
 
                 if (falling)
-                    player.addEvent(new PlayerEventFallStart(player));
+                    player.addEvent(new PlayerEventFall(player));
 
             }
         }
@@ -122,8 +122,8 @@ namespace Game1
                     playerBound.Offset(0, tileRect.rectangle.Height*mult);
                     if (mult == -1)
                     {
-                        player.addEvent(new PlayerEventFallStop(player));
                         player.jumping = false;
+                        player.addEvent(new PlayerEventLanded(player));
                     }
                 }
                 check += tileHeight/2;

@@ -19,7 +19,7 @@ namespace Game1
         protected AnimationCycleSpec[] cycles;
 
         protected bool loopAnimation;
-        protected bool loopFinished;
+        protected bool loopFinished = false;
 
         protected AnimationCycleSpec currentCycle;
         protected AnimationFrameSpec currentFrame;

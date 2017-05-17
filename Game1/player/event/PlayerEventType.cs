@@ -8,8 +8,8 @@ namespace Game1
 {
     enum PlayerEventType
     {
-        START_FALLING,
-        STOP_FALLING,
+        FALLING,
+        LANDED,
         DAMAGED,
     };
 }

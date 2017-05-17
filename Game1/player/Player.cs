@@ -24,7 +24,7 @@ namespace Game1
         // Player Related Flags
         public bool shooting { get; set; }
         public bool jumping { get; set; }
-        public bool damaged { get; set; }
+        public bool grounded { get; set; }
         private Vector2 playerTextureOffset;
         private Vector2 playerTextureSize;
 
@@ -39,7 +39,7 @@ namespace Game1
             playerState = PlayerStates.STAND;
             jumping = false;
             shooting = false;
-            damaged = false;
+            grounded = true;
         }
 
         public void LoadContent(GraphicsDevice GraphicsDevice, ContentManager Content)
@@ -69,6 +69,11 @@ namespace Game1
 
             // Update Bullets
             bulletFactory.Update(shooting, jumping, gameTime);
+        }
+
+        public bool onGround()
+        {
+            return grounded && !jumping;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -108,11 +113,6 @@ namespace Game1
             position.Y -= playerTextureOffset.Y;
             playerBound = newBound;
             return true;
-        }
-
-        public void setDamaged(bool damaged)
-        {
-            this.damaged = damaged;
         }
         
         public void setMap(Map map)
