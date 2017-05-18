@@ -16,6 +16,7 @@ namespace Game1.player
         public override PlayerAction Handle()
         {
             PlayerStates.FALL.animation.reset();
+            PlayerStates.JUMP.animation.reset();
             player.grounded = true;
             return PlayerAction.LAND;
         }

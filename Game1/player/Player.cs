@@ -68,7 +68,12 @@ namespace Game1
                 playerStateMachine.revert();
 
             // Update Bullets
-            bulletFactory.Update(shooting, jumping, gameTime);
+            bulletFactory.Update(shooting, jumping, canShoot(), gameTime);
+        }
+
+        public bool canShoot()
+        {
+            return playerState != PlayerStates.DAMAGED;
         }
 
         public bool onGround()

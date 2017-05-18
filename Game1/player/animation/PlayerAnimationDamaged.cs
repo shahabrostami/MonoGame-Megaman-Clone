@@ -11,6 +11,8 @@ namespace Game1
 {
     class PlayerAnimationHurt : BasePlayerAnimation
     {
+        bool initialDirection = false;
+
         public PlayerAnimationHurt(Player player, SpriteSpec spriteSpec, AnimationSpec animation) :
             base(player, spriteSpec, animation)
         {
@@ -28,7 +30,6 @@ namespace Game1
                 if (currentFrameIndex > currentCycle.ef)
                 {
                     loopFinished = true;
-                    player.setDamaged(false);
                     return false;
                 }
             }
@@ -39,11 +40,15 @@ namespace Game1
         
         public override void updateOnAction(PlayerStateAnimation pState, PlayerAction pAction)
         {
-            direction = player.direction;
-            if (direction == Direction.RIGHT)
-                updateCycle(cycles[0]);
-            else if (direction == Direction.LEFT)
-                updateCycle(cycles[1]);
+            if (!initialDirection)
+            {
+                direction = player.direction;
+                if (direction == Direction.RIGHT)
+                    updateCycle(cycles[0]);
+                else if (direction == Direction.LEFT)
+                    updateCycle(cycles[1]);
+                initialDirection = true;
+            }
         }
 
         public override bool hasMovement()
@@ -53,6 +58,7 @@ namespace Game1
 
         public override void reset()
         {
+            initialDirection = false;
             velocity = currentCycle.velocity;
             currentFrameIndex = 0;
             loopFinished = false;

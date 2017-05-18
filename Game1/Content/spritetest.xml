@@ -143,7 +143,7 @@
               <sf>0</sf>
               <ef>1</ef>
               <velocity>20 10</velocity>
-              <ms>100</ms>
+              <ms>200</ms>
               <frames>
                 <Item></Item>
                 <Item></Item>

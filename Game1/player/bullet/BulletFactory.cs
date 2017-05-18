@@ -31,14 +31,14 @@ namespace Game1
             screenWidth = GraphicsDevice.Viewport.Width / 2 + 20;
         }
 
-        public void Update(bool isShooting, bool isJumping, GameTime gameTime)
+        public void Update(bool isShooting, bool isJumping, bool canShoot, GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
             // Create new bullets
             if (timeSinceLastFrame > delay) { 
 
-                if (isShooting) {
+                if (isShooting && canShoot) {
                     bullets.Add(new Bullet(isJumping, (player.position), player.direction));
                     timeSinceLastFrame = 0;
                 }
