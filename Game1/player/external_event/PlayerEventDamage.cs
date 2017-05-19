@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game1.player
 {
-    class PlayerEventDamaged : PlayerEvent
+    class PlayerEventDamaged : MovingObjectEvent
     {
         public PlayerEventDamaged(Player player) :
-            base (PlayerEventType.DAMAGED, player)
+            base (EventType.DAMAGED, player)
         {
         }
 
-        public override PlayerAction Handle()
+        public override Action Handle()
         {
-            return PlayerAction.HIT;
+            return Action.HIT;
         }
     }
 }

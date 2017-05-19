@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    enum PlayerEventType
+    enum EventType
     {
         FALLING,
         LANDED,

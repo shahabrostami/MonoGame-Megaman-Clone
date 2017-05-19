@@ -9,9 +9,9 @@ namespace Game1
     class PlayerStateTransition
     {
         PlayerStateAnimation state;
-        PlayerAction action;
+        Action action;
 
-        public PlayerStateTransition(PlayerStateAnimation state, PlayerAction action)
+        public PlayerStateTransition(PlayerStateAnimation state, Action action)
         {
             this.state = state;
             this.action = action;

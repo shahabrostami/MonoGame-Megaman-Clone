@@ -36,7 +36,7 @@ namespace Game1
             return true;
         }
         
-        public override void updateOnAction(PlayerStateAnimation pState, PlayerAction pAction)
+        public override void updateOnAction(PlayerStateAnimation pState, Action pAction)
         {
             direction = player.direction;
             if (direction == Direction.RIGHT)
@@ -52,7 +52,7 @@ namespace Game1
                 else updateCycle(cycles[1]);
             }
 
-            if (pAction == PlayerAction.STOP)
+            if (pAction == Action.STOP)
                 velocity.X = 0;
             else 
                 velocity.X = currentCycle.velocity.X;

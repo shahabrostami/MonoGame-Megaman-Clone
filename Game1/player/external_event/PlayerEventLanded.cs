@@ -6,19 +6,16 @@ using System.Threading.Tasks;
 
 namespace Game1.player
 {
-    class PlayerEventLanded : PlayerEvent
+    class PlayerEventLanded : MovingObjectEvent
     {
-        public PlayerEventLanded(Player player) :
-            base (PlayerEventType.LANDED, player)
+        public PlayerEventLanded(MovingObject movingObj) :
+            base (EventType.LANDED, movingObj)
         {
         }
 
-        public override PlayerAction Handle()
+        public override Action Handle()
         {
-            PlayerStates.FALL.animation.reset();
-            PlayerStates.JUMP.animation.reset();
-            player.grounded = true;
-            return PlayerAction.LAND;
+            return Action.LAND;
         }
     }
 }

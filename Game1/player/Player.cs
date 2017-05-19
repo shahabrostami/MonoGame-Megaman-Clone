@@ -16,7 +16,7 @@ namespace Game1
         private PlayerStateMachine playerStateMachine;
         private PlayerActionHandler playerActionHandler;
         public PlayerStateAnimation playerState;
-        private PlayerAction playerAction;
+        private Action playerAction;
         private BulletFactory bulletFactory;
         private Map map;
         public Direction direction { get; set; }
@@ -87,7 +87,7 @@ namespace Game1
             bulletFactory.Draw(spriteBatch);
         }
 
-        public void addEvent(PlayerEvent pEvent) {
+        public void addEvent(MovingObjectEvent pEvent) {
             playerActionHandler.addEvent(pEvent);
         }
 
@@ -128,6 +128,11 @@ namespace Game1
         public string getDebugInfo()
         {
             return String.Format("Player: ({0},{1}) \nAction: {2}\nState: {3} \n{4}", (int)position.X, (int)position.Y, playerAction, playerState, bulletFactory.GetDebugInfo());
+        }
+
+        public void setJumping(bool b)
+        {
+            this.jumping = b;
         }
     }
 }

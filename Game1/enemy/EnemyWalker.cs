@@ -14,5 +14,11 @@ namespace Game1.enemy
             base()
         {
         }
+
+        public new void Update(GameTime gameTime)
+        {
+            enemyBound = new Rectangle(position.ToPoint(), animation.textureSize.ToPoint());
+            animation.Update(gameTime);
+        }
     }
 }

@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace Game1.player
 {
-    class PlayerEventFall : PlayerEvent
+    class PlayerEventFall : MovingObjectEvent
     {
+        Player player;
+
         public PlayerEventFall(Player player) :
-            base (PlayerEventType.FALLING, player)
+            base (EventType.FALLING, player)
         {
+            this.player = player;
         }
 
-        public override PlayerAction Handle()
+        public override Action Handle()
         {
-            player.grounded = false;
-            return PlayerAction.FALL;
+            return Action.FALL;
         }
     }
 }

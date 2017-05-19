@@ -45,7 +45,7 @@ namespace Game1
             return true;
         }
 
-        public override void updateOnAction(PlayerStateAnimation pState, PlayerAction pAction)
+        public override void updateOnAction(PlayerStateAnimation pState, Action pAction)
         {
             if (player.direction == Direction.RIGHT)
             {

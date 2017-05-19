@@ -19,20 +19,20 @@ namespace Game1
 
            transitions = new Dictionary<PlayerStateTransition, PlayerStateAnimation>
             {
-                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.MOVE), PlayerStates.RUN },
-                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.JUMP), PlayerStates.JUMP},
-                { new PlayerStateTransition(PlayerStates.STAND, PlayerAction.HIT), PlayerStates.DAMAGED},
-                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.JUMP), PlayerStates.JUMP},
-                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.STOP), PlayerStates.STAND},
-                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.HIT), PlayerStates.DAMAGED},
-                { new PlayerStateTransition(PlayerStates.RUN, PlayerAction.FALL), PlayerStates.FALL},
-                { new PlayerStateTransition(PlayerStates.JUMP, PlayerAction.HIT), PlayerStates.DAMAGED},
-                { new PlayerStateTransition(PlayerStates.FALL, PlayerAction.LAND), PlayerStates.STAND},
-                { new PlayerStateTransition(PlayerStates.FALL, PlayerAction.HIT), PlayerStates.DAMAGED}
+                { new PlayerStateTransition(PlayerStates.STAND, Action.MOVE), PlayerStates.RUN },
+                { new PlayerStateTransition(PlayerStates.STAND, Action.JUMP), PlayerStates.JUMP},
+                { new PlayerStateTransition(PlayerStates.STAND, Action.HIT), PlayerStates.DAMAGED},
+                { new PlayerStateTransition(PlayerStates.RUN, Action.JUMP), PlayerStates.JUMP},
+                { new PlayerStateTransition(PlayerStates.RUN, Action.STOP), PlayerStates.STAND},
+                { new PlayerStateTransition(PlayerStates.RUN, Action.HIT), PlayerStates.DAMAGED},
+                { new PlayerStateTransition(PlayerStates.RUN, Action.FALL), PlayerStates.FALL},
+                { new PlayerStateTransition(PlayerStates.JUMP, Action.HIT), PlayerStates.DAMAGED},
+                { new PlayerStateTransition(PlayerStates.FALL, Action.LAND), PlayerStates.STAND},
+                { new PlayerStateTransition(PlayerStates.FALL, Action.HIT), PlayerStates.DAMAGED}
             };
         }
 
-        public PlayerStateAnimation Update(PlayerAction playerAction)
+        public PlayerStateAnimation Update(Action playerAction)
         {
             PlayerStateTransition transition = new PlayerStateTransition(currentState, playerAction);
             PlayerStateAnimation newState;

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1.player;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -18,6 +19,10 @@ namespace Game1
         void Draw(SpriteBatch spriteBatch);
 
         bool updateLocation(Vector2 updateLocation);
+
+        void setJumping(bool jumping);
+
+        void addEvent(MovingObjectEvent objEvent);
 
         string getDebugInfo();
     }

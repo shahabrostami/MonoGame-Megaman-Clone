@@ -59,13 +59,13 @@
     <Compile Include="player\external_event\PlayerEventLanded.cs" />
     <Compile Include="player\external_event\PlayerEventFall.cs" />
     <Compile Include="player\external_event\PlayerEventDamage.cs" />
-    <Compile Include="player\external_event\PlayerEvent.cs" />
+    <Compile Include="player\external_event\MovingObjectEvent.cs" />
     <Compile Include="player\state\PlayerStateMachine.cs" />
     <Compile Include="player\state\PlayerStateTransition.cs" />
     <Compile Include="player\animation\PlayerAnimationJump.cs" />
     <Compile Include="player\animation\PlayerAnimationBlink.cs" />
     <Compile Include="player\animation\PlayerAnimationRun.cs" />
-    <Compile Include="player\action\PlayerAction.cs" />
+    <Compile Include="player\action\Action.cs" />
     <Compile Include="animation\Animation.cs" />
     <Compile Include="animation\SpriteSpec.cs" />
     <Compile Include="player\action\PlayerActionHandler.cs" />
@@ -106,7 +106,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <Compile Include="player\external_event\PlayerEventType.cs" />
+    <Compile Include="player\external_event\EventType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

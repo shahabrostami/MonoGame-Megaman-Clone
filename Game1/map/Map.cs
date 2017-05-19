@@ -111,42 +111,42 @@ namespace Game1
             }
         }
 
-        public Rectangle checkVertCollision(Rectangle playerBound, int checkY, int mult)
+        public Rectangle checkVertCollision(MovingObject obj, Rectangle objectBound, int checkY, int mult)
         {
-            int check = playerBound.Left + tileWidth/2;
-            while (check < playerBound.Right)
+            int check = objectBound.Left + tileWidth/2;
+            while (check < objectBound.Right)
             {
-                TileRect tileRect = getCollisionRectangle(playerBound, check, checkY);
+                TileRect tileRect = getCollisionRectangle(objectBound, check, checkY);
                 if (!tileRect.rectangle.IsEmpty && tileRect.tileId == collisionTileId)
                 {
-                    playerBound.Offset(0, tileRect.rectangle.Height*mult);
+                    objectBound.Offset(0, tileRect.rectangle.Height*mult);
                     if (mult == -1)
                     {
-                        player.jumping = false;
-                        player.addEvent(new PlayerEventLanded(player));
+                        obj.setJumping(false);
+                        obj.addEvent(new PlayerEventLanded(player));
                     }
                 }
                 check += tileHeight/2;
-                if (check > playerBound.Right)
-                    check = playerBound.Right;
+                if (check > objectBound.Right)
+                    check = objectBound.Right;
             }
-            return playerBound;
+            return objectBound;
         }
 
-        public Rectangle checkHorizCollision(Rectangle playerBound, int checkX, int mult)
+        public Rectangle checkHorizCollision(Rectangle objectBound, int checkX, int mult)
         {
             // Check Below
-            int check = playerBound.Top;
-            while (check < playerBound.Bottom)
+            int check = objectBound.Top;
+            while (check < objectBound.Bottom)
             {
-                TileRect tileRect = getCollisionRectangle(playerBound, checkX, check);
+                TileRect tileRect = getCollisionRectangle(objectBound, checkX, check);
                 if (!tileRect.rectangle.IsEmpty && tileRect.tileId == collisionTileId)
-                    playerBound.Offset(tileRect.rectangle.Width * mult, 0);
+                    objectBound.Offset(tileRect.rectangle.Width * mult, 0);
                 check += tileWidth/2;
-                if (check > playerBound.Bottom)
-                    check = playerBound.Bottom;
+                if (check > objectBound.Bottom)
+                    check = objectBound.Bottom;
             }
-            return playerBound;
+            return objectBound;
         }
 
         public Vector2 checkPlayerCollisions(Rectangle playerBound, Vector2 updateLocation)
@@ -155,9 +155,9 @@ namespace Game1
             Rectangle vertBound = playerBound;
             
             if (updateLocation.Y < 0)
-                playerBound = checkVertCollision(playerBound, playerBound.Top, 1);
+                playerBound = checkVertCollision(player, playerBound, playerBound.Top, 1);
             else if (updateLocation.Y > 0)
-                playerBound = checkVertCollision(playerBound, playerBound.Bottom, -1);
+                playerBound = checkVertCollision(player, playerBound, playerBound.Bottom, -1);
 
             if (updateLocation.X > 0) 
                 playerBound = checkHorizCollision(playerBound, playerBound.Right, -1);

@@ -12,76 +12,86 @@ namespace Game1
 {
     class PlayerActionHandler
     {
-        private PlayerAction currentAction;
-        private PlayerAction previousAction;
+        private Action currentAction;
+        private Action previousAction;
 
         private Player player;
 
         // Player event list
-        private List<PlayerEvent> playerEvents = new List<PlayerEvent>();
+        private List<MovingObjectEvent> playerEvents = new List<MovingObjectEvent>();
 
         public PlayerActionHandler(Player player)
         {
-            previousAction = PlayerAction.JUMP;
-            currentAction = PlayerAction.STOP;
+            previousAction = Action.JUMP;
+            currentAction = Action.STOP;
             this.player = player;
         }
 
-        public PlayerAction handlePlayerEvent()
+        public Action handlePlayerEvent()
         {
             int count = playerEvents.Count;
-            PlayerAction action = PlayerAction.NONE;
+            Action action = Action.NONE;
             if (count > 0)
             {
-                PlayerEvent pEvent = playerEvents[count - 1];
+                MovingObjectEvent pEvent = playerEvents[count - 1];
                 playerEvents.RemoveAt(count - 1);
                 action = pEvent.Handle();
             }
             return action;
         }
         
-        public void addEvent(PlayerEvent pEvent)
+        public void addEvent(MovingObjectEvent pEvent)
         {
             playerEvents.Add(pEvent);
         }
 
-        public PlayerAction Update(GameTime gameTime)
+        public Action Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 player.direction = Direction.RIGHT;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                    currentAction = PlayerAction.JUMP;
+                    currentAction = Action.JUMP;
                 else
-                    currentAction = PlayerAction.MOVE;
+                    currentAction = Action.MOVE;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 player.direction = Direction.LEFT;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                    currentAction = PlayerAction.JUMP;
+                    currentAction = Action.JUMP;
                 else
-                    currentAction = PlayerAction.MOVE;
+                    currentAction = Action.MOVE;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Space) && !player.jumping)
             {
-                currentAction = PlayerAction.JUMP;
+                currentAction = Action.JUMP;
             }
             else
             {
-                currentAction = PlayerAction.STOP;
+                currentAction = Action.STOP;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.O))
                 player.shooting = true;
             else player.shooting = false;
 
-            if (currentAction == PlayerAction.JUMP)
+            if (currentAction == Action.JUMP)
                 player.jumping = true;
 
-            PlayerAction playerEventAction = handlePlayerEvent();
-            if (playerEventAction != PlayerAction.NONE)
+            Action playerEventAction = handlePlayerEvent();
+            if (playerEventAction != Action.NONE)
                 currentAction = playerEventAction;
+
+            if (playerEventAction == Action.LAND)
+            {
+                PlayerStates.FALL.animation.reset();
+                PlayerStates.JUMP.animation.reset();
+                player.grounded = true;
+            }
+            else if (playerEventAction == Action.FALL)
+                player.grounded = false;
+
 
             if (currentAction != previousAction)
             {
@@ -91,7 +101,7 @@ namespace Game1
             return currentAction;
         }
 
-        public PlayerAction getAction ()
+        public Action getAction ()
         {
             return currentAction;
         }

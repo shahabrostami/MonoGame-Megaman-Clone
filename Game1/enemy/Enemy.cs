@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Game1.player;
 
 namespace Game1.enemy
 {
@@ -13,10 +14,10 @@ namespace Game1.enemy
     {
         int hp;
         public Vector2 position;
-        Rectangle enemyBound;
-        Vector2 velocity;
+        internal Rectangle enemyBound;
+        public Vector2 velocity;
 
-        BaseEnemyAnimation animation;
+        internal BaseEnemyAnimation animation;
 
         public Enemy()
         {
@@ -85,6 +86,16 @@ namespace Game1.enemy
         {
             this.position += updateLocation;
             return true;
+        }
+
+        public void setJumping(bool jumping)
+        {
+            
+        }
+
+        public void addEvent(MovingObjectEvent objEvent)
+        {
+            
         }
     }
 }
